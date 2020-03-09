@@ -3,9 +3,10 @@
   "scripts": {
     "dev": "docker-compose up -d && yarn hasura console",
     "hasura": "hasura --project hasura --skip-update-check",
-    "deploy:hasura": "yarn hasura migrate apply --endpoint https://foodex-db.caprover.cocaud.dev --admin-secret $HASURA_ADMIN_SECRET"
+    "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
+    "deploy:hasura": "yarn hasura:prod migrate apply && yarn hasura:prod metadata apply"
   },
   "devDependencies": {
-    "hasura-cli": "1.2.0-beta.1"
+    "hasura-cli": "1.2.0-beta.2"
   }
 }

@@ -1,1 +1,66 @@
-[]
+- table:
+    schema: public
+    name: ingredient
+  array_relationships:
+  - name: recipe_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: ingredient_id
+        table:
+          schema: public
+          name: recipe_ingredient
+- table:
+    schema: public
+    name: recipe
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: ingredients
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: recipe_ingredient
+        column_mapping:
+          id: recipe_id
+- table:
+    schema: public
+    name: recipe_ingredient
+  object_relationships:
+  - name: ingredient
+    using:
+      foreign_key_constraint_on: ingredient_id
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+- table:
+    schema: public
+    name: recipe_list
+  array_relationships:
+  - name: recipes
+    using:
+      foreign_key_constraint_on:
+        column: recipe_list_id
+        table:
+          schema: public
+          name: recipe_list_entry
+- table:
+    schema: public
+    name: recipe_list_entry
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+- table:
+    schema: public
+    name: user
+  array_relationships:
+  - name: recipes
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: recipe
