@@ -10,9 +10,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn
-            - run:
-                command: yarn
-                cwd: app
+            - run: cd app && yarn
             - run: yarn build:app
             - run: yarn deploy:app
             - run: yarn deploy:hasura
