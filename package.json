@@ -2,15 +2,16 @@
   "private": true,
   "scripts": {
     "dev": "docker-compose up -d && cd app && yarn dev",
+    "build:app": "cd app && yarn build",
     "hasura": "hasura --project hasura --skip-update-check",
     "hasura:console": "yarn hasura console",
     "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
-    "deploy:hasura": "yarn hasura:prod migrate apply && yarn hasura:prod metadata apply"
+    "deploy:hasura": "yarn hasura:prod migrate apply && yarn hasura:prod metadata apply",
+    "predeploy:app": "tar -czf foodex-app.tar.gz app/__sapper__/build app/captain-definition app/Dockerfile app/static app/package.json app/yarn.lock",
+    "deploy:app": "caprover deploy -a foodex-app -h caprover.cocaud.dev -t foodex-app.tar.gz"
   },
   "devDependencies": {
+    "caprover": "^2.1.1",
     "hasura-cli": "1.2.0-beta.3"
-  },
-  "dependencies": {
-    "marked": "^0.8.2"
   }
 }

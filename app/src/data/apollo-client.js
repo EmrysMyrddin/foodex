@@ -10,7 +10,7 @@ const customFetch = (uri, options) => {
 }
 
 export const client = new ApolloClient({
-  uri: "http://localhost:8080/v1/graphql",
+  uri: process.env.GRAPHQL_ENDPOINT || "http://localhost:8080/v1/graphql",
   fetch: customFetch,
 })
 
