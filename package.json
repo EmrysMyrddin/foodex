@@ -1,12 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "dev": "docker-compose up -d && yarn hasura console",
+    "dev": "docker-compose up -d && cd app && yarn dev",
     "hasura": "hasura --project hasura --skip-update-check",
+    "hasura:console": "yarn hasura console",
     "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
     "deploy:hasura": "yarn hasura:prod migrate apply && yarn hasura:prod metadata apply"
   },
   "devDependencies": {
-    "hasura-cli": "1.2.0-beta.2"
+    "hasura-cli": "1.2.0-beta.3"
+  },
+  "dependencies": {
+    "marked": "^0.8.2"
   }
 }

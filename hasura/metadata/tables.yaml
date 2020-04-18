@@ -12,6 +12,10 @@
 - table:
     schema: public
     name: recipe
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      user_id: userId
   object_relationships:
   - name: user
     using:
@@ -25,9 +29,64 @@
           name: recipe_ingredient
         column_mapping:
           id: recipe_id
+  - name: shopping_list_entries
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: shopping_list_entry
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - description
+      - name
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - description
+      - name
+      - created_at
+      - updated_at
+      - id
+      - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - description
+      - name
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-User-Id
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: recipe_ingredient
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      ingredient_id: ingredientId
+      recipe_id: recipeId
   object_relationships:
   - name: ingredient
     using:
@@ -37,22 +96,72 @@
       foreign_key_constraint_on: recipe_id
 - table:
     schema: public
-    name: recipe_list
+    name: shopping_list
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      user_id: userId
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
   array_relationships:
+  - name: ingredients
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: shopping_list_ingredients
+        column_mapping:
+          id: shopping_list_id
   - name: recipes
     using:
       foreign_key_constraint_on:
-        column: recipe_list_id
+        column: shopping_list_id
         table:
           schema: public
-          name: recipe_list_entry
+          name: shopping_list_entry
 - table:
     schema: public
-    name: recipe_list_entry
+    name: shopping_list_entry
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      recipe_id: recipeId
+      shopping_list_id: shoppingListId
   object_relationships:
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  - name: shopping_list
+    using:
+      foreign_key_constraint_on: shopping_list_id
+- table:
+    schema: public
+    name: shopping_list_ingredients
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      ingredient_id: ingredientId
+      sum: qte
+      shopping_list_id: shoppingListId
+  object_relationships:
+  - name: ingredient
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: ingredient
+        column_mapping:
+          ingredient_id: id
+  - name: shoppingList
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: shopping_list
+        column_mapping:
+          shopping_list_id: id
 - table:
     schema: public
     name: user
@@ -64,3 +173,10 @@
         table:
           schema: public
           name: recipe
+  - name: shopping_lists
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: shopping_list
