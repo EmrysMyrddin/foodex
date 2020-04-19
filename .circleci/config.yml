@@ -10,10 +10,10 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn
+            - run: yarn deploy:hasura
             - run: cd app && yarn
             - run: yarn build:app
             - run: yarn deploy:app
-            - run: yarn deploy:hasura
             # - run: npm test
 
 workflows:
