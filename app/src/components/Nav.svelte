@@ -1,5 +1,11 @@
 <script>
+	import { goto } from '@sapper/app'
+
 	export let segment;
+
+	function disconect() {
+		sessionStorage.token = null
+	}
 </script>
 
 <style>
@@ -56,5 +62,7 @@
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='/shopping-lists'>listes</a></li>
+
+		<li on:click={disconect}><a href="/login" >Déconnection</a></li>
 	</ul>
 </nav>

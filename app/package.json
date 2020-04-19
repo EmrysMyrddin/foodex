@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "sapper dev --hot=false",
-    "build": "sapper build",
+    "build": "NODE_ENV=production sapper build",
     "export": "sapper export",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "apollo-boost": "^0.4.7",
+    "body-parser": "^1.19.0",
     "compression": "^1.7.1",
     "graphql": "14",
+    "jsonwebtoken": "^8.5.1",
     "marked": "^0.8.2",
     "node-fetch": "^2.6.0",
     "polka": "next",

@@ -9,6 +9,33 @@
         table:
           schema: public
           name: recipe_ingredient
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - name
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter: {}
 - table:
     schema: public
     name: recipe
@@ -71,8 +98,6 @@
       check:
         user_id:
           _eq: X-Hasura-User-Id
-      set:
-        user_id: x-hasura-User-Id
   delete_permissions:
   - role: user
     permission:
@@ -94,6 +119,53 @@
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - ingredient_id
+      - qte
+      - recipe_id
+      - unit
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - qte
+      - unit
+      - created_at
+      - updated_at
+      - id
+      - ingredient_id
+      - recipe_id
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - ingredient_id
+      - qte
+      - unit
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list
@@ -121,6 +193,44 @@
         table:
           schema: public
           name: shopping_list_entry
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - name
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      - created_at
+      - updated_at
+      - id
+      - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list_entry
@@ -136,6 +246,49 @@
   - name: shopping_list
     using:
       foreign_key_constraint_on: shopping_list_id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - qte
+      - recipe_id
+      - shopping_list_id
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - qte
+      - created_at
+      - updated_at
+      - id
+      - recipe_id
+      - shopping_list_id
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - qte
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list_ingredients
@@ -162,6 +315,19 @@
           name: shopping_list
         column_mapping:
           shopping_list_id: id
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - shopping_list_id
+      - ingredient_id
+      - sum
+      - unit
+      filter:
+        shoppingList:
+          user_id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
 - table:
     schema: public
     name: user
@@ -180,3 +346,38 @@
         table:
           schema: public
           name: shopping_list
+  select_permissions:
+  - role: unauthorized
+    permission:
+      columns:
+      - id
+      - password
+      - username
+      filter: {}
+      limit: 1
+  - role: user
+    permission:
+      columns:
+      - created_at
+      - id
+      - updated_at
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - password
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
