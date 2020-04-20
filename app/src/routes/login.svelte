@@ -6,7 +6,12 @@ let username, password
 async function handleLogin() {
   const response = await fetch('/api/login', { method: 'POST', body: JSON.stringify({ username, password }) })
   if(!response.ok) return
-  sessionStorage.token = await response.text()
+
+  const { user, token } = await response.json()
+
+  sessionStorage.token = token
+  sessionStorage.userId = user.id
+
   goto('/recipes')
 }
 </script>

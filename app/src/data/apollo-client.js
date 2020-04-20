@@ -16,9 +16,11 @@ const customFetch = (uri, options) => {
   })
 }
 
+console.log(process.env.GRAPHQL_ENDPOINT || "http://localhost:8080/v1/graphql")
+
 export const client = new ApolloClient({
   uri: process.env.GRAPHQL_ENDPOINT || "http://localhost:8080/v1/graphql",
   fetch: customFetch,
 })
 
-export const userId = 'b59b20eb-562b-4510-a2ff-6e44805e08fe'
+export const userId = () => sessionStorage.userId

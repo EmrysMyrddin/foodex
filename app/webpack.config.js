@@ -37,7 +37,7 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.GRAPHQL_ENDPOINT': `"${process.env.GRAPHQL_ENDPOINT}"`,
+				'process.env.GRAPHQL_ENDPOINT': process.env.GRAPHQL_ENDPOINT && `"${process.env.GRAPHQL_ENDPOINT}"`,
 			}),
 		].filter(Boolean),
 		devtool: dev && 'inline-source-map'

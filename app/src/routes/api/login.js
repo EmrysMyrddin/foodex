@@ -33,7 +33,8 @@ export async function post(req, res, next) {
     process.env.JWT_SECRET || 'this is a secret developpement key',
   )
 
-  res.end(token)
+  res.writeHeader(200, { 'content-type': 'application/json' })
+  res.end(JSON.stringify({ user, token }))
 }
 
 

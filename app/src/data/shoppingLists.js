@@ -12,21 +12,21 @@ export function listShoppingLists() {
       }
       ${shoppingListsFragment}
     `,
-    variables: { userId }
+    variables: { userId: userId() }
   })
 }
 
 export async function createShoppingList(name) {
   return mutate(client, {
     mutation: gql`
-      mutation createShoppingList($name: String, $userId: uuid) {
-        insert_shopping_list_one(object: { name: $name, userId: $userId }) {
+      mutation createShoppingList($name: String) {
+        insert_shopping_list_one(object: { name: $name }) {
           user { ...shoppingLists }
         }
       }
       ${shoppingListsFragment}
     `,
-    variables: { userId, name }
+    variables: { name }
   })
 }
 

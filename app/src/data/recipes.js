@@ -14,7 +14,7 @@ export function listRecipes() {
       }
     `,
     variables: {
-      userId
+      userId: userId()
     }
   })
 }
