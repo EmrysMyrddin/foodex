@@ -62,8 +62,8 @@ export function setDescription(recipeId, description) {
   })
 }
 
-export function addIngredient(recipe_id, recipeIngredient) {
-  console.log(recipe_id, recipeIngredient)
+export function addIngredient(recipeId, recipeIngredient) {
+  console.log(recipeId, recipeIngredient)
   return mutate(client, {
     mutation: gql`
       mutation addIngredient($recipeIngredient: recipe_ingredient_insert_input!) {

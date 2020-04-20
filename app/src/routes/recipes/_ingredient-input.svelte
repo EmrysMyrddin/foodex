@@ -10,7 +10,7 @@
   async function handleAdd() {
     let ingredientId = selectedValue.id
 
-    if(ingredient_id === 'new') {
+    if(ingredientId === 'new') {
       const newIngredient = await createIngredient(selectedValue.name)
       ingredientId = newIngredient.id
     }
