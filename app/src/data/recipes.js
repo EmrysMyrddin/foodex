@@ -112,8 +112,8 @@ export async function deleteRecipe(recipeId) {
 export async function createRecipe(name) {
   return mutate(client, {
     mutation: gql`
-      mutation createRecipe($userId: uuid!, $name: String!) {
-        insert_recipe_one(object: { name: $name, userId: $userId, description: "" }) {
+      mutation createRecipe($name: String!) {
+        insert_recipe_one(object: { name: $name, description: "" }) {
           user {
             id
             recipes { id, name }
