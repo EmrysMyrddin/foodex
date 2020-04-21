@@ -10,7 +10,7 @@
   import EditableTitle from '../../components/editable-title'
   import IngredientInput from './_ingredient-input'
   import EditableMarkdown from '../../components/editable-markdown'
-  import { getRecipe, setName, setDescription, addIngredient } from '../../data/recipes'
+  import { getRecipe, setName, setDescription, addIngredient, removeIngredient } from '../../data/recipes'
 
   export let recipeId
 
@@ -32,7 +32,7 @@
   <h2>Ingrédients : </h2>
   <ul>
     {#each recipe.ingredients as recipeIngredient}
-      <li><Ingredient {recipeIngredient}/></li>
+      <li><Ingredient {recipeIngredient} onDelete={() => removeIngredient(recipeIngredient.id)} /></li>
     {/each}
     <li><IngredientInput onAdd={recipeIngredient => addIngredient(recipeId, recipeIngredient)}/></li>
   </ul>

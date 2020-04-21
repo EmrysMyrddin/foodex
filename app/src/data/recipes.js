@@ -124,3 +124,19 @@ export async function createRecipe(name) {
     variables: { userId, name }
   })
 }
+
+export function removeIngredient(recipeIngredientId) {
+  return mutate(client, {
+    mutation: gql`
+      mutation removeRecipeIngredient($recipeIngredientId: uuid!) {
+        delete_recipe_ingredient_by_pk(id: $recipeIngredientId) {
+          recipe {
+            id
+            ingredients { id }
+          }
+        }
+      }
+    `,
+    variables: { recipeIngredientId }
+  })
+}
