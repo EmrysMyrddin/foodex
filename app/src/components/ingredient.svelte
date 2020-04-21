@@ -12,5 +12,11 @@
 </a>: {qte}{unit}
 
 {#if onDelete}
-  <button on:click={onDelete} >🗑</button>
+  <span on:click={onDelete} class="delete-button" >🗑</span>
 {/if}
+
+<style>
+.delete-button {
+  cursor: pointer;
+}
+</style>
