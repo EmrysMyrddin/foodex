@@ -6,16 +6,13 @@ import { nonInputTypeOnVarMessage } from 'graphql/validation/rules/VariablesAreI
 export function listRecipes() {
   return query(client, {
     query: gql`
-      query getRecipesList($userId: uuid!) {
-        user: user_by_pk(id: $userId) {
-          id
-          recipes { id name }
+      query listRecipes {
+        recipe {
+          id, name
+          user { id, username }
         }
       }
     `,
-    variables: {
-      userId: userId()
-    }
   })
 }
 
@@ -27,6 +24,7 @@ export function getRecipe(recipeId) {
           id
           name, description
           ingredients { id, ingredientId, qte, unit }
+          user { id, username }
         }
       }
     `,

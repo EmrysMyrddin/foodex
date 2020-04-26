@@ -3,21 +3,28 @@ import gql from 'graphql-tag'
 import { client } from '../../data/apollo-client'
 
 export async function post(req, res, next) {
+  console.log(req.body)
   const { username, password } = req.body
 
-  const { data: { user: [ user ] } } = await client.query({
+  console.log(username, password)
+
+  const { data: { user: users } } = await client.query({
     query: gql`
       query getUser($username: String, $password: String) {
         user(where:{ _and: [
             { username: { _eq: $username } },
             { password: { _eq: $password } }
         ] }) {
-          id
+          id, username
         }
       }
     `,
     variables: { username, password }
   })
+
+  console.log(users)
+
+  const [user] = users
 
   const claims = {
     sub: user.id,

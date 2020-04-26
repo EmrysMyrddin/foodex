@@ -7,7 +7,7 @@ export let recipeId, qte = null
 let recipeQuery = query(client, {
   query: gql`
     query getRecipeForList($recipeId: uuid!) {
-      recipe: recipe_by_pk(id: $recipeId) { id, name }
+      recipe: recipe_by_pk(id: $recipeId) { id, name, user { id, username } }
     }
   `,
   variables: { recipeId }
@@ -15,5 +15,9 @@ let recipeQuery = query(client, {
 
 </script>
 
-{#await $recipeQuery} Recette {:then { data: { recipe } } } <a href="/recipes/{recipe.id}">{recipe.name}</a> {/await }
+{#await $recipeQuery}
+  Recette
+{:then { data: { recipe } } }
+  <a href="/recipes/{recipe.id}">{recipe.name} ({recipe.user.username})</a>
+{/await }
 {#if qte !== null}(x{qte}){/if}

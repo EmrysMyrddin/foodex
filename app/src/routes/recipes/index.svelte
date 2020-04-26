@@ -21,9 +21,9 @@
 
 {#await $recipesQuery}
   <p>Loading ...</p>
-{:then { data: { user: { recipes } } } }
+{:then { data: { recipe } } }
   <ul>
-    {#each recipes as { id }}
+    {#each recipe as { id }}
       <li><Recipe recipeId={id} /></li>
     {/each}
   </ul>

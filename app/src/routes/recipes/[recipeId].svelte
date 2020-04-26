@@ -26,6 +26,8 @@
 {:then { data: { recipe } } }
   <EditableTitle title={recipe.name} onChange={name => setName(recipeId, name)} />
 
+  <p>Créé par {recipe.user.username}</p>
+
   <h2>Étapes : </h2>
   <EditableMarkdown content={recipe.description} onChange={description => setDescription(recipeId, description)}/>
 

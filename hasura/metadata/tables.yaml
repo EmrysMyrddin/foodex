@@ -83,8 +83,13 @@
       - id
       - user_id
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - user:
+            sharingWith:
+              shared_to_user_id:
+                _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: user
@@ -92,12 +97,22 @@
       columns:
       - description
       - name
+      - created_at
+      - updated_at
+      - id
+      - user_id
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-      check:
-        user_id:
-          _eq: X-Hasura-User-Id
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - user:
+            sharingWith:
+              _and:
+              - shared_to_user_id:
+                  _eq: X-Hasura-User-Id
+              - can_write:
+                  _eq: true
+      check: {}
   delete_permissions:
   - role: user
     permission:
@@ -123,9 +138,18 @@
   - role: user
     permission:
       check:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        _or:
+        - recipe:
+            user_id:
+              _eq: X-Hasura-User-Id
+        - recipe:
+            user:
+              sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_write:
+                    _eq: true
       columns:
       - ingredient_id
       - qte
@@ -143,9 +167,15 @@
       - ingredient_id
       - recipe_id
       filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        _or:
+        - recipe:
+            user_id:
+              _eq: X-Hasura-User-Id
+        - recipe:
+            user:
+              sharingWith:
+                shared_to_user_id:
+                  _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: user
@@ -155,9 +185,18 @@
       - qte
       - unit
       filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        _or:
+        - recipe:
+            user_id:
+              _eq: X-Hasura-User-Id
+        - recipe:
+            user:
+              sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_write:
+                    _eq: true
       check: null
   delete_permissions:
   - role: user
@@ -339,6 +378,20 @@
         table:
           schema: public
           name: recipe
+  - name: sharedBy
+    using:
+      foreign_key_constraint_on:
+        column: shared_to_user_id
+        table:
+          schema: public
+          name: user_shares
+  - name: sharingWith
+    using:
+      foreign_key_constraint_on:
+        column: owner_id
+        table:
+          schema: public
+          name: user_shares
   - name: shopping_lists
     using:
       foreign_key_constraint_on:
@@ -362,9 +415,7 @@
       - id
       - updated_at
       - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
+      filter: {}
   update_permissions:
   - role: user
     permission:
@@ -380,4 +431,62 @@
     permission:
       filter:
         id:
+          _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: user_shares
+  configuration:
+    custom_root_fields: {}
+    custom_column_names:
+      can_write: canWrite
+      owner_id: ownerId
+      shared_to_user_id: sharedToUserId
+  object_relationships:
+  - name: sharedBy
+    using:
+      foreign_key_constraint_on: owner_id
+  - name: sharedTo
+    using:
+      foreign_key_constraint_on: shared_to_user_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        owner_id: x-hasura-User-Id
+      columns:
+      - can_write
+      - shared_to_user_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - owner_id
+      - shared_to_user_id
+      - can_write
+      filter:
+        _or:
+        - shared_to_user_id:
+            _eq: X-Hasura-User-Id
+        - owner_id:
+            _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - can_write
+      - shared_to_user_id
+      filter:
+        owner_id:
+          _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        owner_id:
           _eq: X-Hasura-User-Id
