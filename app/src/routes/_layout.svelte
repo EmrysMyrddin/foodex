@@ -12,18 +12,27 @@
 </script>
 
 <style>
+	.app-container {
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
 	main {
-		position: relative;
-		max-width: 56em;
 		background-color: white;
 		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
+		flex: 1;
+		overflow-y: auto;
 	}
+
 </style>
 
-<Nav />
+<div class="app-container">
 
 <main>
 	<slot></slot>
 </main>
+
+<Nav {segment} />
+
+</div>
