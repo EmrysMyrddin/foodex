@@ -291,9 +291,10 @@
   - role: user
     permission:
       check:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
       columns:
       - qte
       - recipe_id
@@ -309,9 +310,10 @@
       - recipe_id
       - shopping_list_id
       filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: user
@@ -319,17 +321,19 @@
       columns:
       - qte
       filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
       check: null
   delete_permissions:
   - role: user
     permission:
       filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list_ingredients
