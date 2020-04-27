@@ -42,7 +42,7 @@
 }
 </style>
 
-<div class="ingredient-input">
+<form class="ingredient-input" on:submit|preventDefault >
   <div class="ingredient-select-container">
     <Select
       optionIdentifier="id"
@@ -64,5 +64,5 @@
     <option value="p">pièce</option>
     <option value="cl">cl</option>
   </select>
-  <button on:click={handleAdd} >Ajouter</button>
-</div>
+  <button on:click={handleAdd} disabled={!qte || !selectedValue || !unit}>Ajouter</button>
+</form>
