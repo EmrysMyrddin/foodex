@@ -1,4 +1,6 @@
+import { get } from 'svelte/store'
 import ApolloClient from 'apollo-boost'
+import { userId as userIdStore } from '../stores/user-id'
 
 if(typeof fetch !== 'function') {
   global.fetch = require('node-fetch')
@@ -23,4 +25,4 @@ export const client = new ApolloClient({
   fetch: customFetch,
 })
 
-export const userId = () => sessionStorage.userId
+export const userId = () => get(userIdStore)

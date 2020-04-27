@@ -17,7 +17,7 @@
 
 <div class="create-recipe-container">
   <input bind:value={name}/>
-  <button on:click={handleCreate}>Créer un recette</button>
+  <button on:click={handleCreate}>Créer une recette</button>
 </div>
 
 {#await $recipesQuery}

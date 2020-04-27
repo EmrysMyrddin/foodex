@@ -1,8 +1,10 @@
 <script>
 	import { goto } from '@sapper/app'
+	import { userId } from '../stores/user-id'
 
 	function disconect() {
 		sessionStorage.token = null
+		userId.set(null)
 	}
 
 	const menuEntries = [
@@ -10,14 +12,16 @@
 		{ label: 'Ingredients', href: '/ingredients' },
 		{ label: 'Listes de course', href: '/shopping-lists' },
 		{ label: 'Mon compte', href: '/account' },
-		{ label: 'Déconnection', href: '/login', onClick: disconect}
+		{ label: 'Déconnexion', href: '/login', onClick: disconect, loggedOut: true}
 	]
 </script>
 
 <nav>
 	<ul>
-		{#each menuEntries as { label, href, onClick } }
-			<li on:click={onClick}><a {href} rel=prefetch>{label}</a></li>
+		{#each menuEntries as { label, href, onClick, loggedOut } }
+			{#if $userId || loggedOut}
+				<li on:click={onClick}><a {href} rel=prefetch>{label}</a></li>
+			{/if}
 		{/each}
 	</ul>
 </nav>
