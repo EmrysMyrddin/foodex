@@ -15,10 +15,10 @@
 
 <h1>Recettes</h1>
 
-<div class="create-recipe-container">
+<form class="create-recipe-container" on:submit|preventDefault >
   <input bind:value={name}/>
-  <button on:click={handleCreate}>Créer une recette</button>
-</div>
+  <button on:click={handleCreate} disabled={!name}>Créer une recette</button>
+</form>
 
 {#await $recipesQuery}
   <p>Loading ...</p>
