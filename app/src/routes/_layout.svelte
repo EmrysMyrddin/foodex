@@ -1,5 +1,14 @@
 <script>
+	import { goto } from '@sapper/app';
+	import { userId } from '../stores/user-id'
 	import Nav from '../components/navigation.svelte';
+
+	export let segment
+
+	$: {
+		// Fixme typeof document === 'object' should not be mandatory here ?
+		if(typeof document === 'object' && !$userId && segment !== 'login') goto('/login', { replaceState: true })
+	}
 </script>
 
 <style>

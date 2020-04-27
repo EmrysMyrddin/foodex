@@ -8,7 +8,12 @@ function persist(key, value) {
 function read(key) {
   const value = sessionStorage.getItem(key)
   console.log(value)
-  return value && JSON.parse(value)
+  try {
+    return value && JSON.parse(value)
+  } catch(err) {
+    console.error(`Error while parsing session storage key '${key}' : `, err)
+    sessionStorage.removeItem(key)
+  }
 }
 
 export function writableSession(key, initialValue) {

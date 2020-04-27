@@ -3,8 +3,9 @@
 	import { userId } from '../stores/user-id'
 
 	function disconect() {
-		sessionStorage.token = null
+		sessionStorage.removeItem('token')
 		userId.set(null)
+		goto('/login')
 	}
 
 	const menuEntries = [
