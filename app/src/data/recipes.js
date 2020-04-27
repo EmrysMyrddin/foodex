@@ -7,12 +7,13 @@ export function listRecipes() {
   return query(client, {
     query: gql`
       query listRecipes {
-        recipe {
+        recipe(order_by: { name: asc }) {
           id, name
           user { id, username }
         }
       }
     `,
+    fetchPolicy: 'cache-and-network',
   })
 }
 
@@ -108,19 +109,17 @@ export async function deleteRecipe(recipeId) {
 }
 
 export async function createRecipe(name) {
-  return mutate(client, {
+  const { data: { createdRecipe } } = await mutate(client, {
     mutation: gql`
       mutation createRecipe($name: String!) {
-        insert_recipe_one(object: { name: $name, description: "" }) {
-          user {
-            id
-            recipes { id, name }
-          }
+        createdRecipe: insert_recipe_one(object: { name: $name, description: "" }) {
+          id, name
         }
       }
     `,
-    variables: { userId, name }
+    variables: { name }
   })
+  return createdRecipe
 }
 
 export function removeIngredient(recipeIngredientId) {

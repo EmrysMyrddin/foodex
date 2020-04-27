@@ -1,4 +1,5 @@
 <script>
+  import { goto } from '@sapper/app'
   import Recipe from '../../components/recipe'
   import { listRecipes, createRecipe } from '../../data/recipes'
 
@@ -6,9 +7,9 @@
 
   const recipesQuery = listRecipes()
 
-  function handleCreate() {
-    createRecipe(name)
-    name = ''
+  async function handleCreate() {
+    const { id } = await createRecipe(name)
+    goto(`/recipes/${id}`)
   }
 </script>
 
@@ -21,9 +22,9 @@
 
 {#await $recipesQuery}
   <p>Loading ...</p>
-{:then { data: { recipe } } }
+{:then { data } }
   <ul>
-    {#each recipe as { id }}
+    {#each (data && data.recipe) || [] as { id }}
       <li><Recipe recipeId={id} /></li>
     {/each}
   </ul>
