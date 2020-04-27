@@ -23,8 +23,10 @@
 		padding: 2em;
 		flex: 1;
 		overflow-y: auto;
+		max-width: 50em;
+		margin: auto;
+		width: 100%;
 	}
-
 </style>
 
 <div class="app-container">
