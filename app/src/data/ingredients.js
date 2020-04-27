@@ -59,7 +59,7 @@ export function listIngredients() {
   return query(client, {
     query: gql`
       query listIngredients {
-        ingredient { id, name }
+        ingredient(order_by: { name: asc }) { id, name }
       }
     `
   })
