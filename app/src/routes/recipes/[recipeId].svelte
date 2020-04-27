@@ -6,15 +6,23 @@
 
 <script>
   import marked from 'marked'
+  import { goto } from '@sapper/app'
   import Ingredient from '../../components/ingredient'
   import EditableTitle from '../../components/editable-title'
   import IngredientInput from './_ingredient-input'
   import EditableMarkdown from '../../components/editable-markdown'
-  import { getRecipe, setName, setDescription, addIngredient, removeIngredient } from '../../data/recipes'
+  import { getRecipe, setName, setDescription, addIngredient, removeIngredient, deleteRecipe } from '../../data/recipes'
+  import { userId } from '../../stores/user-id'
 
   export let recipeId
 
   let recipeQuery = getRecipe(recipeId)
+
+  async function handleDelete() {
+    if(!confirm('Êtes-vous sûre de vouloir supprimer cette recette ?')) return
+    await deleteRecipe(recipeId)
+    goto('/recipes', { replaceState: true})
+  }
 
 </script>
 
@@ -24,7 +32,11 @@
   <h1>Recette</h1>
   <p>Loading</p>
 {:then { data: { recipe } } }
-  <EditableTitle title={recipe.name} onChange={name => setName(recipeId, name)} />
+  <EditableTitle
+    title={recipe.name}
+    onChange={name => setName(recipeId, name)}
+    onDelete={$userId === recipe.user.id ? handleDelete : null}
+  />
 
   <p>Créé par {recipe.user.username}</p>
 

@@ -98,13 +98,11 @@ export async function deleteRecipe(recipeId) {
     mutation: gql`
       mutation deleteRecipe($recipeId: uuid!) {
         delete_recipe_by_pk(id: $recipeId) {
-          user {
-            id,
-            recipes { id, name }
-          }
+          id
         }
       }
-    `
+    `,
+    variables: { recipeId }
   })
 }
 

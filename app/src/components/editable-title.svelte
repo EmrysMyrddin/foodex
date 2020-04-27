@@ -1,5 +1,5 @@
 <script>
-export let title, onChange
+export let title, onChange, onDelete
 
 let editing = false
 
@@ -21,6 +21,9 @@ function handleBlur({ target }) {
   >
     {title}
   </h1>
+  {#if onDelete}
+    <div class="delete-icon" on:click={onDelete}>🗑</div>
+  {/if}
 </div>
 
 <style>
