@@ -42,6 +42,8 @@
   configuration:
     custom_root_fields: {}
     custom_column_names:
+      updated_at: updatedAt
+      created_at: createdAt
       user_id: userId
   object_relationships:
   - name: user

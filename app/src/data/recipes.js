@@ -3,16 +3,17 @@ import gql from 'graphql-tag'
 import { client, userId } from './apollo-client'
 import { nonInputTypeOnVarMessage } from 'graphql/validation/rules/VariablesAreInputTypes'
 
-export function listRecipes() {
+export function listRecipes(order) {
   return query(client, {
     query: gql`
-      query listRecipes {
-        recipe(order_by: { name: asc }) {
+      query listRecipes($order: [recipe_order_by!]) {
+        recipe(order_by: $order) {
           id, name
           user { id, username }
         }
       }
     `,
+    variables: { order },
     fetchPolicy: 'cache-and-network',
   })
 }
