@@ -3,7 +3,7 @@
 	"theme_color": "#333333",
 	"name": "Foodex",
 	"short_name": "Foodex",
-	"display": "minimal-ui",
+	"display": "fullscreen",
 	"start_url": "/",
 	"icons": [
 		{
