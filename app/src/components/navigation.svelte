@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '@sapper/app'
+	import watchMedia from "svelte-media";
 	import { userId } from '../stores/user-id'
 	import * as icons from './icons'
 
@@ -18,6 +19,10 @@
 		{ label: 'Mon compte', href: '/account', icon: '/account.svg', icon: icons.AccountIcon },
 	]
 
+	const media = watchMedia({ mobile: '(max-width: 60rem)' })
+
+	console.log($media)
+
 	function isCurrent(href, segment) {
 		const parts = href.split('/')
 		console.log(parts[parts.length - 1] === segment, segment, parts)
@@ -33,7 +38,7 @@
 					<a {href} rel=prefetch aria-current={isCurrent(href, segment)}>
 						<div class="menu-button">
 							<svelte:component this={icon} />
-							<div>{label}</div>
+							{#if !$media.mobile }<div>{label}</div>{/if}
 						</div>
 					</a>
 				</li>
@@ -42,7 +47,7 @@
 		<div class="logout extra">
 			<div class="menu-button" on:click={disconect} role="button">
 				<svelte:component this={icons.LogoutIcon} />
-				<div>Déconnexion</div>
+				{#if !$media.mobile }<div>Déconnexion</div>{/if}
 			</div>
 		</div>
 	</nav>
@@ -50,12 +55,11 @@
 
 <style>
 	nav {
-		font-size: 0.7em;
+		font-size: 1em;
 		border-top: 1px solid rgb(var(--PRIMARY_COLOR));
 		transition: border-top 0.3s ease-in-out;
 		font-weight: 300;
-		padding: 0 1em;
-		height: 50px;
+		height: 70px;
 		display: flex;
 		align-items: center;
 	}
@@ -70,7 +74,6 @@
 
 	li {
 		display: block;
-		margin: 0 1em;
 	}
 
 	a {
@@ -93,15 +96,19 @@
 		align-items: center;
 		justify-items: center;
 		transition: color 0.3s ease-in-out;
+		padding: 0 1em;
 	}
 
-	@media(max-width: 800) {
+	@media(max-width: 60rem) {
 		.menu-button {
-			width: 20%
+			width: 20vw;
+			font-size: 1.5em;
+			padding: 0;
 		}
 	}
 
 	.menu-button :global(svg) {
+		display: block;
 		height: 2em;
 		width: 2em;
 		fill: black;

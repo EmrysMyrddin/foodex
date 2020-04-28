@@ -29,8 +29,6 @@
 
 </script>
 
-<a href="/recipes" rel="preload">Retour à la liste des recettes</a>
-
 {#await $recipeQuery}
   <h1>Recette</h1>
   <p>Loading</p>
