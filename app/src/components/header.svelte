@@ -20,13 +20,14 @@
 <style>
 /* rgba(var(--PRIMARY_COLOR), 0.16) */
 header {
-  height: 50px;
+  height: 70px;
   display: flex;
   align-items: center;
   box-shadow: 0px 10px 20px rgba(var(--PRIMARY_COLOR), 0.16);
   background-color: white;
   z-index: 10;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow var(--transition);
+  margin-bottom: 1em;
 }
 
 header :global(svg) {
@@ -36,7 +37,7 @@ header :global(svg) {
   height: auto;
   margin-right: 1em;
   margin-left: 2em;
-  transition: fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+  transition: fill var(--transition), stroke var(--transition);
 }
 
 h1 {
@@ -44,7 +45,7 @@ h1 {
   color: rgb(var(--PRIMARY_COLOR));
   text-transform: uppercase;
   margin: 0;
-  transition: color 0.3s ease-in-out;
+  transition: color var(--transition);
 }
 
 .clickable {

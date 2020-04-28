@@ -16,12 +16,13 @@
   }
 </script>
 
-<div class="ingredient-create-container" >
-  <input bind:value={name} /><button on:click={handleCreate}>Créer un ingredient</button>
-</div>
+<form class="ingredient-create-container" on:submit|preventDefault>
+  <input bind:value={name} />
+  <button on:click={handleCreate} disabled={!name}>Créer un ingredient</button>
+</form>
 
 {#await $ingredientsQuery}
-Chargement des ingrédients...
+  Chargement des ingrédients...
 {:then { data } }
   <ul>
     {#each data.ingredient as { id,name } }

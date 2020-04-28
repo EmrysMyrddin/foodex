@@ -21,11 +21,9 @@
 
 	const media = watchMedia({ mobile: '(max-width: 60rem)' })
 
-	console.log($media)
 
 	function isCurrent(href, segment) {
 		const parts = href.split('/')
-		console.log(parts[parts.length - 1] === segment, segment, parts)
 		if(parts[parts.length - 1] === segment) return 'page'
 	}
 </script>
@@ -55,9 +53,9 @@
 
 <style>
 	nav {
-		font-size: 1em;
+		font-size: 1.2em;
 		border-top: 1px solid rgb(var(--PRIMARY_COLOR));
-		transition: border-top 0.3s ease-in-out;
+		transition: border-top var(--transition);
 		font-weight: 300;
 		height: 70px;
 		display: flex;
@@ -82,6 +80,7 @@
 
 	[aria-current] {
 		color: rgb(var(--PRIMARY_COLOR));
+		font-weight: 900;
 	}
 
 	[aria-current] .menu-button :global(svg) {
@@ -90,20 +89,18 @@
 	}
 
 	.menu-button {
-		width: fit-content;
+		width: 8em;
 		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-items: center;
-		transition: color 0.3s ease-in-out;
-		padding: 0 1em;
+		transition: color var(--transition);
 	}
 
 	@media(max-width: 60rem) {
 		.menu-button {
 			width: 20vw;
 			font-size: 1.5em;
-			padding: 0;
 		}
 	}
 
@@ -113,6 +110,6 @@
 		width: 2em;
 		fill: black;
 		stroke: black;
-		transition: fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+		transition: fill var(--transition), stroke var(--transition);
 	}
 </style>

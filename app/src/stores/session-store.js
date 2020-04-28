@@ -7,7 +7,6 @@ function persist(key, value) {
 
 function read(key) {
   const value = sessionStorage.getItem(key)
-  console.log(value)
   try {
     return value && JSON.parse(value)
   } catch(err) {

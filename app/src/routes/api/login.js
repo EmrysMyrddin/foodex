@@ -3,10 +3,7 @@ import gql from 'graphql-tag'
 import { client } from '../../data/apollo-client'
 
 export async function post(req, res, next) {
-  console.log(req.body)
   const { username, password } = req.body
-
-  console.log(username, password)
 
   const { data: { user: users } } = await client.query({
     query: gql`
@@ -22,7 +19,6 @@ export async function post(req, res, next) {
     variables: { username, password }
   })
 
-  console.log(users)
 
   const [user] = users
 
