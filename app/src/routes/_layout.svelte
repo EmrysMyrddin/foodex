@@ -1,7 +1,8 @@
 <script>
 	import { goto } from '@sapper/app';
 	import { userId } from '../stores/user-id'
-	import Nav from '../components/navigation.svelte';
+	import Nav from '../components/navigation';
+	import Header from '../components/header'
 
 	export let segment
 
@@ -10,6 +11,18 @@
 		if(typeof document === 'object' && !$userId && segment !== 'login') goto('/login', { replaceState: true })
 	}
 </script>
+
+
+<div class="app-container">
+	<Header />
+
+	<main>
+		<slot></slot>
+	</main>
+
+	<Nav {segment} />
+
+</div>
 
 <style>
 	.app-container {
@@ -28,13 +41,3 @@
 		width: 100%;
 	}
 </style>
-
-<div class="app-container">
-
-<main>
-	<slot></slot>
-</main>
-
-<Nav {segment} />
-
-</div>

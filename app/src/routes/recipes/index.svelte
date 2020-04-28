@@ -1,9 +1,12 @@
 <script>
+  import { subtitle } from '../../stores/page'
   import { goto } from '@sapper/app'
   import Recipe from '../../components/recipe'
   import { listRecipes, createRecipe } from '../../data/recipes'
 
   let name, order = { name: 'asc' }
+
+  subtitle.set(null)
 
   let recipesQuery = listRecipes(order)
   $: recipesQuery.refetch({ order })
@@ -17,8 +20,6 @@
     order = { [key]: order[key] === 'asc' ? 'desc' : 'asc' }
   }
 </script>
-
-<h1>Recettes</h1>
 
 <form class="create-recipe-container" on:submit|preventDefault >
   <input bind:value={name}/>

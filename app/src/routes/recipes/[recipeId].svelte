@@ -5,6 +5,7 @@
 </script>
 
 <script>
+  import { subtitle } from '../../stores/page'
   import marked from 'marked'
   import { goto } from '@sapper/app'
   import Ingredient from '../../components/ingredient'
@@ -17,6 +18,8 @@
   export let recipeId
 
   let recipeQuery = getRecipe(recipeId)
+
+  $: $recipeQuery.then(({ data: { recipe: { name } } }) => subtitle.set(name))
 
   async function handleDelete() {
     if(!confirm('Êtes-vous sûre de vouloir supprimer cette recette ?')) return

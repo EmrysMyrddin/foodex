@@ -1,9 +1,12 @@
 <script>
+  import { subtitle } from '../../stores/page'
   import { getUser, setName, listUsers, share } from '../../data/users.js'
   import EditableTitle from '../../components/editable-title'
   import Select from 'svelte-select'
 
   let selectedUser, canWrite
+
+  subtitle.set(null)
 
   let userQuery = getUser()
 

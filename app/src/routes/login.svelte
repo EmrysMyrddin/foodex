@@ -1,9 +1,13 @@
 <script>
+import { title, titleIcon } from '../stores/page'
 import { client } from '../data/apollo-client'
 import { goto } from '@sapper/app'
 import { userId } from '../stores/user-id'
 
 let username, password
+
+titleIcon.set(null)
+title.set('Foodex')
 
 async function handleLogin() {
   const response = await fetch('/api/login', { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({ username, password }) })

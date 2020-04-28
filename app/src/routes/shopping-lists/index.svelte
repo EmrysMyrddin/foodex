@@ -1,12 +1,13 @@
 <script>
+  import { subtitle } from '../../stores/page'
   import { listShoppingLists, createShoppingList } from '../../data/shoppingLists'
 
   let newListName = ''
 
+  subtitle.set(null)
+
   const shoppingListsQuery = listShoppingLists()
 </script>
-
-<h1>Listes des courses</h1>
 
 <div class="new-list-container">
   <input bind:value={newListName}>

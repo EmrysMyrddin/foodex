@@ -1,6 +1,9 @@
 <script>
+  import { subtitle } from '../../stores/page'
   import Ingredient from '../../components/ingredient'
   import { listIngredients, createIngredient } from '../../data/ingredients'
+
+  subtitle.set(null)
 
   let ingredientsQuery = listIngredients()
 
@@ -12,8 +15,6 @@
     name = ''
   }
 </script>
-
-<h1>Ingrédients</h1>
 
 <div class="ingredient-create-container" >
   <input bind:value={name} /><button on:click={handleCreate}>Créer un ingredient</button>

@@ -27,18 +27,17 @@
 
 {#if $userId}
 	<nav>
-		<div class="extra"></div>
 		<ul>
-				{#each menuEntries as { label, href, onClick, icon } }
-					<li on:click={onClick}>
-						<a {href} rel=prefetch aria-current={isCurrent(href, segment)}>
-							<div class="menu-button">
-								<svelte:component this={icon} />
-								<div>{label}</div>
-							</div>
-						</a>
-					</li>
-				{/each}
+			{#each menuEntries as { label, href, onClick, icon } }
+				<li on:click={onClick}>
+					<a {href} rel=prefetch aria-current={isCurrent(href, segment)}>
+						<div class="menu-button">
+							<svelte:component this={icon} />
+							<div>{label}</div>
+						</div>
+					</a>
+				</li>
+			{/each}
 		</ul>
 		<div class="logout extra">
 			<div class="menu-button" on:click={disconect} role="button">
@@ -51,11 +50,12 @@
 
 <style>
 	nav {
-		border-top: 1px solid var(--PRIMARY_COLOR);
+		font-size: 0.7em;
+		border-top: 1px solid rgb(var(--PRIMARY_COLOR));
 		transition: border-top 0.3s ease-in-out;
 		font-weight: 300;
 		padding: 0 1em;
-		height: 90px;
+		height: 50px;
 		display: flex;
 		align-items: center;
 	}
@@ -64,6 +64,8 @@
 		margin: 0;
 		padding: 0;
 		display: flex;
+		flex: 1;
+		justify-content: center;
 	}
 
 	li {
@@ -76,20 +78,12 @@
 	}
 
 	[aria-current] {
-		color: var(--PRIMARY_COLOR);
+		color: rgb(var(--PRIMARY_COLOR));
 	}
 
 	[aria-current] .menu-button :global(svg) {
-		fill: var(--PRIMARY_COLOR);
-		stroke: var(--PRIMARY_COLOR);
-	}
-
-	.extra {
-		flex: 1;
-	}
-
-	.logout {
-		text-align: end;
+		fill: rgb(var(--PRIMARY_COLOR));
+		stroke: rgb(var(--PRIMARY_COLOR));
 	}
 
 	.menu-button {
@@ -101,8 +95,15 @@
 		transition: color 0.3s ease-in-out;
 	}
 
+	@media(max-width: 800) {
+		.menu-button {
+			width: 20%
+		}
+	}
+
 	.menu-button :global(svg) {
-		height: 40px;
+		height: 2em;
+		width: 2em;
 		fill: black;
 		stroke: black;
 		transition: fill 0.3s ease-in-out, stroke 0.3s ease-in-out;

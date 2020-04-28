@@ -5,12 +5,15 @@
 </script>
 
 <script>
+  import { subtitle } from '../../stores/page'
   import EditableTitle from '../../components/editable-title'
   import { getIngredient, setName } from '../../data/ingredients'
 
   export let ingredientId
 
   let ingredientQuery = getIngredient(ingredientId)
+
+  $: $ingredientQuery.then(({ data: { ingredient: { name } } }) => subtitle.set(name))
 </script>
 
 <h1>

@@ -5,6 +5,7 @@
 </script>
 
 <script>
+import { subtitle } from '../../stores/page'
 import { getShoppingList, addRecipe } from '../../data/shoppingLists'
 import Ingredient from '../../components/ingredient'
 import Recipe from '../../components/recipe'
@@ -13,6 +14,9 @@ import RecipeInput from './_recipe-input'
 export let shoppingListId
 
 let shoppingListQuery = getShoppingList(shoppingListId)
+
+$: $shoppingListQuery.then(({ data: { shoppingList: { name } } }) => subtitle.set(name))
+
 </script>
 
 {#await $shoppingListQuery}
