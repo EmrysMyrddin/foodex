@@ -33,7 +33,7 @@ Chargement de la liste de course
     <RecipeInput onAdd={(recipeId, qte) => addRecipe(shoppingListId, recipeId, qte)}/>
   </ul>
 
-  <h2>Ingrédients</h2>
+  <h2>Ingrédients ({shoppingList.ingredients.length})</h2>
     {#each shoppingList.ingredients as recipeIngredient }
       <li><Ingredient {recipeIngredient} /></li>
     {/each}
