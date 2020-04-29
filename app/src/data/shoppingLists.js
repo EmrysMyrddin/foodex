@@ -60,6 +60,21 @@ export async function addRecipe(shoppingListId, recipeId, qte) {
   })
 }
 
+export async function searchShoppingLists(searchText) {
+  const { data: { shoppingLists } } = await client.query({
+    query: gql`
+      query searchShoppingList($searchText: String!) {
+        shoppingLists: shopping_list(where: { name: { _ilike: $searchText } }) {
+          id, name
+        }
+      }
+    `,
+    variables: { searchText: `%${searchText}%` },
+  })
+
+  return shoppingLists
+}
+
 const shoppingListsFragment = gql`
   fragment shoppingLists on user {
     id

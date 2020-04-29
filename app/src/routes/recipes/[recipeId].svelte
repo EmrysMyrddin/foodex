@@ -10,9 +10,11 @@
   import { goto } from '@sapper/app'
   import Ingredient from '../../components/ingredient'
   import EditableTitle from '../../components/editable-title'
-  import IngredientInput from './_ingredient-input'
   import EditableMarkdown from '../../components/editable-markdown'
+  import IngredientInput from './_ingredient-input'
+  import AddToShoppingList from './_add-to-shopping-list'
   import { getRecipe, setName, setDescription, addIngredient, removeIngredient, deleteRecipe } from '../../data/recipes'
+  import { addRecipe as addRecipeToShopingList } from '../../data/shoppingLists'
   import { userId } from '../../stores/user-id'
 
   export let recipeId
@@ -40,6 +42,8 @@
   />
 
   <p>Créé par {recipe.user.username}</p>
+
+  <AddToShoppingList onAdd={(shoppingListId, qte) => addRecipeToShopingList(shoppingListId, recipeId, qte)}/>
 
   <h2>Étapes : </h2>
   <EditableMarkdown content={recipe.description} onChange={description => setDescription(recipeId, description)}/>
