@@ -5,6 +5,7 @@
 </script>
 
 <script>
+import sumBy from 'lodash/sumBy'
 import { subtitle } from '../../stores/page'
 import { getShoppingList, addRecipe } from '../../data/shoppingLists'
 import Ingredient from '../../components/ingredient'
@@ -24,7 +25,7 @@ Chargement de la liste de course
 {:then { data: { shoppingList } } }
   <h1>{shoppingList.name}</h1>
 
-  <h2>Recettes</h2>
+  <h2>Recettes ({sumBy(shoppingList.recipes, 'qte')})</h2>
   <ul>
     {#each shoppingList.recipes as { recipe: { id }, qte }}
       <li><Recipe recipeId={id} {qte} /></li>

@@ -91,7 +91,7 @@ const recipesFragment = gql`
       id, qte,
       recipe { id, name }
     }
-    ingredients {
+    ingredients(order_by: { ingredient: { name: asc } }) {
       qte, unit
       ingredientId
     }
