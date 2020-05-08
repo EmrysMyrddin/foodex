@@ -75,6 +75,24 @@ export async function searchShoppingLists(searchText) {
   return shoppingLists
 }
 
+export async function setRecipePrepared(shoppingListEntryId, prepared) {
+  await client.mutate({
+    mutation: gql`
+      mutation setRecipePrepared($shoppingListEntryId: uuid!, $prepared: Boolean) {
+        update_shopping_list_entry_by_pk(
+          pk_columns: { id: $shoppingListEntryId }
+          _set: { prepared: $prepared}
+        ) {
+          id, prepared
+          shopping_list { id, ...ingredientsFragment }
+        }
+      }
+      ${recipesFragment}
+    `,
+    variables: { shoppingListEntryId, prepared }
+  })
+}
+
 const shoppingListsFragment = gql`
   fragment shoppingLists on user {
     id
@@ -85,15 +103,21 @@ const shoppingListsFragment = gql`
   }
 `
 
+const ingredientsFragment = gql`
+  fragment ingredientsFragment on shopping_list {
+    ingredients(order_by: { ingredient: { name: asc } }) {
+      qte, unit ingredientId
+    }
+  }
+`
+
 const recipesFragment = gql`
   fragment recipesFragment on shopping_list {
     recipes {
-      id, qte,
+      id, qte, prepared
       recipe { id, name }
     }
-    ingredients(order_by: { ingredient: { name: asc } }) {
-      qte, unit
-      ingredientId
-    }
+    ...ingredientsFragment
   }
+  ${ingredientsFragment}
 `

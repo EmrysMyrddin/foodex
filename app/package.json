@@ -24,6 +24,7 @@
     "polka": "next",
     "sirv": "^0.4.0",
     "svelte-apollo": "^0.3.0",
+    "svelte-media": "^0.0.3",
     "svelte-select": "^3.6.2"
   },
   "devDependencies": {

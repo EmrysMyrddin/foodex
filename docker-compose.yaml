@@ -9,7 +9,7 @@ services:
     volumes:
     - db_data:/var/lib/postgresql/data
   graphql-engine:
-    image: hasura/graphql-engine:v1.2.0-beta.5
+    image: hasura/graphql-engine:v1.2.1
     ports:
     - "8080:8080"
     depends_on:
@@ -22,6 +22,5 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: dev
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "unauthorized"
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256",  "key": "this is a secret developpement key" }'
-      ## uncomment next line to set an admin secret
 volumes:
   db_data:

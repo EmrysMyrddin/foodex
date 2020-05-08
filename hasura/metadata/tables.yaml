@@ -303,12 +303,13 @@
   - role: user
     permission:
       columns:
-      - qte
       - created_at
-      - updated_at
       - id
+      - prepared
+      - qte
       - recipe_id
       - shopping_list_id
+      - updated_at
       filter:
         shopping_list:
           user:
@@ -319,6 +320,7 @@
   - role: user
     permission:
       columns:
+      - prepared
       - qte
       filter:
         shopping_list:
@@ -406,6 +408,13 @@
           schema: public
           name: shopping_list
   select_permissions:
+  - role: backend
+    permission:
+      columns:
+      - id
+      - password
+      - username
+      filter: {}
   - role: unauthorized
     permission:
       columns:

@@ -2,9 +2,9 @@
   import { getIngredient } from '../data/ingredients'
   export let recipeIngredient, onDelete
 
-  const { ingredientId, unit, qte } = recipeIngredient
+  $: ({ ingredientId, unit, qte } = recipeIngredient)
 
-  const ingredientQuery = getIngredient(ingredientId)
+  $: ingredientQuery = getIngredient(ingredientId)
 </script>
 
 <a href="/ingredients/{ingredientId}">

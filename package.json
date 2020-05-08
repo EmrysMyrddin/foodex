@@ -12,9 +12,6 @@
   },
   "devDependencies": {
     "caprover": "^2.1.1",
-    "hasura-cli": "1.2.0-beta.5"
-  },
-  "dependencies": {
-    "svelte-media": "^0.0.3"
+    "hasura-cli": "^1.2.0"
   }
 }
