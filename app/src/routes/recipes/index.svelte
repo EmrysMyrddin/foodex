@@ -2,6 +2,7 @@
   import { subtitle } from '../../stores/page'
   import { goto } from '@sapper/app'
   import Recipe from '../../components/recipe'
+  import Grid from '../../components/grid'
   import { listRecipes, createRecipe } from '../../data/recipes'
 
   let name, order = { name: 'asc' }
@@ -36,10 +37,14 @@
     <span class:active={order.createdAt} on:click={orderBy('createdAt')}>Date de création</span>
   </div>
 
-  <ul>
+  <Grid>
     {#each (data && data.recipe) || [] as { id }}
-      <li><Recipe recipeId={id} /></li>
+      <Recipe recipeId={id} />
     {/each}
+  </Grid>
+
+  <ul>
+
   </ul>
 {/await}
 
@@ -48,6 +53,10 @@
   display: grid;
   grid-auto-flow: column;
   grid-gap: 1rem;
+}
+
+.order {
+  margin-top: 1em;
 }
 
 .order > span {
