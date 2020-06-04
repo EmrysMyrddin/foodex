@@ -12,6 +12,6 @@
   },
   "devDependencies": {
     "caprover": "^2.1.1",
-    "hasura-cli": "^1.2.0"
+    "hasura-cli": "^1.2.2"
   }
 }
