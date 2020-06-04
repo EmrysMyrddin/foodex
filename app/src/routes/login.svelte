@@ -2,7 +2,7 @@
 import { title, titleIcon } from '../stores/page'
 import { client } from '../data/apollo-client'
 import { goto } from '@sapper/app'
-import { userId } from '../stores/user-id'
+import { userId as userIdStore } from '../stores/user-id'
 
 let username, password
 
@@ -13,10 +13,10 @@ async function handleLogin() {
   const response = await fetch('/api/login', { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({ username, password }) })
   if(!response.ok) return
 
-  const { user, token } = await response.json()
+  const { userId, token } = await response.json()
 
   sessionStorage.token = token
-  userId.set(user.id)
+  userIdStore.set(userId)
 
   await client.clearStore()
 

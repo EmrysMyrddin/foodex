@@ -12,13 +12,13 @@ if(typeof sessionStorage !== 'object') {
 
 const customFetch = (uri, options) => {
   const operationName = JSON.parse(options.body).operationName || ''
-  return fetch(`${uri}?op=${operationName}`, {
-    ...options,
-    headers: sessionStorage.token && { authorization: `Bearer ${sessionStorage.token}` }
-  })
-}
 
-console.log(process.env.GRAPHQL_ENDPOINT || "http://localhost:8080/v1/graphql")
+  const headers = {}
+  if(sessionStorage.token) headers.authorization = `Bearer ${sessionStorage.token}`
+  if(typeof process === 'object') headers['x-hasura-admin-secret'] = process.env.HASURA_ADMIN_SECRET || 'dev'
+
+  return fetch(`${uri}?op=${operationName}`, { ...options, headers })
+}
 
 export const client = new ApolloClient({
   uri: process.env.GRAPHQL_ENDPOINT || "http://localhost:8080/v1/graphql",

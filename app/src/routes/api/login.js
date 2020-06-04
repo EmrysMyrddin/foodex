@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { client } from '../../data/apollo-client'
 
 export async function post(req, res, next) {
-  const { username, password } = req.body
+  const { username, password } = req.body.input || req.body
 
   const { data: { user: users } } = await client.query({
     query: gql`
@@ -20,14 +20,14 @@ export async function post(req, res, next) {
   })
 
 
-  const [user] = users
+  const [{id: userId}] = users
 
   const claims = {
-    sub: user.id,
+    sub: userId,
     'https://hasura.io/jwt/claims': {
       'x-hasura-allowed-roles': ['user'],
       'x-hasura-default-role': 'user',
-      'x-hasura-user-id': user.id,
+      'x-hasura-user-id': userId,
     },
   }
 
@@ -37,7 +37,7 @@ export async function post(req, res, next) {
   )
 
   res.writeHeader(200, { 'content-type': 'application/json' })
-  res.end(JSON.stringify({ user, token }))
+  res.end(JSON.stringify({ userId, token }))
 }
 
 
