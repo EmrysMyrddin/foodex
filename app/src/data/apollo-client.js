@@ -15,7 +15,7 @@ const customFetch = (uri, options) => {
 
   const headers = {}
   if(sessionStorage.token) headers.authorization = `Bearer ${sessionStorage.token}`
-  if(typeof process === 'object') headers['x-hasura-admin-secret'] = process.env.HASURA_ADMIN_SECRET || 'dev'
+  if(typeof process === 'object' && process.env.HASURA_ADMIN_SECRET) headers['x-hasura-admin-secret'] = process.env.HASURA_ADMIN_SECRET
 
   return fetch(`${uri}?op=${operationName}`, { ...options, headers })
 }

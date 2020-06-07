@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "docker-compose up -d && cd app && yarn dev",
+    "dev": "docker-compose up -d && cd app && HASURA_ADMIN_SECRET=dev yarn dev",
     "build:app": "cd app && yarn build",
     "hasura": "hasura --project hasura --skip-update-check",
     "hasura:console": "yarn hasura console --admin-secret dev",
