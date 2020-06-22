@@ -1,6 +1,38 @@
-actions: []
+actions:
+- name: createUser
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_ACTION_BASE_URL}}/user'
+  permissions:
+  - role: unauthorized
+  - role: user
+- name: login
+  definition:
+    kind: ""
+    handler: '{{HASURA_ACTION_BASE_URL}}/login'
+  permissions:
+  - role: unauthorized
+  - role: user
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+  - name: LoginResult
+    relationships:
+    - remote_table:
+        schema: public
+        name: user
+      name: user
+      type: object
+      field_mapping:
+        userId: id
+  - name: CreateUserResult
+    relationships:
+    - remote_table:
+        schema: public
+        name: user
+      name: user
+      type: object
+      field_mapping:
+        userId: id
   scalars: []

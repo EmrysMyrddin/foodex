@@ -407,22 +407,24 @@
         table:
           schema: public
           name: shopping_list
+  insert_permissions:
+  - role: auth
+    permission:
+      check: {}
+      columns:
+      - password
+      - username
+      backend_only: false
   select_permissions:
-  - role: backend
+  - role: auth
     permission:
       columns:
-      - id
       - password
       - username
-      filter: {}
-  - role: unauthorized
-    permission:
-      columns:
+      - created_at
+      - updated_at
       - id
-      - password
-      - username
       filter: {}
-      limit: 1
   - role: user
     permission:
       columns:
