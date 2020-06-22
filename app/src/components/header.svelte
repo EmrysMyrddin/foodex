@@ -28,6 +28,7 @@ header {
   z-index: 10;
   transition: box-shadow var(--transition);
   margin-bottom: 1em;
+  padding-left: 2em;
 }
 
 header :global(svg) {
@@ -36,7 +37,6 @@ header :global(svg) {
   width: 3em;
   height: auto;
   margin-right: 1em;
-  margin-left: 2em;
   transition: fill var(--transition), stroke var(--transition);
 }
 

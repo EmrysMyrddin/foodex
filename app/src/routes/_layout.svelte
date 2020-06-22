@@ -16,9 +16,11 @@
 <div class="app-container">
 	<Header />
 
-	<main>
-		<slot></slot>
-	</main>
+	<div class="main-content-container">
+		<main>
+			<slot></slot>
+		</main>
+	</div>
 
 	<Nav {segment} />
 
@@ -31,11 +33,14 @@
 		flex-direction: column;
 	}
 
+	.main-content-container {
+		flex: 1;
+		overflow-y: auto;
+	}
+
 	main {
 		background-color: white;
 		padding: 2em;
-		flex: 1;
-		overflow-y: auto;
 		max-width: 60em;
 		margin: auto;
 		width: 100%;
