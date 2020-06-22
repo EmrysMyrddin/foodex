@@ -1,4 +1,5 @@
 node_modules
 build
 foodex-app.tar.gz
+foodex-auth.tar.gz
 .DS_Store

@@ -10,7 +10,9 @@
     "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
     "deploy:hasura": "yarn hasura:prod migrate apply && yarn hasura:prod metadata apply",
     "predeploy:app": "tar -czf foodex-app.tar.gz app/__sapper__/build app/captain-definition app/Dockerfile app/static app/package.json app/yarn.lock",
-    "deploy:app": "caprover deploy -a foodex-app -h captain.caprover.cocaud.dev -t foodex-app.tar.gz"
+    "deploy:app": "caprover deploy -a foodex-app -h captain.caprover.cocaud.dev -t foodex-app.tar.gz",
+    "predeploy:auth": "tar -czf foodex-auth.tar.gz auth/src auth/captain-definition auth/Dockerfile auth/package.json auth/yarn.lock",
+    "deploy:auth": "caprover deploy -a foodex-auth -h captain.caprover.cocaud.dev -t foodex-auth.tar.gz"
   },
   "devDependencies": {
     "caprover": "^2.1.1",
@@ -18,6 +20,6 @@
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
-    "hasura-cli": "^1.2.2"
+    "hasura-cli": "^1.3.0-beta.2"
   }
 }
