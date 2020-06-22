@@ -1,8 +1,8 @@
 import { client, userId } from './apollo-client'
-import { query, mutate} from 'svelte-apollo'
+import { query, mutate } from 'svelte-apollo'
 import gql from 'graphql-tag'
 
-export function getUser() {
+export function getUser () {
   return query(client, {
     query: gql`
       query getUser($userId: uuid!) {
@@ -17,7 +17,7 @@ export function getUser() {
   })
 }
 
-export function setName(username) {
+export function setName (username) {
   return mutate(client, {
     mutation: gql`
       mutation setUserName($username: String) {
@@ -30,8 +30,8 @@ export function setName(username) {
   })
 }
 
-export async function listUsers(searchText) {
-  const {data: { user } } = await client.query({
+export async function listUsers (searchText) {
+  const { data: { user } } = await client.query({
     query: gql`
       query listAvailableUsers($userId: uuid!, $searchText: String) {
         user(where: { _and: [
@@ -43,13 +43,13 @@ export async function listUsers(searchText) {
         }
       }
     `,
-    variables: {userId: userId(), searchText: `%${searchText}%`}
+    variables: { userId: userId(), searchText: `%${searchText}%` }
   })
 
   return user
 }
 
-export function share(userId, canWrite) {
+export function share (userId, canWrite) {
   return mutate(client, {
     mutation: gql`
       mutation share($userId: uuid!, $canWrite: Boolean) {
@@ -63,4 +63,22 @@ export function share(userId, canWrite) {
     `,
     variables: { userId, canWrite: Boolean(canWrite) }
   })
+}
+
+export async function login (username, password) {
+  await client.clearStore()
+
+  const { data: { login } } = await client.query({
+    query: gql`
+      query login($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+          token
+          userId
+        }
+      }
+    `,
+    variables: { username, password }
+  })
+
+  return login
 }

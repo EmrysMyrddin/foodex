@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte'
 import { title, titleIcon } from '../stores/page'
-import { client } from '../data/apollo-client'
+import { login } from '../data/users'
 import { goto } from '@sapper/app'
 import { userId as userIdStore } from '../stores/user-id'
 
@@ -15,15 +15,10 @@ titleIcon.set(null)
 title.set('Foodex')
 
 async function handleLogin() {
-  const response = await fetch('/api/login', { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({ username, password }) })
-  if(!response.ok) return
-
-  const { userId, token } = await response.json()
+  const { userId, token } = await login(username, password)
 
   sessionStorage.token = token
   userIdStore.set(userId)
-
-  await client.clearStore()
 
   goto('/recipes')
 }
