@@ -1,9 +1,9 @@
-import * as sapper from '@sapper/app';
+import * as sapper from '@sapper/app'
 
-if(!sessionStorage.token && !location.pathname.startsWith('/login')) {
-	sapper.goto('/login', { replaceState: true })
+if (!sessionStorage.token && !location.pathname.startsWith('/login')) {
+  sapper.goto('/login', { replaceState: true })
 }
 
 sapper.start({
-	target: document.querySelector('#sapper')
-});
+  target: document.querySelector('#sapper')
+})
