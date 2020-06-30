@@ -6,7 +6,7 @@ module.exports = {
 }
 
 const hasuraUrl = process.env.GRAPHQL_ENDPOINT || 'http://localhost:8080/v1/graphql'
-const hasuraAdminSecret = process.HASURA_ADMIN_SECRET || 'dev'
+const hasuraAdminSecret = process.env.HASURA_ADMIN_SECRET || 'dev'
 
 async function query (q) {
   const response = await fetch(hasuraUrl, {

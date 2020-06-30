@@ -29,7 +29,7 @@ app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-const port = process.port || 4000
+const port = process.env.PORT || 4000
 
 app.listen(port, () => {
   console.info(`listening on port ${port}`)
