@@ -8,8 +8,8 @@ export function getUser () {
       query getUser($userId: uuid!) {
         user: user_by_pk(id: $userId) {
           id, username,
-          sharingWith { id, canWrite, sharedTo { id, username } }
-          sharedBy { id, canWrite, sharedBy { id, username } }
+          sharingWith { id }
+          sharedBy { id, canWrite, canSeeShoppingLists, sharedBy { id, username } }
         }
       }
     `,
@@ -49,19 +49,19 @@ export async function listUsers (searchText) {
   return user
 }
 
-export function share (userId, canWrite) {
+export function share (userId, canWrite, canSeeShoppingLists) {
   return mutate(client, {
     mutation: gql`
-      mutation share($userId: uuid!, $canWrite: Boolean) {
-        insert_user_shares_one(object: { sharedToUserId: $userId, canWrite: $canWrite }) {
+      mutation share($userId: uuid!, $canWrite: Boolean, $canSeeShoppingLists: Boolean) {
+        insert_user_shares_one(object: { sharedToUserId: $userId, canWrite: $canWrite, canSeeShoppingLists: $canSeeShoppingLists }) {
           sharedBy {
             id
-            sharingWith { id, canWrite, sharedTo { id, username } }
+            sharingWith { id, canWrite, canSeeShoppingLists, sharedTo { id, username } }
           }
         }
       }
     `,
-    variables: { userId, canWrite: Boolean(canWrite) }
+    variables: { userId, canWrite: Boolean(canWrite), canSeeShoppingLists: Boolean(canSeeShoppingLists) }
   })
 }
 
@@ -81,4 +81,30 @@ export async function login (username, password) {
   })
 
   return login
+}
+
+export function getSharing (sharingId) {
+  return query(client, {
+    query: gql`
+      query getUser($sharingId: uuid!) {
+        sharing: user_shares_by_pk(id: $sharingId) {
+          id, canWrite, canSeeShoppingLists, sharedTo { id, username }
+        }
+      }
+    `,
+    variables: { sharingId }
+  })
+}
+
+export function updateSharing (sharingId, set) {
+  return mutate(client, {
+    mutation: gql`
+      mutation updateSharing($set: user_shares_set_input!, $sharingId: uuid!) {
+        update_user_shares_by_pk(pk_columns: { id: $sharingId }, _set: $set) {
+          id, canSeeShoppingLists, canWrite, sharedTo { id, username }
+        }
+      }
+    `,
+    variables: { sharingId, set }
+  })
 }

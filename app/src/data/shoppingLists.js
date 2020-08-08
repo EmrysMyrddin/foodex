@@ -1,27 +1,27 @@
-import { client, userId } from './apollo-client'
+import { client } from './apollo-client'
 import gql from 'graphql-tag'
 import { query, mutate } from 'svelte-apollo'
 
-export function listShoppingLists() {
+export function listShoppingLists () {
   return query(client, {
     query: gql`
-      query listShoppingLists($userId: uuid!) {
-        user: user_by_pk(id: $userId) {
-          ...shoppingLists
+      query listShoppingLists {
+        shopping_list {
+          ...shoppingList
         }
       }
-      ${shoppingListsFragment}
+      ${shoppingListFragment}
     `,
-    variables: { userId: userId() }
+    fetchPolicy: 'cache-and-network'
   })
 }
 
-export async function createShoppingList(name) {
+export async function createShoppingList (name) {
   return mutate(client, {
     mutation: gql`
       mutation createShoppingList($name: String) {
-        insert_shopping_list_one(object: { name: $name }) {
-          user { ...shoppingLists }
+        shoppingList: insert_shopping_list_one(object: { name: $name }) {
+          id
         }
       }
       ${shoppingListsFragment}
@@ -30,7 +30,7 @@ export async function createShoppingList(name) {
   })
 }
 
-export function getShoppingList(shoppingListId) {
+export function getShoppingList (shoppingListId) {
   return query(client, {
     query: gql`
       query getShoppingList($shoppingListId: uuid!) {
@@ -45,7 +45,7 @@ export function getShoppingList(shoppingListId) {
   })
 }
 
-export async function addRecipe(shoppingListId, recipeId, qte) {
+export async function addRecipe (shoppingListId, recipeId, qte) {
   return mutate(client, {
     mutation: gql`
       mutation addRecipe($recipeId: uuid, $qte: Int, $shoppingListId: uuid) {
@@ -60,7 +60,7 @@ export async function addRecipe(shoppingListId, recipeId, qte) {
   })
 }
 
-export async function searchShoppingLists(searchText) {
+export async function searchShoppingLists (searchText) {
   const { data: { shoppingLists } } = await client.query({
     query: gql`
       query searchShoppingList($searchText: String!) {
@@ -69,13 +69,13 @@ export async function searchShoppingLists(searchText) {
         }
       }
     `,
-    variables: { searchText: `%${searchText}%` },
+    variables: { searchText: `%${searchText}%` }
   })
 
   return shoppingLists
 }
 
-export async function setRecipePrepared(shoppingListEntryId, prepared) {
+export async function setRecipePrepared (shoppingListEntryId, prepared) {
   await client.mutate({
     mutation: gql`
       mutation setRecipePrepared($shoppingListEntryId: uuid!, $prepared: Boolean) {
@@ -93,14 +93,21 @@ export async function setRecipePrepared(shoppingListEntryId, prepared) {
   })
 }
 
+const shoppingListFragment = gql`
+  fragment shoppingList on shopping_list {
+    id, name
+    recipes_aggregate { aggregate { count } }
+  }
+`
+
 const shoppingListsFragment = gql`
   fragment shoppingLists on user {
     id
     shopping_lists {
-      id, name
-      recipes_aggregate { aggregate { count } }
+      ...shoppingList
     }
   }
+  ${shoppingListFragment}
 `
 
 const ingredientsFragment = gql`

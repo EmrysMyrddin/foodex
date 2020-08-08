@@ -3,8 +3,9 @@
   import { getUser, setName, listUsers, share } from '../../data/users.js'
   import EditableTitle from '../../components/editable-title'
   import Select from 'svelte-select'
+  import Sharing from './_sharing'
 
-  let selectedUser, canWrite
+  let selectedUser, canWrite, canSeeShoppingLists
 
   subtitle.set(null)
 
@@ -13,9 +14,10 @@
   const getUsername = ({ username }) => username
 
   async function handleShare() {
-    await share(selectedUser.id, canWrite)
+    await share(selectedUser.id, canWrite, canSeeShoppingLists)
     selectedUser = null
     canWrite = false
+    canSeeShoppingLists = false
   }
 </script>
 
@@ -27,8 +29,8 @@
   <h2>Mes recettes sont partagées avec :</h2>
 
   <ul>
-    {#each sharingWith as { sharedTo: { username }, canWrite } }
-      <li>{username} {#if canWrite}(modification possible){/if}</li>
+    {#each sharingWith as { id } }
+      <Sharing sharingId={id} />
     {/each}
   </ul>
 
@@ -45,6 +47,11 @@
     <label>
       <input type="checkbox" bind:value={canWrite} />
       permettre les modifications
+    </label>
+
+    <label>
+      <input type="checkbox" bind:value={canSeeShoppingLists} />
+      permettre de voir les listes de courses
     </label>
 
     <button on:click={handleShare} disabled={!selectedUser}>Partager mes recettes</button>

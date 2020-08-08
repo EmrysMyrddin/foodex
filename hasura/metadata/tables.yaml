@@ -254,8 +254,16 @@
       - id
       - user_id
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - user:
+            sharingWith:
+              _and:
+              - can_see_shopping_lists:
+                  _eq: true
+              - shared_to_user_id:
+                  _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: user
@@ -263,8 +271,16 @@
       columns:
       - name
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+        _or:
+        - user_id:
+            _eq: X-Hasura-User-Id
+        - user:
+            sharingWith:
+              _and:
+              - can_see_shopping_lists:
+                  _eq: true
+              - shared_to_user_id:
+                  _eq: X-Hasura-User-Id
       check: null
   delete_permissions:
   - role: user
@@ -293,8 +309,15 @@
       check:
         shopping_list:
           user:
-            id:
-              _eq: X-Hasura-User-Id
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
       columns:
       - qte
       - recipe_id
@@ -313,8 +336,15 @@
       filter:
         shopping_list:
           user:
-            id:
-              _eq: X-Hasura-User-Id
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
       allow_aggregations: true
   update_permissions:
   - role: user
@@ -325,8 +355,15 @@
       filter:
         shopping_list:
           user:
-            id:
-              _eq: X-Hasura-User-Id
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
       check: null
   delete_permissions:
   - role: user
@@ -455,6 +492,7 @@
   configuration:
     custom_root_fields: {}
     custom_column_names:
+      can_see_shopping_lists: canSeeShoppingLists
       can_write: canWrite
       owner_id: ownerId
       shared_to_user_id: sharedToUserId
@@ -472,6 +510,7 @@
       set:
         owner_id: x-hasura-User-Id
       columns:
+      - can_see_shopping_lists
       - can_write
       - shared_to_user_id
       backend_only: false
@@ -479,12 +518,13 @@
   - role: user
     permission:
       columns:
-      - id
+      - can_see_shopping_lists
+      - can_write
       - created_at
-      - updated_at
+      - id
       - owner_id
       - shared_to_user_id
-      - can_write
+      - updated_at
       filter:
         _or:
         - shared_to_user_id:
@@ -495,6 +535,7 @@
   - role: user
     permission:
       columns:
+      - can_see_shopping_lists
       - can_write
       - shared_to_user_id
       filter:
