@@ -409,8 +409,13 @@
       - unit
       filter:
         shoppingList:
-          user_id:
-            _eq: X-Hasura-User-Id
+          _or:
+          - user_id:
+              _eq: X-Hasura-User-Id
+          - user:
+              sharingWith:
+                shared_to_user_id:
+                  _eq: X-Hasura-User-Id
       allow_aggregations: true
 - table:
     schema: public
