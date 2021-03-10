@@ -24,11 +24,9 @@
 {#await $ingredientsQuery}
   Chargement des ingrédients...
 {:then { data } }
-  <ul>
     {#each data.ingredient as { id,name } }
-      <li><a href="/ingredients/{id}" >{name}</a></li>
+      <Ingredient ingredientId={id}></Ingredient>
     {/each}
-  </ul>
 {/await}
 
 <style>

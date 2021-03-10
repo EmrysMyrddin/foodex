@@ -16,6 +16,7 @@
   import { getRecipe, setName, setDescription, addIngredient, removeIngredient, deleteRecipe } from '../../data/recipes'
   import { addRecipe as addRecipeToShopingList } from '../../data/shoppingLists'
   import { userId } from '../../stores/user-id'
+  import Grid from '../../components/grid'
 
   export let recipeId
 
@@ -49,10 +50,10 @@
   <EditableMarkdown content={recipe.description} onChange={description => setDescription(recipeId, description)}/>
 
   <h2>Ingrédients : </h2>
-  <ul>
-    {#each recipe.ingredients as recipeIngredient}
-      <li><Ingredient {recipeIngredient} onDelete={() => removeIngredient(recipeIngredient.id)} /></li>
+  <Grid>
+    {#each recipe.ingredients as {id, qte, unit} }
+      <Ingredient {id} {qte} {unit} onDelete={() => removeIngredient(id)} />
     {/each}
-    <li><IngredientInput onAdd={recipeIngredient => addIngredient(recipeId, recipeIngredient)}/></li>
-  </ul>
+  </Grid>
+  <IngredientInput onAdd={recipeIngredient => addIngredient(recipeId, recipeIngredient)}/>
 {/await}

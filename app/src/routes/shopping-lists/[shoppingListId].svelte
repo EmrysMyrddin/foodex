@@ -11,6 +11,7 @@ import { subtitle } from '../../stores/page'
 import { getShoppingList, addRecipe, setRecipePrepared } from '../../data/shoppingLists'
 import Ingredient from '../../components/ingredient'
 import Recipe from '../../components/recipe'
+import Grid from '../../components/grid'
 import RecipeInput from './_recipe-input'
 
 export let shoppingListId
@@ -30,20 +31,22 @@ $: $shoppingListQuery.then(({ data: { shoppingList } }) => {
 </script>
 
 <h2>Recettes ({sumBy(recipes, 'qte')})</h2>
-<ul>
+<Grid>
   {#each recipes as { id: entryId, recipe: { id }, qte } (entryId)}
-    <li>
-      <Recipe recipeId={id} {qte} />
-      <span class="set-prepared-icon" on:click={setRecipePrepared(entryId, true)}>✅</span>
-    </li>
+      <Recipe recipeId={id}>
+        <div>x{qte} <span class="set-prepared-icon" on:click|preventDefault={setRecipePrepared(entryId, true)}>✅</span></div>
+      </Recipe>
   {/each}
+</Grid>
+
+<form>
   <RecipeInput onAdd={(recipeId, qte) => addRecipe(shoppingListId, recipeId, qte)}/>
-</ul>
+</form>
 
 <h2>Ingrédients ({ingredients.length})</h2>
 <ul>
-  {#each ingredients as recipeIngredient}
-    <li><Ingredient {recipeIngredient} /></li>
+  {#each ingredients as {id, qte, unit} }
+    <li><Ingredient {id} {qte} {unit} /></li>
   {/each}
 </ul>
 
@@ -51,8 +54,9 @@ $: $shoppingListQuery.then(({ data: { shoppingList } }) => {
 <ul>
   {#each preparedRecipes as { id: entryId, recipe: { id }, qte } (entryId)}
     <li>
-      <Recipe recipeId={id} {qte} />
-      <span class="set-prepared-icon" on:click={setRecipePrepared(entryId, false)}>🚫</span>
+      <Recipe recipeId={id} {qte}>
+        <span class="set-prepared-icon" on:click|preventDefault={setRecipePrepared(entryId, false)}>🚫</span>
+      </Recipe>
     </li>
   {/each}
 </ul>
@@ -60,5 +64,9 @@ $: $shoppingListQuery.then(({ data: { shoppingList } }) => {
 <style>
   .set-prepared-icon {
     cursor: pointer;
+  }
+
+  form {
+    margin-top: 1em;
   }
 </style>
