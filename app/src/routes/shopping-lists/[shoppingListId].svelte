@@ -45,8 +45,8 @@ $: $shoppingListQuery.then(({ data: { shoppingList } }) => {
 
 <h2>Ingrédients ({ingredients.length})</h2>
 <ul>
-  {#each ingredients as {id, qte, unit} }
-    <li><Ingredient {id} {qte} {unit} /></li>
+  {#each ingredients as {ingredientId, qte, unit} }
+    <li><Ingredient id={ingredientId} {qte} {unit} /></li>
   {/each}
 </ul>
 

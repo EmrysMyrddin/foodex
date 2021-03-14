@@ -51,8 +51,8 @@
 
   <h2>Ingrédients : </h2>
   <Grid>
-    {#each recipe.ingredients as {id, qte, unit} }
-      <Ingredient {id} {qte} {unit} onDelete={() => removeIngredient(id)} />
+    {#each recipe.ingredients as { ingredientId, qte, unit} }
+      <Ingredient id={ingredientId} {qte} {unit} onDelete={() => removeIngredient(id)} />
     {/each}
   </Grid>
   <IngredientInput onAdd={recipeIngredient => addIngredient(recipeId, recipeIngredient)}/>

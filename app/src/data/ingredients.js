@@ -4,8 +4,8 @@ import { query, mutate } from 'svelte-apollo'
 
 export function getIngredient(ingredientId) {
   return query(client, {
-    query:   gql`
-      query($ingredientId: uuid!) {
+    query: gql`
+      query getIngredient($ingredientId: uuid!) {
         ingredient: ingredient_by_pk(id: $ingredientId) {
           id, name
         }
