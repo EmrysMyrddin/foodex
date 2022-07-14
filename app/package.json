@@ -1,37 +1,38 @@
 {
-  "name": "@foodex/app",
-  "description": "Foodex",
-  "version": "0.0.1",
-  "license": "MIT",
-  "scripts": {
-    "dev": "sapper dev --hot=false",
-    "build": "NODE_ENV=production sapper build",
-    "export": "sapper export",
-    "start": "node __sapper__/build",
-    "cy:run": "cypress run",
-    "cy:open": "cypress open",
-    "test": "run-p --race dev cy:run"
-  },
+  "name": "mon-app-test",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "apollo-boost": "^0.4.7",
-    "body-parser": "^1.19.0",
-    "compression": "^1.7.1",
-    "graphql": "14",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "marked": "^0.8.2",
-    "node-fetch": "^2.6.0",
-    "polka": "next",
-    "sirv": "^0.4.0",
-    "svelte-apollo": "^0.3.0",
-    "svelte-media": "^0.0.3",
-    "svelte-select": "^3.6.2"
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "sapper": "^0.27.0",
-    "svelte": "^3.0.0",
-    "svelte-loader": "^2.9.0",
-    "webpack": "^4.7.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
