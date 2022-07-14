@@ -1,8 +1,12 @@
 import React from "react";
+import { useIntl } from 'react-intl'
+import {isMobile} from 'react-device-detect';
+import capitalizeFirstLetter from "../../helper/helper";
 import * as icons from '../icons'
 import './navigation.css'
 
 export default function Navigation(){
+    const intl = useIntl()
 	const path = window.location.href
 
 	function isCurrent(href, segment) {
@@ -12,10 +16,10 @@ export default function Navigation(){
 	}
 
     const menuEntries = [
-		{ label: 'Recettes', href: '/recipes', Icon: icons.RecipesIcon},
-		{ label: 'Ingredients', href: '/ingredients', Icon: icons.IngredientsIcon },
-		{ label: 'Listes de course', href: '/shopping-lists', Icon: icons.ShoppingListsIcon },
-		{ label: 'Mon compte', href: '/account', Icon: icons.AccountIcon },
+		{ href: 'recipes', Icon: icons.RecipesIcon},
+		{ href: 'ingredients', Icon: icons.IngredientsIcon },
+		{ href: 'shopping-lists', Icon: icons.ShoppingListsIcon },
+		{ href: 'account', Icon: icons.AccountIcon },
 	]
 
     return (
@@ -23,23 +27,25 @@ export default function Navigation(){
             <div className={`menu-border ${path.split('/')[path.split('/').length - 1]}`}/>
             <nav>
                 <ul>
-                    {menuEntries.map(({label, href, Icon}) =>
-                        <li key={label}>
-                            <a href={href} aria-current={isCurrent(href, path)}>
+                    {menuEntries.map(({href, Icon}) =>
+                        <li key={href}>
+                            <a href={`/${href}`} aria-current={isCurrent(href, path)}>
                                 <div className={`menu-button ${href.split('/')[href.split('/').length - 1]}`}>
                                     <Icon />
-                                    <div>{label}</div>
+                                    {!isMobile ? <div className="desktop">{capitalizeFirstLetter(intl.formatMessage({ id: href}))}</div> : <></>}
                                 </div>
                             </a>
                         </li>
                     )}
+                    <li> 
+                        <div>
+                            <div className='menu-button'>
+                                <icons.LogoutIcon/>
+                                {!isMobile ? <div>Déconnexion</div> : <></>}
+                            </div>
+                        </div>
+                    </li>
                 </ul>
-                <div className="logout extra">
-                    <div className="menu-button" role="button">
-                        <icons.LogoutIcon/>
-                        <div>Déconnexion</div>
-                    </div>
-                </div>
             </nav>
         </>
     )

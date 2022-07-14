@@ -5,6 +5,9 @@ nav {
     height: 5em;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 ul {
@@ -12,7 +15,7 @@ ul {
     padding: 0;
     display: flex;
     flex: 1;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 li {
@@ -90,8 +93,8 @@ a {
 
 @media(max-width: 60rem) {
     .menu-button {
-        width: 20vw;
-        font-size: 1.5em;
+        width: 100%;
+        font-size: 0.8em;
     }
 }
 
