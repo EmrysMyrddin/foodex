@@ -1,0 +1,1 @@
+import './foodex-colors.css'

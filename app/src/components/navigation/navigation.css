@@ -1,0 +1,103 @@
+nav {
+    font-size: 1.2em;
+    transition: border-top var(--transition);
+    font-weight: 300;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+li {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+.menu-border {
+    border-top: 1px solid var(--PRIMARY);
+}
+
+.menu-border.recipes {
+    border-top: 1px solid var(--RECIPES);
+}
+
+.menu-border.ingredients {
+    border-top: 1px solid var(--INGREDIENTS);
+}
+
+.menu-border.shopping-lists {
+    border-top: 1px solid var(--SHOPPING-LIST);
+}
+
+.menu-border.account {
+    border-top: 1px solid var(--ACCOUNT);
+}
+
+.menu-button {
+    fill: var(--PRIMARY);
+    stroke: var(--PRIMARY);
+    color: var(--PRIMARY);
+    font-weight: 300;
+}
+
+[aria-current] .recipes {
+    fill: var(--RECIPES);
+    stroke: var(--RECIPES);
+    color: var(--RECIPES);
+    font-weight: 700;
+}
+
+[aria-current] .ingredients {
+    fill: var(--INGREDIENTS);
+    stroke: var(--INGREDIENTS);
+    color: var(--INGREDIENTS);
+    font-weight: 700;
+}
+
+[aria-current] .shopping-lists {
+    fill: var(--SHOPPING-LIST);
+    stroke: var(--SHOPPING-LIST);
+    color: var(--SHOPPING-LIST);
+    font-weight: 700;
+}
+
+[aria-current] .account {
+    fill: var(--ACCOUNT);
+    stroke: var(--ACCOUNT);
+    color: var(--ACCOUNT);
+    font-weight: 700;
+}
+
+
+.menu-button {
+    width: 8em;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    transition: color var(--transition);
+}
+
+@media(max-width: 60rem) {
+    .menu-button {
+        width: 20vw;
+        font-size: 1.5em;
+    }
+}
+
+.menu-button svg {
+    display: block;
+    height: 2em;
+    width: 2em;
+    transition: fill var(--transition), stroke var(--transition);
+}
