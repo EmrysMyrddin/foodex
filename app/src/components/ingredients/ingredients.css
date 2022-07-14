@@ -1,0 +1,16 @@
+img{
+    width: 8em;
+}
+
+.ingredients-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2em;
+}
+
+.ingredients-container > div > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

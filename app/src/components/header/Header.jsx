@@ -17,7 +17,7 @@ export default function Header(){
 
     return (
         <div className={`header ${pathName}`}>
-            {menuEntries.filter(({href}) => pathName === href).map(({href, Icon}) => <Icon className={href}/>)}
+            {menuEntries.filter(({href}) => pathName === href).map(({href, Icon}) => <Icon key={href} className={href}/>)}
             <h1 className={pathName}>{capitalizeFirstLetter(intl.formatMessage({ id: pathName}))}</h1>
         </div>
     )

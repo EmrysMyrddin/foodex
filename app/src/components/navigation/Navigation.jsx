@@ -11,7 +11,6 @@ export default function Navigation(){
 
 	function isCurrent(href, segment) {
 		const parts = href.split('/')
-        console.log(segment.split('/').includes(parts[parts.length - 1]))
 		if(segment.split('/').includes(parts[parts.length - 1])) return 'page'
 	}
 
