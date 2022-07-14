@@ -18,6 +18,9 @@ jobs:
             # - run: npm test
 
 workflows:
-    deployg:
+    deploy:
       jobs:
-        - deploy
+        - deploy:
+            filters:  # using regex filters requires the entire branch to match
+              branches:
+                only: master
