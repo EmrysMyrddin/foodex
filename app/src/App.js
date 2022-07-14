@@ -1,16 +1,20 @@
 import './App.css';
+import Header from './components/header/Header';
 import Navigation from './components/navigation/Navigation';
 import './components/Theme/foodex-colors.css';
+import IntlProvider from './translation/IntlProvider';
 
 function App() {
   return (
-    <div className="app">
-      <header className="app-header">
-        
-      </header>
-      <p>Coucou</p>
-      <Navigation/>
-    </div>
+    <IntlProvider>
+      <div className="app">
+        <header className="app-header">
+          <Header />
+        </header>
+        <p>Coucou !!</p>
+        <Navigation/>
+      </div>
+    </IntlProvider>
   );
 }
 
