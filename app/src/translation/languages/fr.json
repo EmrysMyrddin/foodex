@@ -1,7 +1,14 @@
 {
 	"account": "compte",
+	"calorie": "calorie",
+	"carb": "glucide",
+	"fibre": "fibre",
 	"ingredients": "ingrédients",
+	"lipid": "lipide",
 	"logout": "déconnexion",
+	"protein": "protéine",
 	"recipes": "recettes",
-	"shopping-lists": "listes de course"
+	"shopping-lists": "listes de course",
+	"water": "eau",
+	"Value per 100g": "Valeur pour 100 g"
 }

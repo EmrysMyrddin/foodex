@@ -1,0 +1,86 @@
+.ingredient-container {
+    position: relative;
+    top: 5em;
+    padding: 5em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ingredient-container > img {
+    height: auto;
+    width: 100%;
+    padding: 2em;
+}
+
+.ingredient-container > .ingredient-info > .ingredient-title > h1 {
+    margin: 0;
+    align-self: center;
+}
+
+.ingredient-container > .ingredient-info > .ingredient-title > svg {
+    font-size: 2em;
+}
+
+.ingredient-container > .ingredient-info > .ingredient-title {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-self: flex-start;
+}
+
+.ingredient-container > .ingredient-info {
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+}
+
+.table {
+    width: 50%;
+    margin: auto;
+    border: 2px solid var(--INGREDIENTS);
+    border-bottom: 1px solid var(--INGREDIENTS);
+}
+
+.table > .table-header {
+    border-bottom: 2px solid var(--INGREDIENTS);
+}
+
+.table > .table-header > p {
+    margin: 0.5em;
+}
+
+.ligne {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-bottom: 1px solid var(--INGREDIENTS);
+}
+
+.ligne > p:first-child {
+    justify-self: end;
+    border-right: 1px solid var(--INGREDIENTS);
+}
+
+.ligne > p {
+    margin: 0;
+    padding: 0.5em;
+}
+
+@media(max-width: 60rem) {
+    .ingredient-container {
+        padding: 3em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ingredient-container > img {
+        padding: 0;
+    }
+
+    .ingredient-container > .ingredient-info > .ingredient-title > h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .table {
+        width: 100%;
+    }
+}

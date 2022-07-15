@@ -3,14 +3,90 @@ img{
 }
 
 .ingredients-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 2em;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 3em;
+    column-gap: 3em;
+    padding: 5em;
+    padding-left: 4em;
+    padding-right: 4em;
+    align-items: end;
+    overflow: scroll;
+    position: relative;
+    top: 10em;
+    height: 80vh;
+    padding-top: 1em;
 }
 
-.ingredients-container > div > a {
+.ingredient > a {
+    height: 29em;
+}
+
+.ingredients-container > .ingredient {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
+.label {
+    display: flex !important;
+    justify-content: center;
     align-items: center;
+    margin-top: 1em;
+    height: 2em;
+    margin-bottom: 1em;
+}
+
+.label > p {
+    margin: 0;
+    margin-left: 0.3em;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    padding: 1em;
+}
+
+form > input {
+    width: 100%;
+    margin-right: 2em;
+}
+
+.form-container {
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    top: 5em;
+}
+
+.ant-card {
+    height: 100%;
+    width: 18em;
+}
+
+.ant-card-cover {
+    height: 17em;
+}
+
+.ant-card-cover > img {
+    height: 15em;
+    object-fit: cover;
+}
+
+@media(max-width: 60rem) {
+    .ingredients-container {
+        grid-template-columns: repeat(1, 1fr);
+        padding-bottom: 8em;
+    }
+
+    form {
+        width: 80%;
+    }
+
+    .ingredient > a {
+        height: 25em;
+    }
 }

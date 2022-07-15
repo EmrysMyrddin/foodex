@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { login } from '../../data/users'
 import { client } from "../../data/client";
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login(){
-	const history = useHistory()
+	const navigate = useNavigate()
 
     const [u, setU] = useState()
     async function handleLogin(event) {
@@ -24,7 +24,7 @@ export default function Login(){
             <h1>Connexion</h1>
             <form className="login-form" onSubmit={e => {
                 handleLogin(e)
-                if (localStorage.token) history.push('/ingredients')
+                if (localStorage.token) navigate('/ingredients', {replace: true})
             }}>
             <input name='username' />
             <input type="password" name='password' />

@@ -8,6 +8,7 @@ nav {
     justify-content: space-around;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    margin-top: 1em;
 }
 
 ul {
@@ -96,6 +97,10 @@ a {
         width: 100%;
         font-size: 0.8em;
     }
+
+    nav {
+        height: 2em;
+    }
 }
 
 .menu-button svg {
@@ -103,4 +108,11 @@ a {
     height: 2em;
     width: 2em;
     transition: fill var(--transition), stroke var(--transition);
+}
+
+.nav-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
 }

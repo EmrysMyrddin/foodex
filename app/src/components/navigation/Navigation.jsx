@@ -2,6 +2,7 @@ import React from "react";
 import { useIntl } from 'react-intl'
 import {isMobile} from 'react-device-detect';
 import capitalizeFirstLetter from "../../helper/helper";
+import {NavLink} from 'react-router-dom'
 import * as icons from '../icons'
 import './navigation.css'
 
@@ -22,18 +23,18 @@ export default function Navigation(){
 	]
 
     return (
-        <>
+        <div className="nav-container">
             <div className={`menu-border ${path.split('/')[path.split('/').length - 1]}`}/>
             <nav>
                 <ul>
                     {menuEntries.map(({href, Icon}) =>
                         <li key={href}>
-                            <a href={`/${href}`} aria-current={isCurrent(href, path)}>
+                            <NavLink to={`/${href}`} aria-current={isCurrent(href, path)}>
                                 <div className={`menu-button ${href.split('/')[href.split('/').length - 1]}`}>
                                     <Icon />
                                     {!isMobile ? <div className="desktop">{capitalizeFirstLetter(intl.formatMessage({ id: href}))}</div> : <></>}
                                 </div>
-                            </a>
+                            </NavLink>
                         </li>
                     )}
                     <li> 
@@ -46,6 +47,6 @@ export default function Navigation(){
                     </li>
                 </ul>
             </nav>
-        </>
+        </div>
     )
 }

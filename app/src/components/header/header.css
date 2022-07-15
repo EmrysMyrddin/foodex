@@ -1,6 +1,11 @@
 .header {
     display: flex;
     align-items: center;
+    height: 5em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
 }
 
 svg {
@@ -10,6 +15,7 @@ svg {
 
 .header svg, .header h1 {
     padding-left: 0.5em;
+    margin-bottom: 0;
 }
 
 svg.recipes {
