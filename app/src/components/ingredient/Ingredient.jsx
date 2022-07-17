@@ -22,46 +22,43 @@ export default function Ingredient(){
       if (fetching) return <p>Loading...</p>;
       if (error) return <p>Oh no... {error.message}</p>;
 
-      console.log(data)
-      
-
     return (
         <div className="ingredient-container">
             {data.ingredient_by_pk.url_img ? <img src={data.ingredient_by_pk.url_img} alt={data.ingredient_by_pk.name}/> : <></>}
             <div className="ingredient-info">
                 <div className="ingredient-title">
-                    {data.ingredient_by_pk.isVegetable ? <icons.VeganIcon /> : data.ingredient_by_pk.isAnimalProduct ? <icons.VegetarianIcon /> : ''}
+                    {data.ingredient_by_pk.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                     <h1>{capitalizeFirstLetter(data.ingredient_by_pk.name)}</h1>
                 </div>
                 <div>
                     
                     <div className="table">
                         <div className="table-header">
-                            <p>{capitalizeFirstLetter(intl.formatMessage({ id: "Valeur pour 100 g"}))}</p>
+                            <p>{capitalizeFirstLetter(intl.formatMessage({ id: "Value per 100g"}))}</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "carb"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.carb} g</p>
+                            <p>{data.ingredient_by_pk.nutrition?.carb || '-'} g</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "calorie"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.calorie} kcal</p>
+                            <p>{data.ingredient_by_pk.nutrition?.calorie || '-'} kcal</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "fibre"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.fibre} g</p>
+                            <p>{data.ingredient_by_pk.nutrition?.fibre || '-'} g</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "lipid"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.lipid} g</p>
+                            <p>{data.ingredient_by_pk.nutrition?.lipid || '-'} g</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "protein"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.protein} g</p>
+                            <p>{data.ingredient_by_pk.nutrition?.protein || '-'} g</p>
                         </div>
                         <div className="ligne">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "water"}))}</p>
-                            <p>{data.ingredient_by_pk.nutrition.water} g</p>
+                            <p>{data.ingredient_by_pk.nutrition?.water || '-'} g</p>
                         </div>
                     </div>
                 </div>

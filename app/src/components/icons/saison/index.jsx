@@ -10,7 +10,6 @@ import {ReactComponent as WinterEnableIcon} from './winter_enable.svg'
 import './index.css'
 
 function saison(spring: Boolean, summer: Boolean, fall: Boolean, winter: Boolean) {
-  console.log(spring)
   const spring_icon = spring ? <SpringEnableIcon/> : <SpringDisableIcon/>
   const summer_icon = summer ? <SummerEnableIcon/> : <SummerDisableIcon/>
   const fall_icon = fall ? <FallEnableIcon/> : <FallDisableIcon/>

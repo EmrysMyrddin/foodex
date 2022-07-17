@@ -9,6 +9,9 @@ import { Input, Button, Card, Modal, Select } from 'antd';
 import {capitalizeFirstLetter, toIcon} from "../../helper/helper";
 import { categories } from "../../data/category";
 import { saison } from "../icons/saison";
+import { diets } from "../../data/diet";
+import { saisons } from "../../data/saison";
+import {PlusOutlined} from '@ant-design/icons'
 
 const { Meta } = Card;
 
@@ -17,6 +20,7 @@ const { Option } = Select;
 export default function Ingredients(){
     const intl = useIntl()
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [variables, setVariables] = useState()
 
     const showModal = () => {
       setIsModalVisible(true);
@@ -30,27 +34,72 @@ export default function Ingredients(){
       setIsModalVisible(false);
     };
 
-    const handleChange = (value: string[]) => {
-    console.log(`selected ${value}`);
+    const handleChangeDiet = (value: string[]) => {
+        const {_or, ...allVariables} = variables || {}
+        const other = _or && _or.filter(o => o !== {})
+        if (value.length !== 0) {
+            allVariables._or = value.map(v =>({
+                diet: {id: {_eq: v}}
+            }))
+        }
+        other && other.filter(o => o !== {}).map(o => allVariables?._or?.push(o))
+        setVariables(allVariables)
     };
 
-    const [searchText, setSearchText] = useState()
+    const handleChangeCategory = (value: string[]) => {
+        const {_or, ...allVariables} = variables || {}
+        const other = _or && _or.filter(o => o !== {})
+        if (value.length !== 0) {
+            allVariables._or = value.map(v =>({
+                category: {id: {_eq: v}}
+            }))
+         }
+        other && other.filter(o => o !== {}).map(o => allVariables?._or?.push(o))
+        setVariables(allVariables)
+    };
+
+    const handleChangeSaison = (value: string[]) => {
+        const {_or, ...allVariables} = variables || {}
+        const other = _or && _or.filter(o => o !== {})
+        if (value.length !== 0) {
+            allVariables._or = value.map(v =>({
+                _or: [
+                    {saison_ingredients: {saison_id: {_eq: v}}},
+                    {saison_ingredients: {saison_id: {_eq: saisonsData.saison.filter(dat => dat.name === "all-year")[0].id}}}
+                ]
+            }))
+         }
+        other && other.filter(o => o !== {}).map(o => allVariables?._or?.push(o))
+        setVariables(allVariables)
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        const {name, ...allVariables} = variables 
+        if (e.target.text.value) allVariables.name = {_ilike: e.target.text.value}
+        setVariables(allVariables)
+    }
 
     const [{ data: categoriesData, fetching: categoriesFetching, error: categoriesError }] = useQuery({
         query: categories,
     });
 
+    const [{ data: saisonsData, fetching: saisonsFetching, error: saisonsError }] = useQuery({
+        query: saisons,
+    });
+
     const [{ data, fetching, error }] = useQuery({
         query: ingredients,
-        variables: searchText,
+        variables: variables ? {where: variables} : undefined,
       });
+
+      const [{ data: dietData, fetching: dietFetching, error: dietError }] = useQuery({
+          query: diets,
+        });
 
     const form = <div className="form-container">
         <div className="filter-search">
-            <form onSubmit={e => {
-                e.preventDefault()
-                setSearchText(e.target.text.value ? {searchText: e.target.text.value} : {})
-            }}>
+            <form onSubmit={onSubmit}>
                 <Input placeholder="Rechercher un ingredient" name='text'/>
                 <Button type="primary" htmlType="submit">Rechercher</Button>
             </form>
@@ -58,48 +107,47 @@ export default function Ingredients(){
             <Modal title="Filtre pour les ingredients" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <div>
                     <Select
+                        loading={dietFetching}
                         mode="multiple"
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="Régime alimentaire"
-                        onChange={handleChange}
+                        onChange={handleChangeDiet}
                         >
-                            <Option key='vegan'>{capitalizeFirstLetter(intl.formatMessage({id: "vegan"}))}</Option>
-                            <Option key='vegetarian'>{capitalizeFirstLetter(intl.formatMessage({id: "vegetarian"}))}</Option>
+                            {dietData?.diet?.map(d => <Option key={d.id} >{capitalizeFirstLetter(intl.formatMessage({id: d.name}))}</Option>)}
                     </Select>
                     <Select
+                        loading={categoriesFetching}
                         mode="multiple"
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="Catégorie alimentaire"
-                        onChange={handleChange}
+                        onChange={handleChangeCategory}
                         >
                             {categoriesData?.category?.map(cat => <Option key={cat.id}>{capitalizeFirstLetter(intl.formatMessage({id: cat.name}))}</Option>)}
                     </Select>
                     <Select
+                        loading={saisonsFetching}
                         mode="multiple"
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="Saisonalité alimentaire"
-                        onChange={handleChange}
+                        onChange={handleChangeSaison}
                         >
-                            <Option key='spring'>{capitalizeFirstLetter(intl.formatMessage({id: "spring"}))}</Option>
-                            <Option key='summer'>{capitalizeFirstLetter(intl.formatMessage({id: "summer"}))}</Option>
-                            <Option key='fall'>{capitalizeFirstLetter(intl.formatMessage({id: "fall"}))}</Option>
-                            <Option key='winter'>{capitalizeFirstLetter(intl.formatMessage({id: "winter"}))}</Option>
-                    </Select>
+                            {saisonsData?.saison?.map(sai => <Option key={sai.id}>{capitalizeFirstLetter(intl.formatMessage({id: sai.name}))}</Option>)}
+                        </Select>
                 </div>
             </Modal>
         </div>
     </div>
 
-    if (fetching && categoriesFetching) return <>
+    if (fetching && categoriesFetching && saisonsFetching) return <>
         {form}
         <div className="ingredients-container">
             <p>Loading...</p>
         </div>
     </>;
-    if (error || categoriesError) return <p>Oh no... {error.message || categoriesError.message}</p>;
+    if (error || categoriesError || dietError || saisonsError) return <p>Oh no... {error.message || categoriesError.message || dietError.message || saisonsError.message}</p>;
 
     return (
         <>
@@ -113,7 +161,7 @@ export default function Ingredients(){
                                 cover={
                                     <>
                                         <div className="label">
-                                            {ingredient.diet.name === 'vegetable' ? <icons.VeganIcon /> : ingredient.diet.name === 'animal product' ? <icons.VegetarianIcon /> : ''}
+                                            {ingredient.diet.name === 'vegan' ? <icons.VeganIcon /> : ingredient.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                                             <p>{capitalizeFirstLetter(ingredient.name)}</p>
                                         </div>
                                         {ingredient?.url_img ? <img src={ingredient.url_img} alt={ingredient.name}/> : <></>}
@@ -142,6 +190,7 @@ export default function Ingredients(){
                     </div>
                 ))}
             </div>
+            <div className="add"><Button type="primary" size="large" shape="circle" icon={<PlusOutlined />} /></div>
         </>
     )
 }

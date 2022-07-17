@@ -1,6 +1,9 @@
 export const ingredients = `
-    query($searchText: String) {
-        ingredient(order_by: {name: asc}, where: {name: {_ilike: $searchText}}) {
+    query($where: ingredient_bool_exp) {
+        ingredient(
+            order_by: {name: asc}, 
+            where: $where
+        ) {
             id
             name
             url_img

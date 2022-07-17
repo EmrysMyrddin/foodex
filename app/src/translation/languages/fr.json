@@ -1,7 +1,9 @@
 {
 	"account": "compte",
+	"all-year": "toute l'année",
 	"calorie": "calorie",
 	"carb": "glucide",
+	"carnivorous": "carnivore",
 	"crustacean": "crustacé",
 	"dairy product": "produit laitier",
 	"egg": "oeuf",
@@ -13,6 +15,7 @@
 	"lipid": "lipide",
 	"logout": "déconnexion",
 	"meat": "viande",
+	"none": "aucun",
 	"protein": "protéine",
 	"recipes": "recettes",
 	"shopping-lists": "listes de course",
