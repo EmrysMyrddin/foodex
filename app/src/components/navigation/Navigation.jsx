@@ -1,7 +1,7 @@
 import React from "react";
 import { useIntl } from 'react-intl'
 import {isMobile} from 'react-device-detect';
-import capitalizeFirstLetter from "../../helper/helper";
+import {capitalizeFirstLetter} from "../../helper/helper";
 import {NavLink} from 'react-router-dom'
 import * as icons from '../icons'
 import './navigation.css'

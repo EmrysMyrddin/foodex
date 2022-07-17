@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from 'react-intl'
-import capitalizeFirstLetter from "../../helper/helper";
+import {capitalizeFirstLetter} from "../../helper/helper";
 import {useLocation} from 'react-router-dom'
 import * as icons from '../icons'
 import './header.css'

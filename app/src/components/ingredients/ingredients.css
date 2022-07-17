@@ -45,9 +45,7 @@ img{
 form {
     display: flex;
     justify-content: center;
-    width: 50%;
-    margin: auto;
-    padding: 1em;
+    width: 90%;
 }
 
 form > input {
@@ -60,6 +58,15 @@ form > input {
     background-color: white;
     position: fixed;
     top: 5em;
+    padding: 1em;
+}
+
+.filter-search {
+    display: flex;
+    justify-content: space-around;
+    /* grid-template-columns: 5fr 1fr; */
+    width: 80%;
+    margin: auto;
 }
 
 .ant-card {
@@ -89,4 +96,15 @@ form > input {
     .ingredient > a {
         height: 25em;
     }
+}
+
+.ant-card-meta-description > .icons > svg, .ant-card-meta-description > .icons > div > svg {
+    height: 4em;
+    width: 4em;
+}
+
+.ant-card-meta-description > .icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

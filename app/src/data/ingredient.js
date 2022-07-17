@@ -4,17 +4,30 @@ export const ingredients = `
             id
             name
             url_img
-            isVegetable
-            isAnimalProduct
-            isAnimal
+            diet {
+                id
+                name
+            }
             nutrition {
-              calorie
-              carb
-              fibre
-              id
-              lipid
-              protein
-              water
+                calorie
+                carb
+                fibre
+                id
+                lipid
+                protein
+                water
+            }
+            category {
+                id
+                name
+            }
+            saison_ingredients {
+                id
+                saison {
+                  id
+                  name
+                  description
+                }
             }
         }
     }
@@ -26,17 +39,22 @@ export const ingredient = `
             id
             name
             url_img
-            isVegetable
-            isAnimalProduct
-            isAnimal
+            diet {
+                id
+                name
+            }
             nutrition {
-              calorie
-              carb
-              fibre
-              id
-              lipid
-              protein
-              water
+                calorie
+                carb
+                fibre
+                id
+                lipid
+                protein
+                water
+            }
+            category {
+                id
+                name
             }
         }
     }
