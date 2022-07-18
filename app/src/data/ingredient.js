@@ -62,3 +62,11 @@ export const ingredient = `
         }
     }
 `
+
+export const insert_one_ingredient = `
+    mutation($category_id: uuid, $name: String, $url_img: String) {
+        insert_ingredient_one(object: {category_id: $category_id, name: $name, url_img: $url_img}) {
+            id
+        }
+    }
+`

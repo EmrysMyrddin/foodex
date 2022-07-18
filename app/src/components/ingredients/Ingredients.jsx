@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useQuery } from 'urql';
-import { ingredients } from "../../data/ingredient";
+import { useQuery, useMutation } from 'urql';
+import { ingredients, insert_one_ingredient } from "../../data/ingredient";
 import {Link} from 'react-router-dom'
 import './ingredients.css'
 import * as icons from '../icons'
@@ -20,6 +20,10 @@ const { Option } = Select;
 export default function Ingredients(){
     const intl = useIntl()
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalAddVisible, setIsModalAddVisible] = useState(false);
+    const [addIngredientCategory, setAddIngredientCategory] = useState()
+    const [addIngredientName, setAddIngredientName] = useState()
+    const [addIngredientUrl, setAddIngredientUrl] = useState()
     const [variables, setVariables] = useState()
 
     const showModal = () => {
@@ -32,6 +36,25 @@ export default function Ingredients(){
   
     const handleCancel = () => {
       setIsModalVisible(false);
+    };
+
+    const showModalAdd = () => {
+      setIsModalAddVisible(true);
+    };
+
+    const [resultAdd, insertIngredient] = useMutation(insert_one_ingredient)
+    
+    console.log("resultAdd : ", resultAdd)
+  
+    const handleOkAdd = async () => {
+        console.log("Coucou")
+        const u = await insertIngredient({category_id: addIngredientCategory, name: addIngredientName, url_img: addIngredientUrl})
+        console.log(u)
+        setIsModalAddVisible(false);
+    };
+  
+    const handleCancelAdd = () => {
+      setIsModalAddVisible(false);
     };
 
     const handleChangeDiet = (value: string[]) => {
@@ -149,9 +172,34 @@ export default function Ingredients(){
     </>;
     if (error || categoriesError || dietError || saisonsError) return <p>Oh no... {error.message || categoriesError.message || dietError.message || saisonsError.message}</p>;
 
+    const addIngredient = 
+    <Modal title="Ajouter un ingredient" visible={isModalAddVisible} onOk={handleOkAdd} onCancel={handleCancelAdd}>
+            <Input placeholder="Nom de l'ingredient" onChange={e => setAddIngredientName(e.target.value)}/>
+            <Input placeholder="Image de l'ingredient" onChange={e => setAddIngredientUrl(e.target.value)}/>
+            <Select
+                loading={categoriesFetching}
+                allowClear
+                style={{ width: '100%' }}
+                placeholder="Catégorie alimentaire"
+                onChange={setAddIngredientCategory}
+                >
+                    {categoriesData?.category?.map(cat => <Option key={cat.id}>{capitalizeFirstLetter(intl.formatMessage({id: cat.name}))}</Option>)}
+            </Select>
+            <Select
+                loading={saisonsFetching}
+                allowClear
+                style={{ width: '100%' }}
+                placeholder="Saisonalité alimentaire"
+                onChange={handleChangeSaison}
+                >
+                    {saisonsData?.saison?.map(sai => <Option key={sai.id}>{capitalizeFirstLetter(intl.formatMessage({id: sai.name}))}</Option>)}
+            </Select>
+    </Modal>
+
     return (
         <>
             {form}
+            {addIngredient}
             <div className="ingredients-container">
                 {data?.ingredient.map(ingredient => (
                     <div key={ingredient.id} className="ingredient">
@@ -190,7 +238,7 @@ export default function Ingredients(){
                     </div>
                 ))}
             </div>
-            <div className="add"><Button type="primary" size="large" shape="circle" icon={<PlusOutlined />} /></div>
+            <div className="add"><Button  onClick={showModalAdd} type="primary" size="large" shape="circle" icon={<PlusOutlined />} /></div>
         </>
     )
 }
