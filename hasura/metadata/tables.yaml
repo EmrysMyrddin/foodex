@@ -1,14 +1,16 @@
 - table:
     schema: public
     name: category
-  array_relationships:
-  - name: diet_categories
+  object_relationships:
+  - name: diet_category
     using:
-      foreign_key_constraint_on:
-        column: id
-        table:
+      manual_configuration:
+        remote_table:
           schema: public
           name: diet_category
+        column_mapping:
+          id: category_id
+  array_relationships:
   - name: ingredients
     using:
       foreign_key_constraint_on:
@@ -53,7 +55,7 @@
   - name: diet_categories
     using:
       foreign_key_constraint_on:
-        column: category_id
+        column: diet_id
         table:
           schema: public
           name: diet_category
@@ -100,10 +102,10 @@
   object_relationships:
   - name: category
     using:
-      foreign_key_constraint_on: id
+      foreign_key_constraint_on: category_id
   - name: diet
     using:
-      foreign_key_constraint_on: category_id
+      foreign_key_constraint_on: diet_id
   insert_permissions:
   - role: user
     permission:
@@ -291,16 +293,18 @@
         user_id: x-hasura-User-Id
       columns:
       - description
+      - img_url
       - name
   select_permissions:
   - role: user
     permission:
       columns:
-      - description
-      - name
       - created_at
-      - updated_at
+      - description
       - id
+      - img_url
+      - name
+      - updated_at
       - user_id
       filter:
         _or:
@@ -315,11 +319,12 @@
   - role: user
     permission:
       columns:
-      - description
-      - name
       - created_at
-      - updated_at
+      - description
       - id
+      - img_url
+      - name
+      - updated_at
       - user_id
       filter:
         _or:

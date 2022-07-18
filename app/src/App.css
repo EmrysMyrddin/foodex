@@ -10,3 +10,91 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+.app-body {
+  position: absolute;
+  top: 5em;
+  width: 100%;
+  padding: 1em;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 3em;
+  column-gap: 3em;
+  padding: 5em;
+  padding-left: 4em;
+  padding-right: 4em;
+  align-items: end;
+  overflow: scroll;
+  position: relative;
+  top: 4em;
+  height: 80vh;
+  padding-top: 1em;
+  align-items: flex-start;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.container-details {
+  position: relative;
+  top: 5em;
+  padding: 5em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.container-details > img {
+  height: auto;
+  width: 100%;
+  padding: 2em;
+  max-width: 30vw;
+}
+
+.container-details > .info-details > .title-details > h1 {
+  margin: 0;
+  align-self: center;
+}
+
+.container-details > .info-details > .title-details > svg {
+  font-size: 2em;
+}
+
+.container-details > .info-details > .title-details {
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.container-details > .info-details {
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+}
+
+@media(max-width: 60rem) {
+  .container {
+      grid-template-columns: repeat(1, 1fr);
+      padding-bottom: 8em;
+  }
+
+  .container-details {
+      padding: 3em;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .container-details > img {
+      padding: 0;
+  }
+
+  .container-details > .info-details > .title-details > h1 {
+      margin: 0;
+      padding: 0;
+  }
+}

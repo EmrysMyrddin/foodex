@@ -10,6 +10,8 @@ import Ingredients from './components/ingredients/Ingredients';
 import Login from './components/login/Login';
 import Ingredient from './components/ingredient/Ingredient';
 import "antd/dist/antd.css";
+import Recipes from './components/recipes/Recipes';
+import Recipe from './components/repice/Recipe';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
               <Route path="/" element={<Layout />} >
                 <Route path="ingredients/:id" element={<Ingredient />} />
                 <Route path="ingredients"  element={<Ingredients />}/>
+                <Route path="recipes/:id" element={<Recipe />} />
+                <Route path="recipes"  element={<Recipes />}/>
               </Route>
             </Routes>
           </Router>
@@ -37,7 +41,7 @@ function Layout() {
       <header className="app-header">
         <Header />
       </header>
-      <div>
+      <div className='app-body'>
         <Outlet />
       </div>
       <Navigation/>

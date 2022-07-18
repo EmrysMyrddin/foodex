@@ -44,12 +44,8 @@ export default function Ingredients(){
 
     const [resultAdd, insertIngredient] = useMutation(insert_one_ingredient)
     
-    console.log("resultAdd : ", resultAdd)
-  
     const handleOkAdd = async () => {
-        console.log("Coucou")
-        const u = await insertIngredient({category_id: addIngredientCategory, name: addIngredientName, url_img: addIngredientUrl})
-        console.log(u)
+        await insertIngredient({category_id: addIngredientCategory, name: addIngredientName, url_img: addIngredientUrl})
         setIsModalAddVisible(false);
     };
   
@@ -200,9 +196,9 @@ export default function Ingredients(){
         <>
             {form}
             {addIngredient}
-            <div className="ingredients-container">
+            <div className="container">
                 {data?.ingredient.map(ingredient => (
-                    <div key={ingredient.id} className="ingredient">
+                    <div key={ingredient.id} className="grid">
                         <Link to={`/ingredients/${ingredient.id}`} >
                             <Card
                                 hoverable

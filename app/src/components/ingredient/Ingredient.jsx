@@ -23,15 +23,14 @@ export default function Ingredient(){
       if (error) return <p>Oh no... {error.message}</p>;
 
     return (
-        <div className="ingredient-container">
+        <div className="container-details">
             {data.ingredient_by_pk.url_img ? <img src={data.ingredient_by_pk.url_img} alt={data.ingredient_by_pk.name}/> : <></>}
-            <div className="ingredient-info">
-                <div className="ingredient-title">
+            <div className="info-details">
+                <div className="title-details">
                     {data.ingredient_by_pk.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                     <h1>{capitalizeFirstLetter(data.ingredient_by_pk.name)}</h1>
                 </div>
                 <div>
-                    
                     <div className="table">
                         <div className="table-header">
                             <p>{capitalizeFirstLetter(intl.formatMessage({ id: "Value per 100g"}))}</p>

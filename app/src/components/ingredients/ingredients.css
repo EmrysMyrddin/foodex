@@ -2,32 +2,6 @@ img{
     width: 8em;
 }
 
-.ingredients-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    row-gap: 3em;
-    column-gap: 3em;
-    padding: 5em;
-    padding-left: 4em;
-    padding-right: 4em;
-    align-items: end;
-    overflow: scroll;
-    position: relative;
-    top: 10em;
-    height: 80vh;
-    padding-top: 1em;
-}
-
-.ingredient > a {
-    height: 29em;
-}
-
-.ingredients-container > .ingredient {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-}
-
 .label {
     display: flex !important;
     justify-content: center;
@@ -106,17 +80,8 @@ form > input {
 }
 
 @media(max-width: 60rem) {
-    .ingredients-container {
-        grid-template-columns: repeat(1, 1fr);
-        padding-bottom: 8em;
-    }
-
     form {
         width: 80%;
-    }
-
-    .ingredient > a {
-        height: 25em;
     }
 
     .add {
