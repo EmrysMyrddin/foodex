@@ -7,10 +7,6 @@ export const ingredients = `
             id
             name
             url_img
-            diet {
-                id
-                name
-            }
             nutrition {
                 calorie
                 carb
@@ -23,6 +19,13 @@ export const ingredients = `
             category {
                 id
                 name
+                diet_category {
+                    id
+                    diet {
+                        id
+                        name
+                    }
+                }
             }
             saison_ingredients {
                 id
@@ -42,10 +45,6 @@ export const ingredient = `
             id
             name
             url_img
-            diet {
-                id
-                name
-            }
             nutrition {
                 calorie
                 carb
@@ -58,6 +57,13 @@ export const ingredient = `
             category {
                 id
                 name
+                diet_category {
+                    id
+                    diet {
+                        id
+                        name
+                    }
+                }
             }
         }
     }

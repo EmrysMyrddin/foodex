@@ -27,7 +27,7 @@ export default function Ingredient(){
             {data.ingredient_by_pk.url_img ? <img src={data.ingredient_by_pk.url_img} alt={data.ingredient_by_pk.name}/> : <></>}
             <div className="info-details">
                 <div className="title-details">
-                    {data.ingredient_by_pk.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
+                    {data.ingredient_by_pk.category.diet_category.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.category.diet_category.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                     <h1>{capitalizeFirstLetter(data.ingredient_by_pk.name)}</h1>
                 </div>
                 <div>

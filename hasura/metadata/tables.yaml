@@ -59,13 +59,6 @@
         table:
           schema: public
           name: diet_category
-  - name: ingredients
-    using:
-      foreign_key_constraint_on:
-        column: diet_id
-        table:
-          schema: public
-          name: ingredient
   insert_permissions:
   - role: user
     permission:
@@ -143,9 +136,6 @@
   - name: category
     using:
       foreign_key_constraint_on: category_id
-  - name: diet
-    using:
-      foreign_key_constraint_on: diet_id
   - name: nutrition
     using:
       foreign_key_constraint_on: nutrition_id
@@ -170,7 +160,6 @@
       check: {}
       columns:
       - category_id
-      - diet_id
       - name
       - nutrition_id
       - url_img
@@ -184,7 +173,6 @@
       - created_at
       - updated_at
       - category_id
-      - diet_id
       - id
       - nutrition_id
       filter: {}
@@ -193,7 +181,6 @@
     permission:
       columns:
       - category_id
-      - diet_id
       - name
       - nutrition_id
       - url_img

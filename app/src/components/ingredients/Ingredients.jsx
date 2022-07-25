@@ -205,7 +205,7 @@ export default function Ingredients(){
                                 cover={
                                     <>
                                         <div className="label">
-                                            {ingredient.diet.name === 'vegan' ? <icons.VeganIcon /> : ingredient.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
+                                            {ingredient.category.diet_category.diet.name === 'vegan' ? <icons.VeganIcon /> : ingredient.category.diet_category.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                                             <p>{capitalizeFirstLetter(ingredient.name)}</p>
                                         </div>
                                         {ingredient?.url_img ? <img src={ingredient.url_img} alt={ingredient.name}/> : <></>}
