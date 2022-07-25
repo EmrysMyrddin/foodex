@@ -20,8 +20,8 @@ export default function Recipe(){
     const [editing, setEditing] = useState(false)
 
     const [result] = useQuery({
-    query: recipe,
-    variables: {id}
+        query: recipe,
+        variables: {id}
     });
 
     const { data, fetching, error } = result;

@@ -12,6 +12,8 @@ import Ingredient from './components/ingredient/Ingredient';
 import "antd/dist/antd.css";
 import Recipes from './components/recipes/Recipes';
 import Recipe from './components/repice/Recipe';
+import ShoppingLists from './components/shopping-lists/ShoppingLists';
+import ShoppingList from './components/shopping-list/ShoppingList';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
                 <Route path="ingredients"  element={<Ingredients />}/>
                 <Route path="recipes/:id" element={<Recipe />} />
                 <Route path="recipes"  element={<Recipes />}/>
+                <Route path="shopping-lists/:id"  element={<ShoppingList />}/>
+                <Route path="shopping-lists"  element={<ShoppingLists />}/>
               </Route>
             </Routes>
           </Router>

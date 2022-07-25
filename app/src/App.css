@@ -16,6 +16,7 @@ html, body {
   top: 5em;
   width: 100%;
   padding: 1em;
+
 }
 
 .container {
@@ -32,6 +33,7 @@ html, body {
   top: 4em;
   height: 80vh;
   padding-top: 1em;
+  margin-bottom: 1em;
   align-items: flex-start;
 }
 
@@ -75,6 +77,10 @@ html, body {
 .container-details > .info-details {
   display: grid;
   grid-template-rows: 1fr 6fr;
+}
+
+.ant-card-cover {
+  height: auto !important;
 }
 
 @media(max-width: 60rem) {
