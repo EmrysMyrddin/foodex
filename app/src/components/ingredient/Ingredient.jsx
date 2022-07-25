@@ -22,13 +22,21 @@ export default function Ingredient(){
       if (fetching) return <p>Loading...</p>;
       if (error) return <p>Oh no... {error.message}</p>;
 
+      const conversion = data.ingredient_by_pk.unit_ingredients.map(ui => `${ui.value} ${ui.unit.name}`).join(" = ")
+
     return (
         <div className="container-details">
             {data.ingredient_by_pk.url_img ? <img src={data.ingredient_by_pk.url_img} alt={data.ingredient_by_pk.name}/> : <></>}
+            
             <div className="info-details">
                 <div className="title-details">
-                    {data.ingredient_by_pk.category.diet_category.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.category.diet_category.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
-                    <h1>{capitalizeFirstLetter(data.ingredient_by_pk.name)}</h1>
+                    <div className="more-info-title">
+                        <div className="title">
+                            {data.ingredient_by_pk.category.diet_category.diet.name === 'vegan' ? <icons.VeganIcon /> : data.ingredient_by_pk.category.diet_category.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
+                            <h1>{capitalizeFirstLetter(data.ingredient_by_pk.name)}</h1>
+                        </div>
+                        <p>{conversion}</p>
+                    </div>
                 </div>
                 <div>
                     <div className="table">

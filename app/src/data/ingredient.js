@@ -45,6 +45,15 @@ export const ingredient = `
             id
             name
             url_img
+            unit_ingredients {
+                id
+                value
+                unit {
+                    id
+                    name
+                    short
+                }
+            }
             nutrition {
                 calorie
                 carb

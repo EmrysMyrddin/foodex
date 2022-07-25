@@ -29,6 +29,21 @@
     padding: 0.5em;
 }
 
+.more-info-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.more-info-title > .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.more-info-title > .title > h1 {
+    margin: 0;
+}
+
 @media(max-width: 60rem) {
     .table {
         width: 100%;
