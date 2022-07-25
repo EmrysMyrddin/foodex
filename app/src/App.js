@@ -14,6 +14,7 @@ import Recipes from './components/recipes/Recipes';
 import Recipe from './components/repice/Recipe';
 import ShoppingLists from './components/shopping-lists/ShoppingLists';
 import ShoppingList from './components/shopping-list/ShoppingList';
+import Account from './components/account/Account';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Layout />} >
+                <Route path="account"  element={<Account />}/>
                 <Route path="ingredients/:id" element={<Ingredient />} />
                 <Route path="ingredients"  element={<Ingredients />}/>
                 <Route path="recipes/:id" element={<Recipe />} />

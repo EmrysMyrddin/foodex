@@ -16,6 +16,7 @@ export default function Login(){
         setU(error)
 
         localStorage.token = data.login.token
+        localStorage.userId = data.login.userId
     }
 
 

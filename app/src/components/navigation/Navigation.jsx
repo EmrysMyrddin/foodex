@@ -37,14 +37,6 @@ export default function Navigation(){
                             </NavLink>
                         </li>
                     )}
-                    <li> 
-                        <div>
-                            <div className='menu-button'>
-                                <icons.LogoutIcon/>
-                                {!isMobile ? <div>Déconnexion</div> : <></>}
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </nav>
         </div>
