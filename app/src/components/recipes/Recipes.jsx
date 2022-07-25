@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from 'urql';
 import { recipes } from "../../data/recipes";
 import { Link } from 'react-router-dom'
-import {Spin, Empty, Card} from "antd"
+import {Spin, Empty, Card, Tag} from "antd"
 import { capitalizeFirstLetter } from "../../helper/helper";
 import * as icons from '../icons'
 
@@ -15,8 +15,6 @@ export default function Recipes(){
     if (recipesFetching) return <Spin />
 
     if (recipesError) return <p>{recipesError.message}</p>
-    
-    console.log(recipesData.recipe[3].ingredients.filter(i => i.ingredient.category.diet_category?.diet === undefined).length)
     
     return <div>
         {recipesData.recipe.length === 0 ? <Empty/> : 
@@ -44,7 +42,11 @@ export default function Recipes(){
                                     {recipe?.img_url ? <img src={recipe.img_url} alt={recipe.name}/> : <></>}
                                 </>
                             }
-                        />
+                        >
+                            {recipe.tag_recipes.length > 0 && <div>
+                                {recipe.tag_recipes.map(tag => <Tag color="magenta">{tag.tag.name}</Tag>)}
+                            </div>}
+                        </Card>
                     </Link>
                 </div>
             ))}

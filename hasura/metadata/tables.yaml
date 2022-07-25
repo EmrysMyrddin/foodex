@@ -154,6 +154,13 @@
         table:
           schema: public
           name: saison_ingredient
+  - name: tag_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: ingredient_id
+        table:
+          schema: public
+          name: tag_ingredient
   - name: unit_ingredients
     using:
       foreign_key_constraint_on:
@@ -279,6 +286,13 @@
         table:
           schema: public
           name: shopping_list_entry
+  - name: tag_recipes
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: tag_recipe
   insert_permissions:
   - role: user
     permission:
@@ -713,6 +727,134 @@
                 shared_to_user_id:
                   _eq: X-Hasura-User-Id
       allow_aggregations: true
+- table:
+    schema: public
+    name: tag
+  array_relationships:
+  - name: tag_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: tag_id
+        table:
+          schema: public
+          name: tag_ingredient
+  - name: tag_recipes
+    using:
+      foreign_key_constraint_on:
+        column: tag_id
+        table:
+          schema: public
+          name: tag_recipe
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - description
+      - name
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - description
+      - name
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - description
+      - name
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: tag_ingredient
+  object_relationships:
+  - name: ingredient
+    using:
+      foreign_key_constraint_on: ingredient_id
+  - name: tag
+    using:
+      foreign_key_constraint_on: tag_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - ingredient_id
+      - tag_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - created_at
+      - updated_at
+      - id
+      - ingredient_id
+      - tag_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - ingredient_id
+      - tag_id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: tag_recipe
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: tag
+    using:
+      foreign_key_constraint_on: tag_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - recipe_id
+      - tag_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - created_at
+      - updated_at
+      - id
+      - recipe_id
+      - tag_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - recipe_id
+      - tag_id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter: {}
 - table:
     schema: public
     name: unit

@@ -7,6 +7,14 @@ export const recipes = `
             description
             name
             img_url
+            tag_recipes {
+              id
+              tag {
+                description
+                id
+                name
+              }
+            }
             ingredients {
               id
               ingredient {
@@ -36,6 +44,14 @@ export const recipe = `
             description
             name
             img_url
+            tag_recipes {
+              id
+              tag {
+                description
+                id
+                name
+              }
+            }
             ingredients {
               id
               ingredient {
