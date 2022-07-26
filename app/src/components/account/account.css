@@ -34,3 +34,10 @@
     flex-direction: column;
     row-gap: 2em;
 }
+
+
+@media(max-width: 60rem) {
+    #account {
+        width: 80%;
+    }
+}
