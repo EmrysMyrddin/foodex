@@ -307,13 +307,13 @@
   - role: user
     permission:
       columns:
-      - created_at
-      - description
       - id
-      - img_url
-      - name
+      - created_at
       - updated_at
+      - name
+      - description
       - user_id
+      - img_url
       filter:
         _or:
         - user_id:

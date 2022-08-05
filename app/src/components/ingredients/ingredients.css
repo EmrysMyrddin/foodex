@@ -27,14 +27,6 @@ form > input {
     margin-right: 2em;
 }
 
-.form-container {
-    width: 100%;
-    background-color: white;
-    position: fixed;
-    top: 5em;
-    padding: 1em;
-}
-
 .filter-search {
     display: flex;
     justify-content: space-around;

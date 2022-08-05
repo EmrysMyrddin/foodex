@@ -4,7 +4,7 @@ import {ReactComponent as EggIcon} from './egg.svg'
 import {ReactComponent as FallIcon} from './fall.svg'
 import {ReactComponent as FilterIcon} from './filter.svg'
 import {ReactComponent as FishIcon} from './fish.svg'
-import {ReactComponent as FreezeIcon} from './freeze.svg'
+import {ReactComponent as FreezingIcon} from './freezing.svg'
 import {ReactComponent as FruitIcon} from './fruit.svg'
 import {ReactComponent as IngredientsIcon} from './ingredients.svg'
 import {ReactComponent as LogoutIcon} from './logout.svg'
@@ -27,7 +27,7 @@ export {
   FallIcon,
   FilterIcon,
   FishIcon,
-  FreezeIcon,
+  FreezingIcon,
   FruitIcon,
   IngredientsIcon,
   LogoutIcon,

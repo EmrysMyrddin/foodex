@@ -1,12 +1,13 @@
 import React from "react"
 import { shoppingListIngredients, updated_shopping_list_entry_prepared } from "../../data/shopping-lists";
 import { useMutation, useQuery } from "urql";
-import { Spin, Card, Button } from 'antd'
+import { Spin, Button } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import { capitalizeFirstLetter } from "../../helper/helper";
 import './shopping-list.css'
 import * as icons from '../icons'
 import { CheckSquareOutlined, BorderOutlined, DeleteOutlined, CloseSquareOutlined } from '@ant-design/icons'
+import FoodexCard from "../../molecules/FoodexCard";
 
 export default function ShoppingList(){
     const {id} = useParams('id')
@@ -15,7 +16,6 @@ export default function ShoppingList(){
         query: shoppingListIngredients,
         variables: {id}
     })
-
 
     const [resultAdd, updatedShoppingListEntryPrepared] = useMutation(updated_shopping_list_entry_prepared)
 
@@ -41,9 +41,7 @@ export default function ShoppingList(){
                 .map(recipe => (
                         <div key={recipe.recipe.id}>
                             <Link to={`/recipes/${recipe.recipe.id}`} className="grid" >
-                                <Card
-                                    size="small"
-                                    hoverable
+                                <FoodexCard
                                     cover={
                                         <>
                                             <div className="label">     
@@ -62,12 +60,11 @@ export default function ShoppingList(){
                                             <img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>
                                         </>
                                     }
-                                >
-                                    <div className="body-container">
+                                    description={<div className="body-container">
                                         {!recipe.prepared && <Button type="text" icon={<BorderOutlined />} onClick={e => onClick(e, recipe.recipe.id, data.shopping_list_by_pk.id, true)} />}
                                         <Button type="text" icon={<DeleteOutlined />} />
-                                    </div>
-                                </Card>
+                                    </div>}
+                                />
                             </Link>
                         </div>
                     ))
@@ -79,9 +76,7 @@ export default function ShoppingList(){
                     .map(ingredient => 
                         <div key={ingredient.ingredient.id}>
                             <Link to={`/ingredients/${ingredient.ingredient.id}`} className="grid" >
-                                <Card
-                                    size="small"
-                                    hoverable
+                                <FoodexCard
                                     cover={
                                         <>
                                             <div className="label">
@@ -91,11 +86,10 @@ export default function ShoppingList(){
                                             <img src={ingredient.ingredient.url_img} alt={ingredient.ingredient.name}/>
                                         </>
                                     }
-                                >
-                                    <div className="body-container">
+                                    description={<div className="body-container">
                                         <p>{ingredient.qte} {ingredient.unit}</p>
-                                    </div>
-                                </Card>
+                                    </div>}
+                                />
                             </Link>
                         </div>
                     )
@@ -108,9 +102,7 @@ export default function ShoppingList(){
                 .map(recipe => (
                         <div key={recipe.recipe.id}>
                             <Link to={`/recipes/${recipe.recipe.id}`} className="grid" >
-                                <Card
-                                    size="small"
-                                    hoverable
+                                <FoodexCard
                                     cover={
                                         <>
                                             <div className="label">     
@@ -129,12 +121,11 @@ export default function ShoppingList(){
                                             <img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>
                                         </>
                                     }
-                                    >
-                                    <div className="body-container">
+                                    description={<div className="body-container">
                                         {recipe.prepared && <Button type="text" icon={<CheckSquareOutlined />}  onClick={e => onClick(e, recipe.recipe.id, data.shopping_list_by_pk.id, false)} />}
                                         <Button type="text" icon={<DeleteOutlined />} />
-                                    </div>
-                                </Card>
+                                    </div>}
+                                />
                             </Link>
                         </div>
                     ))

@@ -1,6 +1,9 @@
 export const shoppingLists = `
-    query {
-        shopping_list{
+    query($where: shopping_list_bool_exp) {
+        shopping_list(
+            order_by: {name: asc},
+            where: $where
+        ){
             id
             name
             recipes {

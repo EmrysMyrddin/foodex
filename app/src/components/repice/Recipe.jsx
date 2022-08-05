@@ -10,6 +10,7 @@ import './recipe.css'
 import { useState } from "react";
 import { useEffect } from "react";
 import { marked } from 'marked'
+import FoodexCard from "../../molecules/FoodexCard";
 
 const { Meta } = Card;
 
@@ -40,33 +41,29 @@ export default function Recipe(){
                 {data.recipe_by_pk.img_url ? <img src={data.recipe_by_pk.img_url} alt={data.recipe_by_pk.name}/> : <></>}
                 <div className="info">
                     {data.recipe_by_pk.ingredients.map(i => <Link key={i.ingredient.id} to={`/ingredients/${i.ingredient.id}`} >
-                            <Card
-                                hoverable
+                            <FoodexCard
                                 cover={
-                                    <>
-                                        <div className="label">
-                                            {
+                                    <div className="label">
+                                        {
+                                            i.ingredient
+                                            .category
+                                            .diet_category
+                                            ?.diet
+                                            .name === 'vegan' ? 
+                                                <icons.VeganIcon /> : 
                                                 i.ingredient
                                                 .category
                                                 .diet_category
-                                                ?.diet
-                                                .name === 'vegan' ? 
-                                                    <icons.VeganIcon /> : 
-                                                    i.ingredient
-                                                    .category
-                                                    .diet_category
-                                                    ?.diet.name === 'vegetarian' ? 
-                                                        <icons.VegetarianIcon /> : 
-                                                        ''
-                                            }
-                                            <p>{capitalizeFirstLetter(i.ingredient.name)}</p>
-                                        </div>
-                                        {i.ingredient?.url_img ? <img src={i.ingredient.url_img} alt={i.ingredient.name}/> : <></>}
-                                    </>
+                                                ?.diet.name === 'vegetarian' ? 
+                                                    <icons.VegetarianIcon /> : 
+                                                    ''
+                                        }
+                                        <p>{capitalizeFirstLetter(i.ingredient.name)}</p>
+                                    </div>
                                 }
-                            >
-                                <Meta title={`${i.ingredient.recipe_ingredients[0].qte} ${i.ingredient.recipe_ingredients[0].unit}`}/>
-                            </Card>
+                                img={i.ingredient?.url_img ? <img src={i.ingredient.url_img} alt={i.ingredient.name}/> : <></>}
+                                description={`${i.ingredient.recipe_ingredients[0].qte} ${i.ingredient.recipe_ingredients[0].unit}`}
+                                />
                         </Link>)}
                 </div>
             </div>

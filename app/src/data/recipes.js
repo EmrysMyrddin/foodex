@@ -1,7 +1,8 @@
 export const recipes = `
-    query {
+    query($where: recipe_bool_exp) {
         recipe(
-            order_by: {name: asc}
+            order_by: {name: asc}, 
+            where: $where
         ) {
             id
             description
@@ -52,7 +53,7 @@ export const recipe = `
                 name
               }
             }
-            ingredients {
+            ingredients(order_by: {ingredient: {name: asc}}) {
               id
               ingredient {
                 id

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import {isMobile} from 'react-device-detect';
 import {capitalizeFirstLetter} from "../../helper/helper";
 import {NavLink} from 'react-router-dom'
-import * as icons from '../icons'
+import * as navigation from '../icons/navigation'
 import './navigation.css'
 
 export default function Navigation(){
@@ -16,10 +16,12 @@ export default function Navigation(){
 	}
 
     const menuEntries = [
-		{ href: 'recipes', Icon: icons.RecipesIcon},
-		{ href: 'ingredients', Icon: icons.IngredientsIcon },
-		{ href: 'shopping-lists', Icon: icons.ShoppingListsIcon },
-		{ href: 'account', Icon: icons.AccountIcon },
+		{ href: 'recipes', Icon: navigation.BurgerIcon},
+		{ href: 'ingredients', Icon: navigation.PimentsIcon },
+		{ href: 'shopping-lists', Icon: navigation.PanierIcon },
+		{ href: 'market', Icon: navigation.MarketIcon },
+		{ href: 'freeze', Icon: navigation.FreezeIcon },
+		{ href: 'account', Icon: navigation.SettingIcon },
 	]
 
     return (
