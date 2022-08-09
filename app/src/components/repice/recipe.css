@@ -26,3 +26,10 @@
     width: 100% !important;
     height: 100%;
 }
+.recipe-form {
+    display: block;
+}
+
+.recipe-form textarea {
+    height: 20em;
+}
