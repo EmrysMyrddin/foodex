@@ -28,7 +28,7 @@ export default function Recipe(){
     });
     
     const [resultUpdate, updateRecipe] = useMutation(/* GraphQL */`
-        mutation updateRecipe($id: Int!, $name: String, $img_url: String, $description: String) {
+        mutation updateRecipe($id: uuid!, $name: String, $img_url: String, $description: String) {
           update_recipe_by_pk(pk_columns: {id: $id}, _set: {name: $name, img_url: $img_url, description: $description}) {
             id, name, description
           }
@@ -137,7 +137,7 @@ export default function Recipe(){
     )
 }
 
-function RecipFormModal({onOk, initialValues, ...props}) {
+export function RecipFormModal({onOk, initialValues, ...props}) {
   const form = useRef()
   function handleOk() {
     onOk(form.current.getFieldsValue())
@@ -150,6 +150,7 @@ function RecipFormModal({onOk, initialValues, ...props}) {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={initialValues}
+            width="90vw"
       >
         <Form.Item name="name" label="Nom de la recette" rules={[{ required: true, message: 'Veuillez entrer un nom de recette' }]}>
           <Input placeholder="Nom de la recette" name="name"/>

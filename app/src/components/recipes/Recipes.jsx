@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { useQuery } from 'urql';
+import {useMutation, useQuery} from 'urql';
 import { recipes } from "../../data/recipes";
 import { useIntl } from 'react-intl'
-import { Spin, Empty } from "antd"
-import { capitalizeFirstLetter } from "../../helper/helper";
-import { diets } from "../../data/diet";
+import {Spin, Empty, Button} from "antd"
 import FoodexGrid from "../../organisms/FoodexGrid";
 import RecipesItem from "../../molecules/Item/RecipesItem";
 import FoodexSearchFilter from "../../organisms/FoodexSearchFilter";
 import RecipesModal from "../../molecules/Modal/RecipesModal";
+import {PlusOutlined} from "@ant-design/icons";
+import {RecipFormModal} from "../repice/Recipe";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 export default function Recipes(){
-    const intl = useIntl()
     const [variables, setVariables] = useState()
+    const [showModalAdd, setShowModalAdd] = useState(false)
+    const [createResult, createRecipe] = useMutation(CREATE_RECIPE_MUTATION)
+    const navigate = useNavigate()
 
     const onSubmit = (value) => {
         const {name, ...allVariables} = variables || {}
@@ -52,5 +56,28 @@ export default function Recipes(){
                 Item={RecipesItem}
             />
         }
+        <div className="add"><Button  onClick={() => setShowModalAdd(true)} type="primary" size="large" shape="circle" icon={<PlusOutlined />} /></div>
+        <RecipFormModal
+          visible={showModalAdd} onCancel={() => setShowModalAdd(false)}
+          title="Création d'une recette" loading={createResult.fetching}
+          onOk={async values => {
+              const result = await createRecipe({ recipe: values })
+              if (result.error) {
+                  toast.error(result.error.message)
+              } else {
+                  toast.success("Recette créée")
+                  setShowModalAdd(false)
+                  navigate('/recipes/' + result.data.recipe.id)
+              }
+          }}
+        />
     </div>
 }
+
+const CREATE_RECIPE_MUTATION = /* GraphQL */ `
+    mutation createRecipe($recipe: recipe_insert_input!) {
+        recipe: insert_recipe_one(object: $recipe) {
+            id, name, description, img_url
+        }
+    }
+`
