@@ -279,6 +279,20 @@
           name: recipe_ingredient
         column_mapping:
           id: recipe_id
+  - name: recipe_needed_recipes
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_needed_recipe
+  - name: recipeNeededRecipesByNeededRecipeId
+    using:
+      foreign_key_constraint_on:
+        column: needed_recipe_id
+        table:
+          schema: public
+          name: recipe_needed_recipe
   - name: shopping_list_entries
     using:
       foreign_key_constraint_on:
@@ -367,69 +381,40 @@
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  - name: unit
+    using:
+      foreign_key_constraint_on: unit_id
   insert_permissions:
   - role: user
     permission:
-      check:
-        _or:
-        - recipe:
-            user_id:
-              _eq: X-Hasura-User-Id
-        - recipe:
-            user:
-              sharingWith:
-                _and:
-                - shared_to_user_id:
-                    _eq: X-Hasura-User-Id
-                - can_write:
-                    _eq: true
+      check: {}
       columns:
       - ingredient_id
       - qte
       - recipe_id
-      - unit
+      - unit_id
+      backend_only: false
   select_permissions:
   - role: user
     permission:
       columns:
       - qte
-      - unit
       - created_at
       - updated_at
       - id
       - ingredient_id
       - recipe_id
-      filter:
-        _or:
-        - recipe:
-            user_id:
-              _eq: X-Hasura-User-Id
-        - recipe:
-            user:
-              sharingWith:
-                shared_to_user_id:
-                  _eq: X-Hasura-User-Id
-      allow_aggregations: true
+      - unit_id
+      filter: {}
   update_permissions:
   - role: user
     permission:
       columns:
       - ingredient_id
       - qte
-      - unit
-      filter:
-        _or:
-        - recipe:
-            user_id:
-              _eq: X-Hasura-User-Id
-        - recipe:
-            user:
-              sharingWith:
-                _and:
-                - shared_to_user_id:
-                    _eq: X-Hasura-User-Id
-                - can_write:
-                    _eq: true
+      - recipe_id
+      - unit_id
+      filter: {}
       check: null
   delete_permissions:
   - role: user
@@ -438,6 +423,55 @@
         recipe:
           user_id:
             _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: recipe_needed_recipe
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: recipeByNeededRecipeId
+    using:
+      foreign_key_constraint_on: needed_recipe_id
+  - name: unit
+    using:
+      foreign_key_constraint_on: unit_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - needed_recipe_id
+      - qte
+      - recipe_id
+      - unit_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - qte
+      - created_at
+      - updated_at
+      - id
+      - needed_recipe_id
+      - recipe_id
+      - unit_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - needed_recipe_id
+      - qte
+      - recipe_id
+      - unit_id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter: {}
 - table:
     schema: public
     name: saison
@@ -686,12 +720,6 @@
 - table:
     schema: public
     name: shopping_list_ingredients
-  configuration:
-    custom_root_fields: {}
-    custom_column_names:
-      ingredient_id: ingredientId
-      sum: qte
-      shopping_list_id: shoppingListId
   object_relationships:
   - name: ingredient
     using:
@@ -709,6 +737,14 @@
           name: shopping_list
         column_mapping:
           shopping_list_id: id
+  - name: unit
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: unit
+        column_mapping:
+          unit_id: id
   select_permissions:
   - role: user
     permission:
@@ -716,17 +752,20 @@
       - shopping_list_id
       - ingredient_id
       - sum
-      - unit
-      filter:
-        shoppingList:
-          _or:
-          - user_id:
-              _eq: X-Hasura-User-Id
-          - user:
-              sharingWith:
-                shared_to_user_id:
-                  _eq: X-Hasura-User-Id
-      allow_aggregations: true
+      - unit_id
+      filter: {}
+- table:
+    schema: public
+    name: shopping_list_recipe_ingredients
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - shopping_list_id
+      - ingredient_id
+      - qte
+      - unit_id
+      filter: {}
 - table:
     schema: public
     name: tag
@@ -859,6 +898,20 @@
     schema: public
     name: unit
   array_relationships:
+  - name: recipe_ingredients
+    using:
+      foreign_key_constraint_on:
+        column: unit_id
+        table:
+          schema: public
+          name: recipe_ingredient
+  - name: recipe_needed_recipes
+    using:
+      foreign_key_constraint_on:
+        column: unit_id
+        table:
+          schema: public
+          name: recipe_needed_recipe
   - name: unit_ingredients
     using:
       foreign_key_constraint_on:

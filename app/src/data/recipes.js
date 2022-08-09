@@ -53,6 +53,35 @@ export const recipe = `
                 name
               }
             }
+            recipe_needed_recipes {
+              id
+              qte
+              recipeByNeededRecipeId {
+                id
+                name
+                img_url
+                ingredients {
+                  id
+                  ingredient {
+                    category {
+                      diet_category {
+                        diet {
+                          id
+                          name
+                        }
+                        id
+                      }
+                      id
+                    }
+                  }
+                }
+                
+              }
+              unit {
+                id
+                name
+              }
+            }
             ingredients(order_by: {ingredient: {name: asc}}) {
               id
               ingredient {
@@ -62,7 +91,10 @@ export const recipe = `
                 recipe_ingredients {
                   id
                   qte
-                  unit
+                  unit {
+                    id
+                    name
+                  }
                 }
                 category {
                   id

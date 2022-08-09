@@ -46,9 +46,12 @@ export const shoppingListIngredients = `
                 }
             }
             ingredients(order_by: {ingredient: {name: asc}}) {
-                ingredientId
-                qte
-                unit
+                ingredient_id
+                sum
+                unit {
+                    id
+                    name
+                }
                 ingredient {
                     id
                     name

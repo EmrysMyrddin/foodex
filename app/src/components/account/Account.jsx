@@ -1,27 +1,61 @@
-import { Button, Checkbox, Input } from "antd";
-import React from "react";
+import { Button, Checkbox, Select, Spin } from "antd";
+import React, { useState } from "react";
 import { useQuery } from "urql";
-import { user_by_pk } from "../../data/user";
+import { users, user_by_pk } from "../../data/user";
 import './account.css'
 
+const {Option} = Select
+
 export default function Account(){
+    const [value, setValue] = useState();
+    const [variables, setVariables] = useState()
+
+    const [{ data: dataUsers, fetching: fetchingUsers, error: errorUsers }] = useQuery({
+        query: users,
+        variables: {where: {_not: {id: {_eq: localStorage.userId}}}},
+    });
+
     const [result] = useQuery({
         query: user_by_pk,
         variables: {id : localStorage.userId}
-      });
+    });
 
-      const { data, fetching, error } = result;
+    const { data, fetching, error } = result;
 
-      if (fetching) return <p>Loading...</p>;
-      if (error) return <p>Oh no... {error.message}</p>;
+    if (fetching || fetchingUsers) return <Spin/>
+    if (error || errorUsers) return <p>Oh no... {error.message}</p>;
 
+    console.log(dataUsers)
+
+
+    const handleSearch = (newValue: string) => {
+        setVariables(newValue)
+    };
+
+    const handleChange = (newValue: string) => {
+        setValue(dataUsers.user);
+    };
+
+    const options = dataUsers.user.map(d => <Option key={d.id}><strong>{d.username.toUpperCase()}</strong>{`#${d.id.split('-')[0]}`}</Option>)
 
     return <div id="account">
         <h1>
-            {data.user_by_pk.username.toUpperCase()}
+            {`${data.user_by_pk.username.toUpperCase()}#${localStorage.userId.split('-')[0]}`}
         </h1>
         <div id="share">
-            <Input placeholder="Je souhaite partager mes recettes avec"/>
+            <Select
+                showSearch
+                value={value}
+                placeholder="Je souhaite partager mes recettes avec"
+                defaultActiveFirstOption={false}
+                showArrow={false}
+                filterOption={false}
+                onSearch={handleSearch}
+                onChange={handleChange}
+                notFoundContent={null}
+                >
+                {options}
+            </Select>
             <div>
                 <Checkbox>Permettre les modifications</Checkbox>
                 <Checkbox>Permettre de voir les listes de courses</Checkbox>

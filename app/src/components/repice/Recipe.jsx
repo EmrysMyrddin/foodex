@@ -11,10 +11,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { marked } from 'marked'
 import FoodexCard from "../../molecules/FoodexCard";
+import { useIntl } from 'react-intl'
 
 const { Meta } = Card;
 
 export default function Recipe(){
+    const {formatMessage} = useIntl()
 	const {id} = useParams()
 
     const [content, setContent] = useState('# A écrire')
@@ -40,7 +42,7 @@ export default function Recipe(){
             <div className="recipe-right">
                 {data.recipe_by_pk.img_url ? <img src={data.recipe_by_pk.img_url} alt={data.recipe_by_pk.name}/> : <></>}
                 <div className="info">
-                    {data.recipe_by_pk.ingredients.map(i => <Link key={i.ingredient.id} to={`/ingredients/${i.ingredient.id}`} >
+                        {data.recipe_by_pk.ingredients.map(i => <Link key={i.ingredient.id} to={`/ingredients/${i.ingredient.id}`} >
                             <FoodexCard
                                 cover={
                                     <div className="label">
@@ -62,7 +64,36 @@ export default function Recipe(){
                                     </div>
                                 }
                                 img={i.ingredient?.url_img ? <img src={i.ingredient.url_img} alt={i.ingredient.name}/> : <></>}
-                                description={`${i.ingredient.recipe_ingredients[0].qte} ${i.ingredient.recipe_ingredients[0].unit}`}
+                                description={`${
+                                    formatMessage(
+                                        { id: i.ingredient.recipe_ingredients[0].unit.name}, 
+                                        { count: i.ingredient.recipe_ingredients[0].qte })
+                                }`}
+                                />
+                        </Link>)}
+                        {data.recipe_by_pk.recipe_needed_recipes.map(i => <Link key={i.recipeByNeededRecipeId.id} to={`/recipes/${i.recipeByNeededRecipeId.id}`} >
+                            <FoodexCard
+                                cover={
+                                    <div className="label">
+                                        {
+                                        i.recipeByNeededRecipeId.ingredients.length < 1 ||
+                                        i.recipeByNeededRecipeId.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'carnivorous').length > 0 ||
+                                        i.recipeByNeededRecipeId.ingredients.filter(i => i.ingredient.category.diet_category?.diet === undefined).length > 0
+                                            ?
+                                            "" :
+                                            i.recipeByNeededRecipeId.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'vegetarian').length > 0 ? 
+                                            <icons.VegetarianIcon /> : 
+                                            <icons.VeganIcon />
+                                        }
+                                        <p>{capitalizeFirstLetter(i.recipeByNeededRecipeId.name)}</p>
+                                    </div>
+                                }
+                                img={i.recipeByNeededRecipeId?.img_url ? <img src={i.recipeByNeededRecipeId.img_url} alt={i.recipeByNeededRecipeId.name}/> : <></>}
+                                description={`${
+                                    formatMessage(
+                                        { id: i.unit.name}, 
+                                        { count: i.qte })
+                                }`}
                                 />
                         </Link>)}
                 </div>
@@ -86,7 +117,6 @@ export default function Recipe(){
                         setEditing(true)
                     }}>
                         {data.recipe_by_pk.description}
-                    
                     </article>
                 </div>
             </div>

@@ -19,7 +19,7 @@ export default function RecipesItem({item}){
                             item.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'vegetarian').length > 0 ? 
                             <icons.VegetarianIcon /> : 
                             <icons.VeganIcon />
-                        }            
+                        }
                         <p>{capitalizeFirstLetter(item.name)}</p>
                     </div>
                 }

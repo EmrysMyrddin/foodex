@@ -1,6 +1,9 @@
 export const users = `
-    query {
-        user {
+    query($where: user_bool_exp) {
+        user(
+          order_by: {username: asc},
+          where: $where
+        ) {
             id
             username
             sharedBy {

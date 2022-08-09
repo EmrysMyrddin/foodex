@@ -34,11 +34,11 @@
     color: rgb(199, 0, 0);
 }
 
-/* .shopping-list > .container {
+.shopping-list > .container {
     display: flex;
     flex-direction: column;
     height: 75vh;
-} */
+}
 
 .title-shopping-list {
     display: flex;

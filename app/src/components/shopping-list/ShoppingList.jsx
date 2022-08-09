@@ -8,9 +8,11 @@ import './shopping-list.css'
 import * as icons from '../icons'
 import { CheckSquareOutlined, BorderOutlined, DeleteOutlined, CloseSquareOutlined } from '@ant-design/icons'
 import FoodexCard from "../../molecules/FoodexCard";
+import { useIntl } from "react-intl";
 
 export default function ShoppingList(){
     const {id} = useParams('id')
+    const { formatMessage } = useIntl()
 
     const [result ] = useQuery({
         query: shoppingListIngredients,
@@ -28,6 +30,8 @@ export default function ShoppingList(){
         e.preventDefault()
         await updatedShoppingListEntryPrepared({recipeId: recipeId, shoppingListId: shoppingListId, prepared: prepared})
     }
+
+    console.log(data.shopping_list_by_pk.ingredients[0].ingredient)
 
     return <div className="shopping-list">
         <div className="title-shopping-list">
@@ -57,9 +61,9 @@ export default function ShoppingList(){
                                                 }
                                                 <p>{capitalizeFirstLetter(recipe.recipe.name)} (x{recipe.qte})</p>
                                             </div>
-                                            <img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>
                                         </>
                                     }
+                                    img={<img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>}
                                     description={<div className="body-container">
                                         {!recipe.prepared && <Button type="text" icon={<BorderOutlined />} onClick={e => onClick(e, recipe.recipe.id, data.shopping_list_by_pk.id, true)} />}
                                         <Button type="text" icon={<DeleteOutlined />} />
@@ -75,19 +79,23 @@ export default function ShoppingList(){
                 {data.shopping_list_by_pk.ingredients
                     .map(ingredient => 
                         <div key={ingredient.ingredient.id}>
-                            <Link to={`/ingredients/${ingredient.ingredient.id}`} className="grid" >
-                                <FoodexCard
+                             <Link to={`/ingredients/${ingredient.ingredient.id}`} className="grid" >
+                                 <FoodexCard
                                     cover={
                                         <>
                                             <div className="label">
                                                 {ingredient.ingredient.category.diet_category.diet.name === 'vegan' ? <icons.VeganIcon /> : ingredient.ingredient.category.diet_category.diet.name === 'vegetarian' ? <icons.VegetarianIcon /> : ''}
                                                 <p>{capitalizeFirstLetter(ingredient.ingredient.name)}</p>
                                             </div>
-                                            <img src={ingredient.ingredient.url_img} alt={ingredient.ingredient.name}/>
                                         </>
                                     }
+                                    img={<img src={ingredient.ingredient.url_img} alt={ingredient.ingredient.name}/>}
                                     description={<div className="body-container">
-                                        <p>{ingredient.qte} {ingredient.unit}</p>
+                                        <p>
+                                        {formatMessage(
+                                            { id: ingredient.unit.name}, 
+                                            { count: ingredient.sum })}
+                                        </p>
                                     </div>}
                                 />
                             </Link>
@@ -100,35 +108,35 @@ export default function ShoppingList(){
                 {data.shopping_list_by_pk.recipes
                 .filter(recipe => recipe.prepared)
                 .map(recipe => (
-                        <div key={recipe.recipe.id}>
-                            <Link to={`/recipes/${recipe.recipe.id}`} className="grid" >
-                                <FoodexCard
-                                    cover={
-                                        <>
-                                            <div className="label">     
-                                                {
-                                                recipe.recipe.ingredients.length < 1 ||
-                                                recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'carnivorous').length > 0 ||
-                                                recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet === undefined).length > 0
-                                                ?
-                                                    "" :
-                                                recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'vegetarian').length > 0 ? 
-                                                    <icons.VegetarianIcon /> : 
-                                                    <icons.VeganIcon />
-                                                }
-                                                <p>{capitalizeFirstLetter(recipe.recipe.name)} (x{recipe.qte})</p>
-                                            </div>
-                                            <img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>
-                                        </>
-                                    }
-                                    description={<div className="body-container">
-                                        {recipe.prepared && <Button type="text" icon={<CheckSquareOutlined />}  onClick={e => onClick(e, recipe.recipe.id, data.shopping_list_by_pk.id, false)} />}
-                                        <Button type="text" icon={<DeleteOutlined />} />
-                                    </div>}
-                                />
-                            </Link>
-                        </div>
-                    ))
+                    <div key={recipe.recipe.id}>
+                        <Link to={`/recipes/${recipe.recipe.id}`} className="grid" >
+                            <FoodexCard
+                                cover={
+                                    <>
+                                        <div className="label">     
+                                            {
+                                            recipe.recipe.ingredients.length < 1 ||
+                                            recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'carnivorous').length > 0 ||
+                                            recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet === undefined).length > 0
+                                            ?
+                                                "" :
+                                            recipe.recipe.ingredients.filter(i => i.ingredient.category.diet_category?.diet.name === 'vegetarian').length > 0 ? 
+                                                <icons.VegetarianIcon /> : 
+                                                <icons.VeganIcon />
+                                            }
+                                            <p>{capitalizeFirstLetter(recipe.recipe.name)} (x{recipe.qte})</p>
+                                        </div>
+                                    </>
+                                }
+                                img={<img src={recipe.recipe.img_url} alt={recipe.recipe.name}/>}
+                                description={<div className="body-container">
+                                    {recipe.prepared && <Button type="text" icon={<CheckSquareOutlined />}  onClick={e => onClick(e, recipe.recipe.id, data.shopping_list_by_pk.id, false)} />}
+                                    <Button type="text" icon={<DeleteOutlined />} />
+                                </div>}
+                            />
+                        </Link>
+                    </div>
+                ))
                 }
             </div>
         </div>
