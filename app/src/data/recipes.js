@@ -34,9 +34,7 @@ export const recipes = `
             }
         }
     }
-`;
-
-
+`
 
 export const recipe = `
     query($id: uuid!) {

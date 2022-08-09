@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
@@ -16,7 +17,6 @@ html, body {
   top: 5em;
   width: 100%;
   padding: 1em;
-
 }
 
 .grid {
@@ -28,7 +28,6 @@ html, body {
 .ant-card-cover {
   height: auto !important;
 }
-
 
 .container-details {
   height: 80vh;
@@ -65,22 +64,22 @@ html, body {
   grid-template-rows: 1fr 6fr;
 }
 
-@media(max-width: 60rem) {
+@media (max-width: 60rem) {
   .container-details {
-      padding: 0;
-      top: 4em;
-      display: flex;
-      flex-direction: column;
+    padding: 0;
+    top: 4em;
+    display: flex;
+    flex-direction: column;
   }
 
   .container-details > img {
-      width: 100%;
-      padding: 0;
-      max-width: none;
+    width: 100%;
+    padding: 0;
+    max-width: none;
   }
 
   .container-details > .info-details > .title-details > h1 {
-      margin: 0;
-      padding: 0;
+    margin: 0;
+    padding: 0;
   }
 }

@@ -5,6 +5,6 @@
 .saison-icon > .summer-icon,
 .saison-icon > .fall-icon,
 .saison-icon > .winter-icon {
-    position: absolute;
-    font-size: 2em;
+  position: absolute;
+  font-size: 2em;
 }

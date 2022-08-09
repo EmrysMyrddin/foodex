@@ -11,7 +11,7 @@ export const shoppingLists = `
             }
         }
     }
-`;
+`
 
 export const shoppingListIngredients = `
     query($id: uuid!) {

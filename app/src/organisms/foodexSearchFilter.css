@@ -1,29 +1,29 @@
 .form-container {
-    background-color: white;
-    position: fixed;
-    top: 5em;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 3em;
-    padding: 5em;
-    padding-top: 1em;
-    padding-bottom: 0;
-    width: 100%;
+  background-color: white;
+  position: fixed;
+  top: 5em;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 3em;
+  padding: 5em;
+  padding-top: 1em;
+  padding-bottom: 0;
+  width: 100%;
 }
 
 .form-container > form {
-    width: 100%;
+  width: 100%;
 }
 
 .form-container > svg {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-@media(max-width: 60rem) {
-    .form-container {
-        padding: 0;
-        padding-top: 1em;
-        width: 90vw;
-        column-gap: 1em;
-    }
+@media (max-width: 60rem) {
+  .form-container {
+    padding: 0;
+    padding-top: 1em;
+    width: 90vw;
+    column-gap: 1em;
+  }
 }

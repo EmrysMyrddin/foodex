@@ -1,1 +1,1 @@
-import './foodex-colors.css'
+import "./foodex-colors.css"

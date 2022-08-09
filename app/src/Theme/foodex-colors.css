@@ -1,11 +1,10 @@
 :root {
   --PRIMARY: #2f2f2f;
-  --RECIPES: #B67B12;
-  --INGREDIENTS: #005C91;
+  --RECIPES: #b67b12;
+  --INGREDIENTS: #005c91;
   --SHOPPING-LIST: #488131;
-  --ACCOUNT: #D34D4D;
+  --ACCOUNT: #d34d4d;
 }
-
 
 /* FONT */
 @font-face {

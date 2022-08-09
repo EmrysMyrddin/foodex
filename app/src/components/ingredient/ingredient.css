@@ -1,51 +1,51 @@
 .table {
-    width: 50%;
-    margin: auto;
-    border: 2px solid var(--INGREDIENTS);
-    border-bottom: 1px solid var(--INGREDIENTS);
+  width: 50%;
+  margin: auto;
+  border: 2px solid var(--INGREDIENTS);
+  border-bottom: 1px solid var(--INGREDIENTS);
 }
 
 .table > .table-header {
-    border-bottom: 2px solid var(--INGREDIENTS);
+  border-bottom: 2px solid var(--INGREDIENTS);
 }
 
 .table > .table-header > p {
-    margin: 0.5em;
+  margin: 0.5em;
 }
 
 .ligne {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-bottom: 1px solid var(--INGREDIENTS);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--INGREDIENTS);
 }
 
 .ligne > p:first-child {
-    justify-self: end;
-    border-right: 1px solid var(--INGREDIENTS);
+  justify-self: end;
+  border-right: 1px solid var(--INGREDIENTS);
 }
 
 .ligne > p {
-    margin: 0;
-    padding: 0.5em;
+  margin: 0;
+  padding: 0.5em;
 }
 
 .more-info-title {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .more-info-title > .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .more-info-title > .title > h1 {
-    margin: 0;
+  margin: 0;
 }
 
-@media(max-width: 60rem) {
-    .table {
-        width: 100%;
-    }
+@media (max-width: 60rem) {
+  .table {
+    width: 100%;
+  }
 }

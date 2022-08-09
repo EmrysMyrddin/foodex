@@ -1,0 +1,14 @@
+{
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dev": {
+        "url": "http://192.168.1.48:8080/v1/graphql",
+        "headers": {
+          "x-hasura-admin-secret": "dev"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

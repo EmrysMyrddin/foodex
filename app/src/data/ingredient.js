@@ -37,7 +37,7 @@ export const ingredients = `
             }
         }
     }
-`;
+`
 
 export const ingredient = `
     query($id: uuid!) {

@@ -1,72 +1,73 @@
 .header {
-    display: flex;
-    align-items: center;
-    height: 5em;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: white;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 5em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
 }
 
 svg {
-    height: 2em;
-    width: 2em;
+  height: 2em;
+  width: 2em;
 }
 
-.header svg, .header h1 {
-    padding-left: 0.5em;
-    margin-bottom: 0;
+.header svg,
+.header h1 {
+  padding-left: 0.5em;
+  margin-bottom: 0;
 }
 
 svg.recipes {
-    fill: var(--RECIPES);
-    stroke: var(--RECIPES);
+  fill: var(--RECIPES);
+  stroke: var(--RECIPES);
 }
 
 svg.ingredients {
-    fill: var(--INGREDIENTS);
-    stroke: var(--INGREDIENTS);
+  fill: var(--INGREDIENTS);
+  stroke: var(--INGREDIENTS);
 }
 
 svg.shopping-lists {
-    fill: var(--SHOPPING-LIST);
-    stroke: var(--SHOPPING-LIST);
+  fill: var(--SHOPPING-LIST);
+  stroke: var(--SHOPPING-LIST);
 }
 
 svg.account {
-    fill: var(--ACCOUNT);
-    stroke: var(--ACCOUNT);
+  fill: var(--ACCOUNT);
+  stroke: var(--ACCOUNT);
 }
 
 .header.recipes {
-    border-bottom: 1px solid var(--RECIPES);
+  border-bottom: 1px solid var(--RECIPES);
 }
 
 .header.ingredients {
-    border-bottom: 1px solid var(--INGREDIENTS);
+  border-bottom: 1px solid var(--INGREDIENTS);
 }
 
 .header.shopping-lists {
-    border-bottom: 1px solid var(--SHOPPING-LIST);
+  border-bottom: 1px solid var(--SHOPPING-LIST);
 }
 
 .header.account {
-    border-bottom: 1px solid var(--ACCOUNT);
+  border-bottom: 1px solid var(--ACCOUNT);
 }
 
 .header .recipes {
-    color: var(--RECIPES);
+  color: var(--RECIPES);
 }
 
 header .ingredients {
-    color: var(--INGREDIENTS);
+  color: var(--INGREDIENTS);
 }
 
 header .shopping-lists {
-    color: var(--SHOPPING-LIST);
+  color: var(--SHOPPING-LIST);
 }
 
 header .account {
-    color: var(--ACCOUNT);
+  color: var(--ACCOUNT);
 }
