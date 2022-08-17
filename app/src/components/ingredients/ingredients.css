@@ -44,6 +44,10 @@ form > input {
   height: 17em;
 }
 
+.ant-card-body {
+  min-height: 8em;
+}
+
 .ant-card-cover > img {
   height: 15em;
   object-fit: cover;
@@ -56,9 +60,8 @@ form > input {
 }
 
 .ant-card-meta-description > .icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .add {

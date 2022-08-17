@@ -1,0 +1,48 @@
+.recipe-form {
+    display: grid !important;
+    grid-template-columns: auto auto 1fr;
+    column-gap: 3em;
+    width: auto;
+    height: 50vh;
+    overflow: auto;
+}
+
+.recipe-right,
+.recipe-right > .description,
+.recipe-right > .description > div {
+    width: 100% !important;
+}
+
+.ant-modal {
+    width: 90vw !important;
+}
+
+.recipe-right {
+    height: fit-content;
+}
+
+.ingredient-recipe-form {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    column-gap: 1em;
+    align-items: flex-end;
+}
+
+.recipe-add-form {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 60rem) {
+    .recipe-form {
+        display: flex !important;
+        flex-direction: column;
+        column-gap: 3em;
+        padding-top: 20em;
+    }
+
+    .recipe-form > .recipe-right {
+        display: block;
+    }
+}
+

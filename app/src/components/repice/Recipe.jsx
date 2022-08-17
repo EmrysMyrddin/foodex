@@ -1,10 +1,10 @@
-import React, { useRef } from "react"
+import React from "react"
 import { useMutation, useQuery } from "urql"
 import { useParams } from "react-router"
 import { capitalizeFirstLetter } from "../../helper/helper"
 import { recipe } from "../../data/recipes"
 import * as icons from "../icons"
-import { Spin, Button, Modal, Input, Form } from "antd"
+import { Spin, Button } from "antd"
 import { Link } from "react-router-dom"
 import "./recipe.css"
 import { useState } from "react"
@@ -13,6 +13,7 @@ import FoodexCard from "../../molecules/FoodexCard"
 import { useIntl } from "react-intl"
 import { EditOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
+import { RecipeFormModal } from "../../molecules/Modal/RecipeFormModal"
 
 export default function Recipe() {
   const { formatMessage } = useIntl()
@@ -63,7 +64,16 @@ export default function Recipe() {
                     <p>{capitalizeFirstLetter(i.ingredient.name)}</p>
                   </div>
                 }
-                img={i.ingredient?.url_img ? <img src={i.ingredient.url_img} alt={i.ingredient.name} /> : <></>}
+                img={
+                  i.ingredient?.url_img ? (
+                    <img src={i.ingredient.url_img} alt={i.ingredient.name} />
+                  ) : (
+                    <img
+                      src="https://www.google.com/aclk?sa=l&ai=DChcSEwjktvq5wM35AhVChdUKHbdyA34YABBTGgJ3cw&sig=AOD64_0lGV_bJ5PHrZgOOWaZ864HAOpyHA&adurl&ctype=5&ved=2ahUKEwj6yeq5wM35AhXQyYUKHVgdDI0Quxd6BQgBEMUG"
+                      alt="placeholder"
+                    />
+                  )
+                }
                 description={`${formatMessage(
                   { id: i.ingredient.recipe_ingredients[0].unit.name },
                   { count: i.ingredient.recipe_ingredients[0].qte }
@@ -136,7 +146,7 @@ export default function Recipe() {
       <div className="add">
         <Button onClick={() => setEditing(true)} type="primary" size="large" shape="circle" icon={<EditOutlined />} />
       </div>
-      <RecipFormModal
+      <RecipeFormModal
         title="Modifier la recette"
         visible={editing}
         onCancel={() => setEditing(false)}
@@ -153,40 +163,5 @@ export default function Recipe() {
         initialValues={data.recipe_by_pk}
       />
     </div>
-  )
-}
-
-export function RecipFormModal({ onOk, initialValues, ...props }) {
-  const form = useRef()
-  function handleOk() {
-    onOk(form.current.getFieldsValue())
-  }
-
-  return (
-    <Modal onOk={handleOk} {...props}>
-      <Form
-        ref={form}
-        autoComplete="off"
-        className="recipe-form"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={initialValues}
-        width="90vw"
-      >
-        <Form.Item
-          name="name"
-          label="Nom de la recette"
-          rules={[{ required: true, message: "Veuillez entrer un nom de recette" }]}
-        >
-          <Input placeholder="Nom de la recette" name="name" />
-        </Form.Item>
-        <Form.Item name="img_url" label="Image de la recette">
-          <Input placeholder="Image de la recette" name="img_url" />
-        </Form.Item>
-        <Form.Item name="description" label="Description de la recette">
-          <Input.TextArea placeholder="Description de la recette" name="description" />
-        </Form.Item>
-      </Form>
-    </Modal>
   )
 }

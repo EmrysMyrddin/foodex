@@ -7,11 +7,13 @@ import RecipesItem from "../../molecules/Item/RecipesItem"
 import FoodexSearchFilter from "../../organisms/FoodexSearchFilter"
 import RecipesModal from "../../molecules/Modal/RecipesModal"
 import { PlusOutlined } from "@ant-design/icons"
-import { RecipFormModal } from "../repice/Recipe"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { RecipeFormModal } from "../../molecules/Modal/RecipeFormModal"
+import { useIntl } from "react-intl"
 
 export default function Recipes() {
+  const { formatMessage } = useIntl()
   const [variables, setVariables] = useState()
   const [showModalAdd, setShowModalAdd] = useState(false)
   const [createResult, createRecipe] = useMutation(CREATE_RECIPE_MUTATION)
@@ -68,10 +70,10 @@ export default function Recipes() {
           icon={<PlusOutlined />}
         />
       </div>
-      <RecipFormModal
+      <RecipeFormModal
         visible={showModalAdd}
         onCancel={() => setShowModalAdd(false)}
-        title="Création d'une recette"
+        title={formatMessage({ id: "create.recipe" })}
         confirmLoading={createResult.fetching}
         onOk={async (values) => {
           const result = await createRecipe({ recipe: values })

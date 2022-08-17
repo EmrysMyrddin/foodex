@@ -23,7 +23,6 @@ export default function IngredientsItem({ item }) {
         img={item?.url_img ? <img src={item.url_img} alt={item.name} /> : <></>}
         description={
           <div className="icons">
-            {toIcon(item.category?.name)}
             {saison(
               item?.saison_ingredients?.map((s) => s.saison.name).includes("spring") ||
                 item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year"),
@@ -34,6 +33,7 @@ export default function IngredientsItem({ item }) {
               item?.saison_ingredients?.map((s) => s.saison.name).includes("winter") ||
                 item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year")
             )}
+            {toIcon(item.category?.name)}
           </div>
         }
       />
