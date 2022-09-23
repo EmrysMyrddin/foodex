@@ -1,4 +1,4 @@
-.container {
+.container-foodex {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 3em;
@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 60rem) {
-  .container {
+  .container-foodex {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 1em;
     column-gap: 0.5em;
@@ -29,7 +29,7 @@
     padding-bottom: 4em;
   }
 
-  .container > .grid > a {
+  .container-foodex > .grid > a {
     width: 100%;
   }
 

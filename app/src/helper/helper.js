@@ -6,29 +6,29 @@ function capitalizeFirstLetter(string) {
 
 function toIcon(text) {
   if (text === "egg") {
-    return <icons.EggIcon />
+    return <icons.EggIcon className="text-3xl" />
   } else if (text === "fish") {
-    return <icons.FishIcon />
+    return <icons.FishIcon className="text-3xl" />
   } else if (text === "fruit") {
-    return <icons.FruitIcon />
+    return <icons.FruitIcon className="text-3xl" />
   } else if (text === "meat") {
-    return <icons.MeatIcon />
+    return <icons.MeatIcon className="text-3xl" />
   } else if (text === "dairy product") {
-    return <icons.MilkIcon />
+    return <icons.MilkIcon className="text-3xl" />
   } else if (text === "vegetable") {
-    return <icons.VegetableIcon />
+    return <icons.VegetableIcon className="text-3xl" />
   } else if (text === "crustacean") {
-    return <icons.CrustaceanIcon />
+    return <icons.CrustaceanIcon className="text-3xl" />
   } else if (text === "summer") {
-    return <icons.SummerIcon />
+    return <icons.SummerIcon className="text-3xl" />
   } else if (text === "fall") {
-    return <icons.FallIcon />
+    return <icons.FallIcon className="text-3xl" />
   } else if (text === "spring") {
-    return <icons.SpringIcon />
+    return <icons.SpringIcon className="text-3xl" />
   } else if (text === "winter") {
-    return <icons.WinterIcon />
+    return <icons.WinterIcon className="text-3xl" />
   } else if (text === "all-year") {
-    return <icons.SaisonIcon />
+    return <icons.SaisonIcon className="text-3xl" />
   }
 
   return <></>

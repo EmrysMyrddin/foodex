@@ -2,12 +2,12 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./foodexGrid.css"
 
-export default function FoodexGrid({ list, link, Item }) {
+export default function FoodexGrid({ list, link, Item, linkId = "id" }) {
   return (
-    <div className="container">
+    <div className="container-foodex">
       {list?.map((item) => (
-        <div key={item.id} className="grid">
-          <Link to={`${link}${item.id}`}>
+        <div key={item[linkId]} className="grid">
+          <Link to={`${link}${item[linkId]}`}>
             <Item item={item} />
           </Link>
         </div>

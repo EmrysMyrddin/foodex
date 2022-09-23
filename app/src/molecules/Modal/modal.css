@@ -33,6 +33,36 @@
     flex-direction: column;
 }
 
+form {
+    width: 100% !important;
+}
+
+.recipe-left {
+    width: 100%;
+}
+
+#shooping-list-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 8em;
+}
+
+#shopping-list-title > input {
+    width: 100%;
+}
+
+#shopping-list-add-recipes {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+}
+
+#shopping-list-add-ingredients {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 2em;
+}
+
 @media (max-width: 60rem) {
     .recipe-form {
         display: flex !important;

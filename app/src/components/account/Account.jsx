@@ -25,8 +25,6 @@ export default function Account() {
   if (fetching || fetchingUsers) return <Spin />
   if (error || errorUsers) return <p>Oh no... {error.message}</p>
 
-  console.log(dataUsers)
-
   const handleSearch = (newValue) => {
     setVariables(newValue)
   }

@@ -563,6 +563,13 @@
     using:
       foreign_key_constraint_on: user_id
   array_relationships:
+  - name: ingredient_entries
+    using:
+      foreign_key_constraint_on:
+        column: shoppingListId
+        table:
+          schema: public
+          name: shopping_list_ingredient_entry
   - name: ingredients
     using:
       manual_configuration:
@@ -717,6 +724,99 @@
           user:
             id:
               _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: shopping_list_ingredient_entry
+  object_relationships:
+  - name: ingredient
+    using:
+      foreign_key_constraint_on: ingredientId
+  - name: shopping_list
+    using:
+      foreign_key_constraint_on: shoppingListId
+  - name: unit
+    using:
+      foreign_key_constraint_on: unitId
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        shopping_list:
+          user:
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
+      columns:
+      - ingredientId
+      - qte
+      - shoppingListId
+      - unitId
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - qte
+      - created_at
+      - updated_at
+      - id
+      - ingredientId
+      - shoppingListId
+      - unitId
+      filter:
+        shopping_list:
+          user:
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - ingredientId
+      - qte
+      - shoppingListId
+      - unitId
+      filter:
+        shopping_list:
+          user:
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        shopping_list:
+          user:
+            _or:
+            - id:
+                _eq: X-Hasura-User-Id
+            - sharingWith:
+                _and:
+                - shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+                - can_see_shopping_lists:
+                    _eq: true
 - table:
     schema: public
     name: shopping_list_ingredients

@@ -16,7 +16,6 @@ export default function IngredientsModal({ variables, setVariables }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
-    console.log("COUCOU")
     setIsModalVisible(true)
   }
 

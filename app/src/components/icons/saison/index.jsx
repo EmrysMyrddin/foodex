@@ -16,7 +16,7 @@ function saison(spring, summer, fall, winter) {
   const winter_icon = winter ? <WinterEnableIcon /> : <WinterDisableIcon />
 
   return (
-    <div className="saison-icon">
+    <div className="saison-icon text-xs">
       <div className="spring-icon">{spring_icon}</div>
       <div className="summer-icon">{summer_icon}</div>
       <div className="fall-icon">{fall_icon}</div>

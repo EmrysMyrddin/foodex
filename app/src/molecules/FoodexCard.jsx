@@ -8,6 +8,7 @@ export default function FoodexCard({ cover, img, description }) {
   return (
     <>
       <Card
+        className="shadow-xl shadow-slate-200/25 border-0"
         hoverable
         cover={
           <>
@@ -16,7 +17,7 @@ export default function FoodexCard({ cover, img, description }) {
           </>
         }
       >
-        {description && <Meta description={description} />}
+        {description && <Meta className="" description={description} />}
       </Card>
     </>
   )

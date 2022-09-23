@@ -8,6 +8,7 @@
   "clove": "{count, plural, one {# gousse} other {# gousses} }",
   "create.recipe": "Créer une recette",
   "create.ingredient": "Créer un ingredient",
+  "create.shoppingList": "Créer une liste de course",
   "crustacean": "crustacé",
   "dairy product": "produit laitier",
   "egg": "oeuf",

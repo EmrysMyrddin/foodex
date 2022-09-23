@@ -32,7 +32,6 @@ export function AddIngredientsToRecipe() {
   })
 
   const onClick = () => {
-    console.log(ingredientsAdded)
     if (tmp.type === "ingredient") {
       setIngredientsAdded([
         ...ingredientsAdded,

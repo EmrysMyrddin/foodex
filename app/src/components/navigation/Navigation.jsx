@@ -19,8 +19,8 @@ export default function Navigation() {
     { href: "recipes", Icon: navigation.BurgerIcon },
     { href: "ingredients", Icon: navigation.PimentsIcon },
     { href: "shopping-lists", Icon: navigation.PanierIcon },
-    { href: "market", Icon: navigation.MarketIcon },
-    { href: "freeze", Icon: navigation.FreezeIcon },
+    // { href: "market", Icon: navigation.MarketIcon },
+    // { href: "freeze", Icon: navigation.FreezeIcon },
     { href: "account", Icon: navigation.SettingIcon },
   ]
 
