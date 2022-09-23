@@ -23,9 +23,9 @@ export function RecipeFormModal({ onOk, initialValues, ...props }) {
           <Form.Item name="img_url" label="Image de la recette">
             <Input placeholder="Image de la recette" name="img_url" />
           </Form.Item>
-          <Form.Item name="tag_recipes" label="Tags de la recette">
+          {/* <Form.Item name="tag_recipes" label="Tags de la recette">
             <Select placeholder="Selectionner les tags de la recette" name="tag_recipes" />
-          </Form.Item>
+          </Form.Item> */}
         </div>
         <div className="recipe-middle">
           <AddIngredientsToRecipe />

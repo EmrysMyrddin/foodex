@@ -26,9 +26,9 @@ export default function RecipesItem({ item }) {
         }
         img={item?.img_url ? <img src={item.img_url} alt={item.name} /> : <></>}
         description={
-          item.tag_recipes.length > 0 && (
+          item?.tag_recipes.length > 0 && (
             <div>
-              {item.tag_recipes.map((tag) => (
+              {item?.tag_recipes.map((tag) => (
                 <Tag key={tag.tag.id} color="magenta">
                   {tag.tag.name}
                 </Tag>

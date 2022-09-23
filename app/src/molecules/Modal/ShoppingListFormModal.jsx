@@ -28,23 +28,18 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
   })
 
   function handleOk() {
-    console.log(form.current.getFieldsValue())
-    const { name, qte, recipeId, ingredientId, ingredientQte, unitId } = form.current.getFieldsValue()
+    const { name } = form.current.getFieldsValue()
     const result = {
       name,
       recipes: {
-        // data: [{ qte, recipeId }],
         data: addRecipes,
       },
       ingredient_entries: {
-        // data: [{ ingredientId, qte: ingredientQte, unitId }],
         data: addIngredients,
       },
     }
     onOk(result)
   }
-
-  console.log(addRecipes)
 
   return (
     <Modal onOk={handleOk} {...props}>
@@ -70,8 +65,8 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
             <div>
               <ul>
                 {addRecipes?.map((recipe) => (
-                  <li key={recipe.id}>
-                    {recipe.qte} {recipe.recipeId}
+                  <li key={recipe.recipeId}>
+                    {recipe.qte} {recipesData?.recipe.find((e) => e.id === recipe.recipeId).name}
                   </li>
                 ))}
               </ul>
@@ -100,6 +95,8 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
                       recipeId: form.current.getFieldsValue().recipeId,
                     },
                   ])
+                  form.current.setFieldValue("qte", "")
+                  form.current.setFieldValue("recipeId", null)
                 }}
               >
                 Ajouter une recette
@@ -109,7 +106,8 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
               <ul>
                 {addIngredients?.map((ingredient) => (
                   <li key={ingredient.id}>
-                    {ingredient.qte} {ingredient.unitId} {ingredient.ingredientId}
+                    {ingredient.qte} {unitsData?.unit.find((e) => e.id === ingredient.unitId).name}{" "}
+                    {ingredientsData?.ingredient.find((e) => e.id === ingredient.ingredientId).name}
                   </li>
                 ))}
               </ul>
