@@ -1,0 +1,10 @@
+.ant-card-cover > .label {
+    padding-top: 1em;
+}
+@media (max-width: 60rem) {
+    .foodex-card {
+        width: 10em;
+        height: 8em;
+        padding: 0.25em;
+    }
+}

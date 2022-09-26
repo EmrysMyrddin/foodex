@@ -55,10 +55,9 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
             <Form.Item
               id="name"
               name="name"
-              label="Nom de la liste de course à ajouter"
               rules={[{ required: true, message: "Veuillez entrer le nom de la liste de course" }]}
             >
-              <Input />
+              <Input placeholder="Nom de la liste de course à ajouter" />
             </Form.Item>
           </div>
           <div id="shooping-list-container">
@@ -71,11 +70,20 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
                 ))}
               </ul>
               <div id="shopping-list-add-recipes">
-                <Form.Item name="qte" label="Quantité de la recette à ajouter">
-                  <Input type="number" />
+                <Form.Item name="qte">
+                  <Input type="number" placeholder="Quantité de la recette à ajouter" />
                 </Form.Item>
-                <Form.Item name="recipeId" label="Nom de la recette à ajouter">
-                  <Select>
+                <Form.Item name="unitId">
+                  <Select placeholder="Unité de la recette à ajouter">
+                    {unitsData?.unit.map((r) => (
+                      <Option key={r.id} value={r.id}>
+                        {capitalizeFirstLetter(r.name)}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item name="recipeId">
+                  <Select placeholder="Nom de la recette à ajouter">
                     {recipesData?.recipe.map((r) => (
                       <Option key={r.id} value={r.id}>
                         {capitalizeFirstLetter(r.name)}
@@ -112,11 +120,11 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
                 ))}
               </ul>
               <div id="shopping-list-add-ingredients">
-                <Form.Item name="ingredientQte" label="Quantité de l'ingredient à ajouter">
-                  <Input type="number" />
+                <Form.Item name="ingredientQte">
+                  <Input type="number" placeholder="Quantité de l'ingrédient à ajouter" />
                 </Form.Item>
-                <Form.Item name="unitId" label="Unité de l'ingredient à ajouter">
-                  <Select>
+                <Form.Item name="unitId">
+                  <Select placeholder="Unité de l'ingrédient à ajouter">
                     {unitsData?.unit.map((r) => (
                       <Option key={r.id} value={r.id}>
                         {capitalizeFirstLetter(r.name)}
@@ -124,8 +132,8 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
                     ))}
                   </Select>
                 </Form.Item>
-                <Form.Item name="ingredientId" label="Nom de l'ingredient à ajouter">
-                  <Select>
+                <Form.Item name="ingredientId">
+                  <Select placeholder="Nom de l'ingrédient à ajouter">
                     {ingredientsData?.ingredient.map((r) => (
                       <Option key={r.id} value={r.id}>
                         {capitalizeFirstLetter(r.name)}
@@ -148,7 +156,7 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
                   ])
                 }}
               >
-                Ajouter un ingréedient
+                Ajouter un ingrédient
               </Button>
             </div>
           </div>

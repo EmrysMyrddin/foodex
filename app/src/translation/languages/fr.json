@@ -1,6 +1,7 @@
 {
   "account": "compte",
   "all-year": "toute l'année",
+  "beverage": "boisson",
   "calorie": "calorie",
   "carb": "glucide",
   "carnivorous": "carnivore",
@@ -34,6 +35,7 @@
   "shopping-lists": "listes de course",
   "spring": "printemps",
   "summer": "été",
+  "starchy": "féculent",
   "unit.centiliter": "{count, plural, one { centilitre} other { centilitres} }",
   "unit.clove": "{count, plural, one { gousse (d'aïl)} other { gousses (d'aïl)} }",
   "unit.gramme": "{count, plural, one { gramme} other { grammes} }",

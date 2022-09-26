@@ -20,7 +20,7 @@ export default function ShoppingListsModal({ variables, setVariables }) {
   return (
     <>
       <icons.FilterIcon onClick={showModal} />
-      <Modal title="Filtre pour les listes de courses" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Filtre pour les listes de courses" open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div></div>
       </Modal>
     </>

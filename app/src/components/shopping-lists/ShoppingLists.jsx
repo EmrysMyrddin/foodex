@@ -71,7 +71,7 @@ export default function ShoppingLists() {
         />
       </div>
       <ShoppingListFormModal
-        visible={showModalAdd}
+        open={showModalAdd}
         onCancel={() => setShowModalAdd(false)}
         title={formatMessage({ id: "create.shoppingList" })}
         confirmLoading={createResult.fetching}

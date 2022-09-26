@@ -1,0 +1,31 @@
+.container-details > .recipe-right {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.container-details > .recipe-right > .info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.container-details > .recipe-right > img {
+    width: 60%;
+    max-height: 30em;
+    margin: auto;
+}
+
+@media (max-width: 60rem) {
+    .container-details > .recipe-right {
+        overflow: hidden;
+    }
+
+    .container-details > .recipe-right > .info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container-details > .recipe-right > img {
+        max-width: 15em;
+        max-height: fit-content !important;
+    }
+}

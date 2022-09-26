@@ -62,11 +62,10 @@ export default function ShoppingList() {
       </div>
       <ShoppingListFormModal
         title="Modifier la liste de course"
-        visible={editing}
+        open={editing}
         onCancel={() => setEditing(false)}
         confirmLoading={createIngredientsResult.fetching && createRecipesResult.fetching}
         onOk={async ({ ingredient_entries, recipes }) => {
-          console.log(ingredient_entries)
           const resultIngredients = await createIngredientsShoppingList({
             ingredientsShoppingList: ingredient_entries.data.map((ie) => ({ ...ie, shoppingListId: id })),
           })

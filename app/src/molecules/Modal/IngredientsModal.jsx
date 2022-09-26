@@ -89,7 +89,7 @@ export default function IngredientsModal({ variables, setVariables }) {
   return (
     <>
       <icons.FilterIcon onClick={showModal} />
-      <Modal title="Filtre pour les ingredients" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Filtre pour les ingredients" open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div>
           <Select
             loading={dietFetching}

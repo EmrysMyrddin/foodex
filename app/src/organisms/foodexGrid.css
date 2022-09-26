@@ -6,11 +6,11 @@
   padding: 5em;
   padding-left: 4em;
   padding-right: 4em;
-  align-items: end;
   overflow: scroll;
   position: relative;
   top: 4em;
-  height: 80vh;
+  max-height: 80vh;
+  height: auto;
   padding-top: 0;
   margin-bottom: 1em;
   align-items: flex-start;
@@ -22,11 +22,12 @@
 
 @media (max-width: 60rem) {
   .container-foodex {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     row-gap: 1em;
     column-gap: 0.5em;
     padding: 0.25em;
     padding-bottom: 4em;
+    align-items: flex-start;
   }
 
   .container-foodex > .grid > a {

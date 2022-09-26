@@ -71,7 +71,7 @@ export default function Recipes() {
         />
       </div>
       <RecipeFormModal
-        visible={showModalAdd}
+        open={showModalAdd}
         onCancel={() => setShowModalAdd(false)}
         title={formatMessage({ id: "create.recipe" })}
         confirmLoading={createResult.fetching}

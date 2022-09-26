@@ -89,6 +89,7 @@ export const recipe = `
                 recipe_ingredients {
                   id
                   qte
+                  recipeId
                   unit {
                     id
                     name

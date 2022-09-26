@@ -108,7 +108,7 @@ export default function Ingredients() {
   const addIngredient = (
     <Modal
       title="Ajouter un ingredient"
-      visible={isModalAddVisible}
+      open={isModalAddVisible}
       onOk={handleOkAdd}
       onCancel={handleCancelAdd}
       confirmLoading={resultAdd.fetching}

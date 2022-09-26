@@ -148,7 +148,7 @@ export default function Recipe() {
       </div>
       <RecipeFormModal
         title="Modifier la recette"
-        visible={editing}
+        open={editing}
         onCancel={() => setEditing(false)}
         onOk={async (values) => {
           const result = await updateRecipe({ ...values, id })

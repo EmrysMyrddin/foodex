@@ -9,7 +9,7 @@ export default function IngredientsItem({ item }) {
     <>
       <FoodexCard
         cover={
-          <div className="flex justify-center items-center">
+          <div className="label">
             {item.category.diet_category.diet.name === "vegan" ? (
               <icons.VeganIcon />
             ) : item.category.diet_category.diet.name === "vegetarian" ? (
@@ -17,10 +17,10 @@ export default function IngredientsItem({ item }) {
             ) : (
               ""
             )}
-            <p className="justify-self-end">{capitalizeFirstLetter(item.name)}</p>
+            <p>{capitalizeFirstLetter(item.name)}</p>
           </div>
         }
-        img={item?.url_img ? <img className=" h-40 w-60 object-cover" src={item.url_img} alt={item.name} /> : <></>}
+        img={item?.url_img ? <img src={item.url_img} alt={item.name} /> : <></>}
         description={
           <div className="flex justify-start items-center">
             {saison(

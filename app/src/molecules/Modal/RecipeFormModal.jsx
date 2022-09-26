@@ -28,7 +28,7 @@ export function RecipeFormModal({ onOk, initialValues, ...props }) {
           </Form.Item> */}
         </div>
         <div className="recipe-middle">
-          <AddIngredientsToRecipe />
+          <AddIngredientsToRecipe initialValues={initialValues} />
         </div>
         <div className="recipe-right">
           <Form.Item name="description" className="description" label="Description de la recette">

@@ -2,6 +2,10 @@
     display: grid !important;
     grid-template-columns: auto auto 1fr;
     column-gap: 3em;
+}
+
+.recipe-form,
+.shopping-list-form {
     width: auto;
     height: 50vh;
     overflow: auto;
@@ -19,13 +23,6 @@
 
 .recipe-right {
     height: fit-content;
-}
-
-.ingredient-recipe-form {
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
-    column-gap: 1em;
-    align-items: flex-end;
 }
 
 .recipe-add-form {
@@ -51,16 +48,17 @@ form {
     width: 100%;
 }
 
+#shopping-list-add-ingredients,
 #shopping-list-add-recipes {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 2em;
-}
-
-#shopping-list-add-ingredients {
     display: grid;
     grid-template-columns: auto auto auto;
     column-gap: 2em;
+}
+
+.ingredient-recipe-form > #selects {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr;
+    column-gap: 1em;
 }
 
 @media (max-width: 60rem) {
@@ -68,11 +66,27 @@ form {
         display: flex !important;
         flex-direction: column;
         column-gap: 3em;
-        padding-top: 20em;
+        padding-top: 14em;
     }
 
     .recipe-form > .recipe-right {
         display: block;
+    }
+
+    .ingredient-recipe-form > #selects {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .recipe-add-form > h2 {
+        font-size: medium;
+    }
+
+    #shooping-list-container,
+    #shopping-list-add-ingredients,
+    #shopping-list-add-recipes {
+        display: flex;
+        flex-direction: column;
     }
 }
 

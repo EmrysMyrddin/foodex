@@ -44,7 +44,7 @@ export default function RecipesModal({ variables, setVariables }) {
   return (
     <>
       <icons.FilterIcon onClick={showModal} />
-      <Modal title="Filtre pour les recettes" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Filtre pour les recettes" open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div>
           <Select
             loading={dietFetching}

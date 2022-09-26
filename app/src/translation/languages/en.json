@@ -1,6 +1,7 @@
 {
   "account": "account",
   "all-year": "all year",
+  "beverage": "beverage",
   "calorie": "calorie",
   "carb": "carb",
   "carnivorous": "carnivorous",
@@ -26,6 +27,7 @@
   "shopping-lists": "shopping-list",
   "spring": "spring",
   "summer": "summer",
+  "starchy": "starchy",
   "unit.centiliter": "{count, plural, one {# centiliter} other {# centiliters} }",
   "unit.clove": "{count, plural, one {# clove} other {# cloves} }",
   "unit.gramme": "{count, plural, one {# gramme} other {# grammes} }",
