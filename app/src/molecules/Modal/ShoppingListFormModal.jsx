@@ -1,6 +1,7 @@
 import { Button, Form, Input, Modal, Select } from "antd"
 import React, { useRef } from "react"
 import { useState } from "react"
+import { useIntl } from "react-intl"
 import { useQuery } from "urql"
 import { ingredients } from "../../data/ingredient"
 import { recipes } from "../../data/recipes"
@@ -11,6 +12,7 @@ import "./modal.css"
 const { Option } = Select
 
 export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
+  const intl = useIntl()
   const form = useRef()
   const [addRecipes, setAddRecipes] = useState([])
   const [addIngredients, setAddIngredients] = useState([])
@@ -42,7 +44,7 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
   }
 
   return (
-    <Modal onOk={handleOk} {...props}>
+    <Modal onOk={handleOk} {...props} cancelText={capitalizeFirstLetter(intl.formatMessage({ id: "cancel" }))}>
       <Form
         ref={form}
         layout="vertical"

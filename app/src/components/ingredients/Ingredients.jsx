@@ -111,6 +111,7 @@ export default function Ingredients() {
       open={isModalAddVisible}
       onOk={handleOkAdd}
       onCancel={handleCancelAdd}
+      cancelText={capitalizeFirstLetter(intl.formatMessage({ id: "cancel" }))}
       confirmLoading={resultAdd.fetching}
     >
       <Input placeholder="Nom de l'ingredient" onChange={(e) => setAddIngredientName(e.target.value)} />

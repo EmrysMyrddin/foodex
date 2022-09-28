@@ -3,6 +3,7 @@
   "all-year": "toute l'année",
   "beverage": "boisson",
   "calorie": "calorie",
+  "cancel": "annuler",
   "carb": "glucide",
   "carnivorous": "carnivore",
   "centiliter": "{count, plural, one {# centilitre} other {# centilitres} }",

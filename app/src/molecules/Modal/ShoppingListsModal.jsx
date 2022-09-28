@@ -1,8 +1,11 @@
 import React, { useState } from "react"
 import { Modal } from "antd"
 import * as icons from "../../components/icons"
+import { capitalizeFirstLetter } from "../../helper/helper"
+import { useIntl } from "react-intl"
 
 export default function ShoppingListsModal({ variables, setVariables }) {
+  const intl = useIntl()
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
@@ -20,7 +23,13 @@ export default function ShoppingListsModal({ variables, setVariables }) {
   return (
     <>
       <icons.FilterIcon onClick={showModal} />
-      <Modal title="Filtre pour les listes de courses" open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal
+        title="Filtre pour les listes de courses"
+        cancelText={capitalizeFirstLetter(intl.formatMessage({ id: "cancel" }))}
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
         <div></div>
       </Modal>
     </>

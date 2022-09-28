@@ -1,16 +1,19 @@
 import { Form, Input, Modal, Select } from "antd"
 import React, { useRef } from "react"
+import { useIntl } from "react-intl"
+import { capitalizeFirstLetter } from "../../helper/helper"
 import { AddIngredientsToRecipe } from "./AddIngredientsToRecipe"
 import "./modal.css"
 
 export function RecipeFormModal({ onOk, initialValues, ...props }) {
+  const intl = useIntl()
   const form = useRef()
   function handleOk() {
     onOk(form.current.getFieldsValue())
   }
 
   return (
-    <Modal onOk={handleOk} {...props}>
+    <Modal onOk={handleOk} {...props} cancelText={capitalizeFirstLetter(intl.formatMessage({ id: "cancel" }))}>
       <Form ref={form} layout="vertical" autoComplete="off" className="recipe-form" initialValues={initialValues}>
         <div className="recipe-left">
           <Form.Item

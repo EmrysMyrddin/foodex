@@ -1,3 +1,4 @@
+import { DeleteOutlined } from "@ant-design/icons"
 import { Button, Form, Input, Select } from "antd"
 import React, { useRef } from "react"
 import { useState } from "react"
@@ -56,8 +57,11 @@ export function AddIngredientsToRecipe({ initialValues }) {
         {ingredientsAdded?.length > 0 && (
           <ul>
             {ingredientsAdded?.map((r) => (
-              <li key={r?.ingredient?.id}>
-                {r?.qte} {formatMessage({ id: `unit.${r?.unit?.name}` }, { count: r?.qte })} {r?.ingredient?.name}
+              <li key={r?.ingredient?.id} className="item">
+                <p>
+                  {r?.qte} {formatMessage({ id: `unit.${r?.unit?.name}` }, { count: r?.qte })} {r?.ingredient?.name}
+                </p>
+                <Button icon={<DeleteOutlined />} />
               </li>
             ))}
           </ul>

@@ -61,6 +61,25 @@ form {
     column-gap: 1em;
 }
 
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.item > p {
+    margin: 0;
+    margin-right: 0.5em;
+}
+
+.anticon-delete {
+    font-size: 0.75em;
+}
+
+.item > button {
+    border: none;
+}
+
 @media (max-width: 60rem) {
     .recipe-form {
         display: flex !important;
