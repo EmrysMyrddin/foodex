@@ -1,8 +1,8 @@
-export const diets = `
-    query {
-        diet{
-            id
-            name
-        }
+export const diets = /* GraphQL */ `
+  query {
+    diet {
+      id
+      name
     }
+  }
 `

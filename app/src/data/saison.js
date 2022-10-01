@@ -1,8 +1,8 @@
-export const saisons = `
-    query {
-        saison{
-            id
-            name
-        }
+export const saisons = /* GraphQL */ `
+  query {
+    saison {
+      id
+      name
     }
+  }
 `
