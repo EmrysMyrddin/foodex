@@ -47,6 +47,7 @@ function App() {
 }
 
 function Layout() {
+  if (!localStorage.token) return <Navigate to="/login" replace />
   return (
     <div>
       <header className="app-header">
