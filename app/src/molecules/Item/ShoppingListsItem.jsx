@@ -13,7 +13,6 @@ export default function ShoppingListsItem({ item }) {
             </p>
           </div>
         }
-        img={<img src={`https://lorempokemon.fakerapi.it/pokemon/500/958`} alt={item.name} />}
       />
     </>
   )
