@@ -9,7 +9,7 @@
     "hasura:console": "yarn hasura console --admin-secret dev",
     "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
     "deploy:hasura": "yarn hasura:prod deploy",
-    "predeploy:app": "tar -czf foodex-app.tar.gz app/build app/captain-definition app/Dockerfile app/package.json app/yarn.lock",
+    "predeploy:app": "tar -czf foodex-app.tar.gz app/build app/captain-definition app/Dockerfile app/package.json app/yarn.lock app/nginx.conf",
     "deploy:app": "caprover deploy -a foodex-app -h captain.caprover.cocaud.dev -t foodex-app.tar.gz",
     "predeploy:auth": "tar -czf foodex-auth.tar.gz auth/src auth/captain-definition auth/Dockerfile auth/package.json auth/yarn.lock",
     "deploy:auth": "caprover deploy -a foodex-auth -h captain.caprover.cocaud.dev -t foodex-auth.tar.gz"
