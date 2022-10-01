@@ -35,9 +35,9 @@ export default function Ingredient() {
         <div className="title-details">
           <div className="more-info-title">
             <div className="title">
-              {data.ingredient_by_pk.category.diet_category.diet.name === "vegan" ? (
+              {data.ingredient_by_pk.category?.diet_category.diet.name === "vegan" ? (
                 <icons.VeganIcon />
-              ) : data.ingredient_by_pk.category.diet_category.diet.name === "vegetarian" ? (
+              ) : data.ingredient_by_pk.category?.diet_category.diet.name === "vegetarian" ? (
                 <icons.VegetarianIcon />
               ) : (
                 ""

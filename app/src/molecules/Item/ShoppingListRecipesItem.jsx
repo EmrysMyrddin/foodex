@@ -37,12 +37,12 @@ export default function ShoppingListRecipesItem({ item }) {
         cover={
           <div className="label">
             {item.recipe.ingredients.length < 1 ||
-            item.recipe.ingredients.filter((i) => i.ingredient.category.diet_category?.diet.name === "carnivorous")
+            item.recipe.ingredients.filter((i) => i.ingredient.category?.diet_category?.diet.name === "carnivorous")
               .length > 0 ||
-            item.recipe.ingredients.filter((i) => i.ingredient.category.diet_category?.diet === undefined).length >
+            item.recipe.ingredients.filter((i) => i.ingredient.category?.diet_category?.diet === undefined).length >
               0 ? (
               ""
-            ) : item.recipe.ingredients.filter((i) => i.ingredient.category.diet_category?.diet.name === "vegetarian")
+            ) : item.recipe.ingredients.filter((i) => i.ingredient.category?.diet_category?.diet.name === "vegetarian")
                 .length > 0 ? (
               <icons.VegetarianIcon />
             ) : (

@@ -13,9 +13,9 @@ export default function ShoppingListsIngredientsItem({ item }) {
         cover={
           <>
             <div className="label">
-              {item.ingredient.category.diet_category.diet.name === "vegan" ? (
+              {item.ingredient.category?.diet_category.diet.name === "vegan" ? (
                 <icons.VeganIcon />
-              ) : item.ingredient.category.diet_category.diet.name === "vegetarian" ? (
+              ) : item.ingredient.category?.diet_category.diet.name === "vegetarian" ? (
                 <icons.VegetarianIcon />
               ) : (
                 ""

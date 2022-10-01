@@ -1,18 +1,19 @@
 import React from "react"
-import { saison } from "../../components/icons/saison"
+import { Saison } from "../../components/icons/saison"
 import { capitalizeFirstLetter, toIcon } from "../../helper/helper"
 import FoodexCard from "../FoodexCard"
 import * as icons from "../../components/icons"
 
 export default function IngredientsItem({ item }) {
+  const allYear = item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year")
   return (
     <>
       <FoodexCard
         cover={
           <div className="label">
-            {item.category.diet_category.diet.name === "vegan" ? (
+            {item.category?.diet_category.diet.name === "vegan" ? (
               <icons.VeganIcon />
-            ) : item.category.diet_category.diet.name === "vegetarian" ? (
+            ) : item.category?.diet_category.diet.name === "vegetarian" ? (
               <icons.VegetarianIcon />
             ) : (
               ""
@@ -23,17 +24,13 @@ export default function IngredientsItem({ item }) {
         img={item?.url_img ? <img src={item.url_img} alt={item.name} /> : <></>}
         description={
           <div className="flex justify-start items-center">
-            {saison(
-              item?.saison_ingredients?.map((s) => s.saison.name).includes("spring") ||
-                item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year"),
-              item?.saison_ingredients?.map((s) => s.saison.name).includes("summer") ||
-                item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year"),
-              item?.saison_ingredients?.map((s) => s.saison.name).includes("fall") ||
-                item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year"),
-              item?.saison_ingredients?.map((s) => s.saison.name).includes("winter") ||
-                item?.saison_ingredients?.map((s) => s.saison.name).includes("all-year")
-            )}
-            {toIcon(item.category?.name)}
+            <Saison
+              spring={allYear || item?.saison_ingredients?.map((s) => s.saison.name).includes("spring")}
+              summer={allYear || item?.saison_ingredients?.map((s) => s.saison.name).includes("summer")}
+              fall={allYear || item?.saison_ingredients?.map((s) => s.saison.name).includes("fall")}
+              winter={allYear || item?.saison_ingredients?.map((s) => s.saison.name).includes("winter")}
+            />
+            {item.category && toIcon(item.category.name)}
           </div>
         }
       />

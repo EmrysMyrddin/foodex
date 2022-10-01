@@ -54,9 +54,9 @@ export default function Recipe() {
               <FoodexCard
                 cover={
                   <div className="label">
-                    {i.ingredient.category.diet_category?.diet.name === "vegan" ? (
+                    {i.ingredient.category?.diet_category?.diet.name === "vegan" ? (
                       <icons.VeganIcon />
-                    ) : i.ingredient.category.diet_category?.diet.name === "vegetarian" ? (
+                    ) : i.ingredient.category?.diet_category?.diet.name === "vegetarian" ? (
                       <icons.VegetarianIcon />
                     ) : (
                       ""
@@ -119,14 +119,15 @@ export default function Recipe() {
       </div>
       <div className="info-details">
         <div className="title-details">
-          {data.recipe_by_pk.ingredients.filter((i) => i.ingredient.category.diet_category?.diet.name === "carnivorous")
-            .length ||
-          data.recipe_by_pk.ingredients.filter((i) => i.ingredient.category.diet_category?.diet === undefined).length >
+          {data.recipe_by_pk.ingredients.filter(
+            (i) => i.ingredient.category?.diet_category?.diet.name === "carnivorous"
+          ).length ||
+          data.recipe_by_pk.ingredients.filter((i) => i.ingredient.category?.diet_category?.diet === undefined).length >
             0 ||
           data.recipe_by_pk.ingredients.length < 1 ? (
             ""
           ) : data.recipe_by_pk.ingredients.filter(
-              (i) => i.ingredient.category.diet_category?.diet.name === "vegetarian"
+              (i) => i.ingredient.category?.diet_category?.diet.name === "vegetarian"
             ).length > 0 ? (
             <icons.VegetarianIcon />
           ) : (
