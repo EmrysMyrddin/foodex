@@ -20,7 +20,7 @@ export default function Login() {
 
     localStorage.token = data.login.token
     localStorage.userId = data.login.userId
-    if (localStorage.token) navigate("/ingredients", { replace: true })
+    if (localStorage.token) navigate("/recipes", { replace: true })
   }
 
   return (

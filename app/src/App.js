@@ -2,7 +2,7 @@ import "./App.css"
 import Header from "./components/header/Header"
 import { Provider } from "urql"
 import Navigation from "./components/navigation/Navigation"
-import { BrowserRouter as Router, Route, Outlet, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Outlet, Routes, Navigate } from "react-router-dom"
 import "./Theme/foodex-colors.css"
 import IntlProvider from "./translation/IntlProvider"
 import { client } from "./data/client"
@@ -25,6 +25,10 @@ function App() {
           <Router>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route
+                path="/"
+                element={localStorage.token ? <Navigate to="/recipes" replace /> : <Navigate to="/login" replace />}
+              />
               <Route path="/" element={<Layout />}>
                 <Route path="account" element={<Account />} />
                 <Route path="ingredients/:id" element={<Ingredient />} />
