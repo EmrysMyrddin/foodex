@@ -17,15 +17,15 @@ export function ShoppingListFormModal({ onOk, initialValues, ...props }) {
   const [addRecipes, setAddRecipes] = useState([])
   const [addIngredients, setAddIngredients] = useState([])
 
-  const [{ data: recipesData, fetching: recipesFetching, error: recipesError }] = useQuery({
+  const [{ data: recipesData }] = useQuery({
     query: recipes,
   })
 
-  const [{ data: ingredientsData, fetching: ingredientsFetching, error: ingredientsError }] = useQuery({
+  const [{ data: ingredientsData }] = useQuery({
     query: ingredients,
   })
 
-  const [{ data: unitsData, fetching: unitsFetching, error: unitsError }] = useQuery({
+  const [{ data: unitsData }] = useQuery({
     query: units,
   })
 

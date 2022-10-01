@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ReactComponent as FallDisableIcon } from "./fall_disable.svg"
 import { ReactComponent as FallEnableIcon } from "./fall_enable.svg"
 import { ReactComponent as SpringDisableIcon } from "./spring_disable.svg"

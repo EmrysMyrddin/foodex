@@ -1,6 +1,6 @@
 import { DeleteOutlined } from "@ant-design/icons"
 import { Button, Form, Input, Select } from "antd"
-import React, { useRef } from "react"
+import React from "react"
 import { useState } from "react"
 import { useIntl } from "react-intl"
 import { Link, useParams } from "react-router-dom"
@@ -24,15 +24,15 @@ export function AddIngredientsToRecipe({ initialValues }) {
   const [ingredientsAdded, setIngredientsAdded] = useState(u)
   const [tmp, setTmp] = useState([])
 
-  const [{ data: recipesData, fetching: recipesFetching, error: recipesError }] = useQuery({
+  const [{ data: recipesData, fetching: recipesFetching }] = useQuery({
     query: recipes,
   })
 
-  const [{ data: ingredientsData, fetching: ingredientsFetching, error: ingredientsError }] = useQuery({
+  const [{ data: ingredientsData, fetching: ingredientsFetching }] = useQuery({
     query: ingredients,
   })
 
-  const [{ data: unitsData, fetching: unitsFetching, error: unitsError }] = useQuery({
+  const [{ data: unitsData, fetching: unitsFetching }] = useQuery({
     query: units,
   })
 

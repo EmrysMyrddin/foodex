@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Select } from "antd"
+import { Form, Input, Modal } from "antd"
 import React, { useRef } from "react"
 import { useIntl } from "react-intl"
 import { capitalizeFirstLetter } from "../../helper/helper"

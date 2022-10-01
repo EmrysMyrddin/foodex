@@ -8,7 +8,7 @@ const { Option } = Select
 
 export default function Account() {
   const [value, setValue] = useState()
-  const [variables, setVariables] = useState()
+  const [, setVariables] = useState()
 
   const [{ data: dataUsers, fetching: fetchingUsers, error: errorUsers }] = useQuery({
     query: users,
