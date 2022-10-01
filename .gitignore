@@ -3,3 +3,5 @@ build
 foodex-app.tar.gz
 foodex-auth.tar.gz
 .DS_Store
+schema.graphql
+.idea

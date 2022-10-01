@@ -1,11 +1,11 @@
-from node:13
+FROM nginx:stable-alpine
 
-WORKDIR /usr/src/app
+RUN sed -i '1idaemon off;' /etc/nginx/nginx.conf
 
-COPY package.json yarn.lock ./
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN yarn --production
+EXPOSE 80
 
-COPY . .
+CMD ["nginx"]
 
-CMD ["node", "__sapper__/build"]
+COPY build /usr/src/app

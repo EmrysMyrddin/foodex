@@ -1,0 +1,117 @@
+.nav-container nav {
+  font-size: 1.2em;
+  transition: border-top var(--transition);
+  font-weight: 300;
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 1em;
+}
+
+.nav-container ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.nav-container li {
+  display: block;
+}
+
+.nav-container a {
+  text-decoration: none;
+}
+
+.nav-container .menu-border {
+  border-top: 1px solid var(--PRIMARY);
+}
+
+.nav-container .menu-border.recipes {
+  border-top: 1px solid var(--RECIPES);
+}
+
+.nav-container .menu-border.ingredients {
+  border-top: 1px solid var(--INGREDIENTS);
+}
+
+.nav-container .menu-border.shopping-lists {
+  border-top: 1px solid var(--SHOPPING-LIST);
+}
+
+.nav-container .menu-border.account {
+  border-top: 1px solid var(--ACCOUNT);
+}
+
+.nav-container .menu-button {
+  fill: var(--PRIMARY);
+  stroke: var(--PRIMARY);
+  color: var(--PRIMARY);
+  font-weight: 300;
+}
+
+.nav-container [aria-current] .recipes {
+  fill: var(--RECIPES);
+  stroke: var(--RECIPES);
+  color: var(--RECIPES);
+  font-weight: 700;
+}
+
+.nav-container [aria-current] .ingredients {
+  fill: var(--INGREDIENTS);
+  stroke: var(--INGREDIENTS);
+  color: var(--INGREDIENTS);
+  font-weight: 700;
+}
+
+.nav-container [aria-current] .shopping-lists {
+  fill: var(--SHOPPING-LIST);
+  stroke: var(--SHOPPING-LIST);
+  color: var(--SHOPPING-LIST);
+  font-weight: 700;
+}
+
+.nav-container [aria-current] .account {
+  fill: var(--ACCOUNT);
+  stroke: var(--ACCOUNT);
+  color: var(--ACCOUNT);
+  font-weight: 700;
+}
+
+.nav-container .menu-button {
+  width: 8em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  transition: color var(--transition);
+}
+
+@media (max-width: 60rem) {
+  .nav-container .menu-button {
+    width: 100%;
+    font-size: 0.8em;
+  }
+
+  .nav-container nav {
+    height: 2em;
+  }
+}
+
+.nav-container .menu-button svg {
+  display: block;
+  height: 2em;
+  width: 2em;
+  transition: fill var(--transition), stroke var(--transition);
+}
+
+.nav-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}

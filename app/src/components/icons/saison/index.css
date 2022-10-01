@@ -1,0 +1,15 @@
+.saison-icon {
+  height: 4.9em;
+  width: 4.9em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.saison-icon > .spring-icon,
+.saison-icon > .summer-icon,
+.saison-icon > .fall-icon,
+.saison-icon > .winter-icon {
+  position: absolute;
+  font-size: 2em;
+}

@@ -1,0 +1,88 @@
+img {
+    width: 8em;
+  }
+  
+  .label {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    height: 2em;
+    margin-bottom: 1em;
+  }
+  
+  .label > p {
+    margin: 0;
+    margin-left: 0.3em;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+  }
+  
+  form > input {
+    width: 100%;
+    margin-right: 2em;
+  }
+  
+  .filter-search {
+    display: flex;
+    justify-content: space-around;
+    /* grid-template-columns: 5fr 1fr; */
+    width: 80%;
+    margin: auto;
+  }
+  
+  .ant-card {
+    height: 100%;
+    width: 18em;
+  }
+  
+  .ant-card-cover {
+    height: 17em;
+  }
+  
+  .ant-card-body {
+    min-height: 8em;
+  }
+  
+  .ant-card-cover > img {
+    height: 15em;
+    object-fit: cover;
+  }
+  
+  .ant-card-meta-description > .icons > svg,
+  .ant-card-meta-description > .icons > div > svg {
+    height: 4em;
+    width: 4em;
+  }
+  
+  .ant-card-meta-description > .icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .add {
+    position: fixed;
+    bottom: 10em;
+    right: 4em;
+  }
+  
+  .add > .ant-btn-circle {
+    width: 3em !important;
+    height: 3em !important;
+  }
+  
+  @media (max-width: 60rem) {
+    form {
+      width: 80%;
+    }
+  
+    .add {
+      bottom: 5em;
+      right: 2em;
+    }
+  }
+  

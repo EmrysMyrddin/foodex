@@ -1,0 +1,111 @@
+.recipe-form {
+    display: grid !important;
+    grid-template-columns: auto auto 1fr;
+    column-gap: 3em;
+}
+
+.recipe-form,
+.shopping-list-form {
+    width: auto;
+    height: 50vh;
+    overflow: auto;
+}
+
+.recipe-right,
+.recipe-right > .description,
+.recipe-right > .description > div {
+    width: 100% !important;
+}
+
+.ant-modal {
+    width: 90vw !important;
+}
+
+.recipe-right {
+    height: fit-content;
+}
+
+.recipe-add-form {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    width: 100% !important;
+}
+
+.recipe-left {
+    width: 100%;
+}
+
+#shooping-list-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 8em;
+}
+
+#shopping-list-title > input {
+    width: 100%;
+}
+
+#shopping-list-add-ingredients,
+#shopping-list-add-recipes {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 2em;
+}
+
+.ingredient-recipe-form > #selects {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr;
+    column-gap: 1em;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.item > p {
+    margin: 0;
+    margin-right: 0.5em;
+}
+
+.anticon-delete {
+    font-size: 0.75em;
+}
+
+.item > button {
+    border: none;
+}
+
+@media (max-width: 60rem) {
+    .recipe-form {
+        display: flex !important;
+        flex-direction: column;
+        column-gap: 3em;
+        padding-top: 14em;
+    }
+
+    .recipe-form > .recipe-right {
+        display: block;
+    }
+
+    .ingredient-recipe-form > #selects {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .recipe-add-form > h2 {
+        font-size: medium;
+    }
+
+    #shooping-list-container,
+    #shopping-list-add-ingredients,
+    #shopping-list-add-recipes {
+        display: flex;
+        flex-direction: column;
+    }
+}
+

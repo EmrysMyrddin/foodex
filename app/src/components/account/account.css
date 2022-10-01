@@ -1,0 +1,42 @@
+#logout {
+  background: #d34d4d !important;
+  border-color: #d34d4d !important;
+}
+
+#logout:hover {
+  background: #ad3434 !important;
+  border-color: #ad3434 !important;
+}
+
+#account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5em;
+  column-gap: 5em;
+  width: 50%;
+  margin: auto;
+}
+
+#logout-container,
+#share,
+#resume {
+  width: 100%;
+}
+
+#resume {
+  display: flex;
+}
+
+#share {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+@media (max-width: 60rem) {
+  #account {
+    width: 80%;
+  }
+}
