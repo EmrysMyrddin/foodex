@@ -4,78 +4,120 @@ import React from "react"
 import { useState } from "react"
 import { useIntl } from "react-intl"
 import { Link, useParams } from "react-router-dom"
-import { useQuery } from "urql"
-import { ingredients } from "../../data/ingredient"
-import { recipes } from "../../data/recipes"
+import { useMutation, useQuery } from "urql"
+import { ingredients as ingredientsQuery } from "../../data/ingredient"
+import { recipes as recipesQuery, recipe as recipeQuery } from "../../data/recipes"
 import { units } from "../../data/unit"
 import { capitalizeFirstLetter } from "../../helper/helper"
 
 const { Option, OptGroup } = Select
 
-export function AddIngredientsToRecipe({ initialValues }) {
+const recipeQueryContext = {
+  additionalTypenames: ["recipe_needed_recipe", "recipe_ingredient"],
+}
+
+export function AddIngredientsToRecipe() {
   const { formatMessage } = useIntl()
   const { id } = useParams()
-  const pp = initialValues?.ingredients.map((i) => ({
-    name: i.ingredient.name,
-    info: i.ingredient.recipe_ingredients.filter((ii) => ii.recipeId === id)[0],
-  }))
-  const u = pp?.map((p) => ({ qte: p.info.qte, unit: p.info.unit, ingredient: { id: p.info.id, name: p.name } }))
-  const [recipesAdded, setRecipesAdded] = useState(initialValues?.recipe_needed_recipes)
-  const [ingredientsAdded, setIngredientsAdded] = useState(u)
   const [tmp, setTmp] = useState([])
 
   const [{ data: recipesData, fetching: recipesFetching }] = useQuery({
-    query: recipes,
+    query: recipesQuery,
   })
 
   const [{ data: ingredientsData, fetching: ingredientsFetching }] = useQuery({
-    query: ingredients,
+    query: ingredientsQuery,
+  })
+
+  const [{ data: recipeData }] = useQuery({
+    query: recipeQuery,
+    variables: { id },
+    context: recipeQueryContext,
   })
 
   const [{ data: unitsData, fetching: unitsFetching }] = useQuery({
     query: units,
   })
 
-  const onClick = () => {
-    if (tmp.type === "ingredient") {
-      setIngredientsAdded([
-        ...ingredientsAdded,
-        { qte: tmp.qte, unit: tmp.unit, ingredient: { id: tmp.result.id, name: tmp.result?.name } },
-      ])
-    } else
-      setRecipesAdded([
-        ...recipesAdded,
-        { qte: tmp.qte, unit: tmp.unit, recipe: { id: tmp.result.id, name: tmp.result?.name } },
-      ])
+  const [{ fetching: addingIngredient }, addIngredient] = useMutation(/* GraphQL */ `
+    mutation addIngredientToRecipe($recipeId: uuid!, $id: uuid!, $qte: numeric!, $unitId: uuid!) {
+      insert_recipe_ingredient_one(object: { recipeId: $recipeId, ingredientId: $id, qte: $qte, unit_id: $unitId }) {
+        id
+      }
+    }
+  `)
+
+  const [{ fetching: addingRecipeNeeded }, addRecipeNeeded] = useMutation(/* GraphQL */ `
+    mutation addRecipeNeeded($recipeId: uuid!, $id: uuid!, $qte: numeric!, $unitId: uuid!) {
+      insert_recipe_needed_recipe_one(
+        object: { recipe_id: $recipeId, needed_recipe_id: $id, qte: $qte, unit_id: $unitId }
+      ) {
+        id
+      }
+    }
+  `)
+
+  const [{ fetching: deletingIngredient }, deleteIngredient] = useMutation(/* GraphQL */ `
+    mutation deleteRecipeIngredient($id: uuid!) {
+      delete_recipe_ingredient_by_pk(id: $id) {
+        id
+      }
+    }
+  `)
+
+  const [{ fetching: deletingRecipeNeeded }, deleteRecipeNeeded] = useMutation(/* GraphQL */ `
+    mutation deleteRecipeNeeded($id: uuid!) {
+      delete_recipe_needed_recipe_by_pk(id: $id) {
+        id
+      }
+    }
+  `)
+
+  const onClick = async () => {
+    const handler = tmp.type === "ingredient" ? addIngredient : addRecipeNeeded
+    await handler({ recipeId: id, id: tmp.id, qte: tmp.qte, unitId: tmp.unitId })
   }
 
   return (
     <div className="recipe-add-form">
       <h2>Ingrédients pour la recette</h2>
       <div>
-        {ingredientsAdded?.length > 0 && <p>Les ingredients</p>}
-        {ingredientsAdded?.length > 0 && (
-          <ul>
-            {ingredientsAdded?.map((r) => (
-              <li key={r?.ingredient?.id} className="item">
-                <p>
-                  {r?.qte} {formatMessage({ id: `unit.${r?.unit?.name}` }, { count: r?.qte })} {r?.ingredient?.name}
-                </p>
-                <Button icon={<DeleteOutlined />} />
-              </li>
-            ))}
-          </ul>
+        {recipeData?.recipe_by_pk.ingredients?.length > 0 && (
+          <>
+            <p>Les ingredients</p>
+            <ul>
+              {recipeData?.recipe_by_pk.ingredients?.map((r) => (
+                <li key={r.id} className="item">
+                  <p>
+                    {r.qte} {formatMessage({ id: `unit.${r.unit?.name}` }, { count: r.qte })} {r.ingredient?.name}
+                  </p>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    onClick={() => deleteIngredient({ id: r.id })}
+                    loading={deletingIngredient}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
         )}
-        {recipesAdded?.length > 0 && <p>Les recettes</p>}
-        {recipesAdded?.length > 0 && (
-          <ul>
-            {recipesAdded?.map((r) => (
-              <li key={r?.recipe?.id}>
-                {r.qte} {formatMessage({ id: `unit.${r?.unit?.name}` }, { count: r?.qte })}{" "}
-                <Link to={`/recipes/${r?.recipe?.id}`}>{r?.recipe?.name}</Link>
-              </li>
-            ))}
-          </ul>
+        {recipeData?.recipe_by_pk?.recipe_needed_recipes.length > 0 && (
+          <>
+            <p>Les recettes</p>
+            <ul>
+              {recipeData.recipe_by_pk?.recipe_needed_recipes.map((r) => (
+                <li key={r?.id} className="item">
+                  {r.qte} {formatMessage({ id: `unit.${r?.unit?.name}` }, { count: r?.qte })} &nbsp;
+                  <Link to={`/recipes/${r?.recipeByNeededRecipeId?.id}`}>{r?.recipeByNeededRecipeId?.name}</Link>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    onClick={() => deleteRecipeNeeded({ id: r.id })}
+                    loading={deletingRecipeNeeded}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
       <div className="ingredient-recipe-form">
@@ -95,7 +137,7 @@ export function AddIngredientsToRecipe({ initialValues }) {
               placeholder="Sélectionnez l'unité"
               name="unit"
               loading={unitsFetching}
-              onSelect={(e) => setTmp({ ...tmp, unit: { id: e.split("/")[0], name: e.split("/")[1] } })}
+              onSelect={(e) => setTmp({ ...tmp, unitId: e.split("/")[0] })}
             >
               {unitsData?.unit?.map((i) => (
                 <Option key={i.id} value={`${i.id}/${i.name}`}>
@@ -110,7 +152,7 @@ export function AddIngredientsToRecipe({ initialValues }) {
               name="ingredient"
               loading={recipesFetching && ingredientsFetching}
               onSelect={(e) => {
-                setTmp({ ...tmp, type: e.split("/")[0], result: { id: e.split("/")[1], name: e.split("/")[2] } })
+                setTmp({ ...tmp, type: e.split("/")[0], id: e.split("/")[1] })
               }}
             >
               <OptGroup label="Ingredients">
@@ -133,7 +175,7 @@ export function AddIngredientsToRecipe({ initialValues }) {
           </Form.Item>
         </div>
         <Form.Item>
-          <Button block onClick={(e) => onClick(e)}>
+          <Button block onClick={onClick} loading={addingIngredient || addingRecipeNeeded}>
             Ajouter
           </Button>
         </Form.Item>

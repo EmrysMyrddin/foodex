@@ -1,28 +1,24 @@
 type Mutation {
-  createUser (
+  createUser(
     username: String!
     password: String!
   ): CreateUserResult!
 }
 
-
 type Query {
-  login (
+  login(
     username: String!
     password: String!
   ): LoginResult!
 }
 
-
-
-
 type LoginResult {
-  userId : uuid!
-  token : String!
+  userId: uuid!
+  token: String!
 }
 
 type CreateUserResult {
-  userId : uuid!
-  token : String!
+  userId: uuid!
+  token: String!
 }
 

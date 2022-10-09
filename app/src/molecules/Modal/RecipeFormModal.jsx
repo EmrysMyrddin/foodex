@@ -9,7 +9,8 @@ export function RecipeFormModal({ onOk, initialValues, ...props }) {
   const intl = useIntl()
   const form = useRef()
   function handleOk() {
-    onOk(form.current.getFieldsValue())
+    const { name, img_url, description } = form.current.getFieldsValue()
+    onOk({ name, img_url, description })
   }
 
   return (
@@ -31,7 +32,7 @@ export function RecipeFormModal({ onOk, initialValues, ...props }) {
           </Form.Item> */}
         </div>
         <div className="recipe-middle">
-          <AddIngredientsToRecipe initialValues={initialValues} />
+          <AddIngredientsToRecipe />
         </div>
         <div className="recipe-right">
           <Form.Item name="description" className="description" label="Description de la recette">

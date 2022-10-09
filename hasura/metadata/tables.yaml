@@ -2,261 +2,261 @@
     schema: public
     name: category
   object_relationships:
-  - name: diet_category
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: diet_category
-        column_mapping:
-          id: category_id
+    - name: diet_category
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: diet_category
+          column_mapping:
+            id: category_id
   array_relationships:
-  - name: ingredients
-    using:
-      foreign_key_constraint_on:
-        column: category_id
-        table:
-          schema: public
-          name: ingredient
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: category_id
+          table:
+            schema: public
+            name: ingredient
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - name
-      - description
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - name
+          - description
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - id
-      - name
-      - description
-      - created_at
-      - updated_at
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - id
+          - name
+          - description
+          - created_at
+          - updated_at
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      - description
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - name
+          - description
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: diet
   array_relationships:
-  - name: diet_categories
-    using:
-      foreign_key_constraint_on:
-        column: diet_id
-        table:
-          schema: public
-          name: diet_category
+    - name: diet_categories
+      using:
+        foreign_key_constraint_on:
+          column: diet_id
+          table:
+            schema: public
+            name: diet_category
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - description
-      - name
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - description
+          - name
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      - created_at
-      - updated_at
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+          - created_at
+          - updated_at
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: diet_category
   object_relationships:
-  - name: category
-    using:
-      foreign_key_constraint_on: category_id
-  - name: diet
-    using:
-      foreign_key_constraint_on: diet_id
+    - name: category
+      using:
+        foreign_key_constraint_on: category_id
+    - name: diet
+      using:
+        foreign_key_constraint_on: diet_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - category_id
-      - diet_id
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - category_id
+          - diet_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - updated_at
-      - category_id
-      - diet_id
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - updated_at
+          - category_id
+          - diet_id
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - category_id
-      - diet_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - category_id
+          - diet_id
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: ingredient
   object_relationships:
-  - name: category
-    using:
-      foreign_key_constraint_on: category_id
-  - name: nutrition
-    using:
-      foreign_key_constraint_on: nutrition_id
+    - name: category
+      using:
+        foreign_key_constraint_on: category_id
+    - name: nutrition
+      using:
+        foreign_key_constraint_on: nutrition_id
   array_relationships:
-  - name: recipe_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: ingredient_id
-        table:
-          schema: public
-          name: recipe_ingredient
-  - name: saison_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: ingredient_id
-        table:
-          schema: public
-          name: saison_ingredient
-  - name: tag_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: ingredient_id
-        table:
-          schema: public
-          name: tag_ingredient
-  - name: unit_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: ingredient_id
-        table:
-          schema: public
-          name: unit_ingredient
+    - name: recipe_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: ingredient_id
+          table:
+            schema: public
+            name: recipe_ingredient
+    - name: saison_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: ingredient_id
+          table:
+            schema: public
+            name: saison_ingredient
+    - name: tag_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: ingredient_id
+          table:
+            schema: public
+            name: tag_ingredient
+    - name: unit_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: ingredient_id
+          table:
+            schema: public
+            name: unit_ingredient
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - category_id
-      - name
-      - nutrition_id
-      - url_img
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - category_id
+          - name
+          - nutrition_id
+          - url_img
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      - url_img
-      - created_at
-      - updated_at
-      - category_id
-      - id
-      - nutrition_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - name
+          - url_img
+          - created_at
+          - updated_at
+          - category_id
+          - id
+          - nutrition_id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - category_id
-      - name
-      - nutrition_id
-      - url_img
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - category_id
+          - name
+          - nutrition_id
+          - url_img
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: nutrition
   array_relationships:
-  - name: ingredients
-    using:
-      foreign_key_constraint_on:
-        column: nutrition_id
-        table:
-          schema: public
-          name: ingredient
+    - name: ingredients
+      using:
+        foreign_key_constraint_on:
+          column: nutrition_id
+          table:
+            schema: public
+            name: ingredient
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - calorie
-      - carb
-      - fibre
-      - lipid
-      - protein
-      - water
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - calorie
+          - carb
+          - fibre
+          - lipid
+          - protein
+          - water
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - calorie
-      - carb
-      - fibre
-      - lipid
-      - protein
-      - water
-      - created_at
-      - updated_at
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - calorie
+          - carb
+          - fibre
+          - lipid
+          - protein
+          - water
+          - created_at
+          - updated_at
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - calorie
-      - carb
-      - fibre
-      - lipid
-      - protein
-      - water
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - calorie
+          - carb
+          - fibre
+          - lipid
+          - protein
+          - water
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: recipe
@@ -267,105 +267,105 @@
       created_at: createdAt
       user_id: userId
   object_relationships:
-  - name: user
-    using:
-      foreign_key_constraint_on: user_id
+    - name: user
+      using:
+        foreign_key_constraint_on: user_id
   array_relationships:
-  - name: ingredients
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: recipe_ingredient
-        column_mapping:
-          id: recipe_id
-  - name: recipe_needed_recipes
-    using:
-      foreign_key_constraint_on:
-        column: recipe_id
-        table:
-          schema: public
-          name: recipe_needed_recipe
-  - name: recipeNeededRecipesByNeededRecipeId
-    using:
-      foreign_key_constraint_on:
-        column: needed_recipe_id
-        table:
-          schema: public
-          name: recipe_needed_recipe
-  - name: shopping_list_entries
-    using:
-      foreign_key_constraint_on:
-        column: recipe_id
-        table:
-          schema: public
-          name: shopping_list_entry
-  - name: tag_recipes
-    using:
-      foreign_key_constraint_on:
-        column: recipe_id
-        table:
-          schema: public
-          name: tag_recipe
+    - name: ingredients
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: recipe_ingredient
+          column_mapping:
+            id: recipe_id
+    - name: recipe_needed_recipes
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            schema: public
+            name: recipe_needed_recipe
+    - name: recipeNeededRecipesByNeededRecipeId
+      using:
+        foreign_key_constraint_on:
+          column: needed_recipe_id
+          table:
+            schema: public
+            name: recipe_needed_recipe
+    - name: shopping_list_entries
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            schema: public
+            name: shopping_list_entry
+    - name: tag_recipes
+      using:
+        foreign_key_constraint_on:
+          column: recipe_id
+          table:
+            schema: public
+            name: tag_recipe
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      set:
-        user_id: x-hasura-User-Id
-      columns:
-      - description
-      - img_url
-      - name
+    - role: user
+      permission:
+        check: {}
+        set:
+          user_id: x-hasura-User-Id
+        columns:
+          - description
+          - img_url
+          - name
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - id
-      - created_at
-      - updated_at
-      - name
-      - description
-      - user_id
-      - img_url
-      filter:
-        _or:
-        - user_id:
-            _eq: X-Hasura-User-Id
-        - user:
-            sharingWith:
-              shared_to_user_id:
+    - role: user
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - name
+          - description
+          - user_id
+          - img_url
+        filter:
+          _or:
+            - user_id:
                 _eq: X-Hasura-User-Id
-      allow_aggregations: true
+            - user:
+                sharingWith:
+                  shared_to_user_id:
+                    _eq: X-Hasura-User-Id
+        allow_aggregations: true
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - description
-      - id
-      - img_url
-      - name
-      - updated_at
-      - user_id
-      filter:
-        _or:
-        - user_id:
-            _eq: X-Hasura-User-Id
-        - user:
-            sharingWith:
-              _and:
-              - shared_to_user_id:
-                  _eq: X-Hasura-User-Id
-              - can_write:
-                  _eq: true
-      check: {}
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - description
+          - id
+          - img_url
+          - name
+          - updated_at
+          - user_id
+        filter:
+          _or:
+            - user_id:
+                _eq: X-Hasura-User-Id
+            - user:
+                sharingWith:
+                  _and:
+                    - shared_to_user_id:
+                        _eq: X-Hasura-User-Id
+                    - can_write:
+                        _eq: true
+        check: {}
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          user_id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: recipe_ingredient
@@ -375,182 +375,261 @@
       ingredient_id: ingredientId
       recipe_id: recipeId
   object_relationships:
-  - name: ingredient
-    using:
-      foreign_key_constraint_on: ingredient_id
-  - name: recipe
-    using:
-      foreign_key_constraint_on: recipe_id
-  - name: unit
-    using:
-      foreign_key_constraint_on: unit_id
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: unit
+      using:
+        foreign_key_constraint_on: unit_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - ingredient_id
-      - qte
-      - recipe_id
-      - unit_id
-      backend_only: false
+    - role: user
+      permission:
+        check:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
+        columns:
+          - ingredient_id
+          - qte
+          - recipe_id
+          - unit_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - qte
-      - created_at
-      - updated_at
-      - id
-      - ingredient_id
-      - recipe_id
-      - unit_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - qte
+          - created_at
+          - updated_at
+          - id
+          - ingredient_id
+          - recipe_id
+          - unit_id
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    shared_to_user_id:
+                      _eq: X-Hasura-User-Id
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - ingredient_id
-      - qte
-      - recipe_id
-      - unit_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - ingredient_id
+          - qte
+          - recipe_id
+          - unit_id
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        recipe:
-          user_id:
-            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
 - table:
     schema: public
     name: recipe_needed_recipe
   object_relationships:
-  - name: recipe
-    using:
-      foreign_key_constraint_on: recipe_id
-  - name: recipeByNeededRecipeId
-    using:
-      foreign_key_constraint_on: needed_recipe_id
-  - name: unit
-    using:
-      foreign_key_constraint_on: unit_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: recipeByNeededRecipeId
+      using:
+        foreign_key_constraint_on: needed_recipe_id
+    - name: unit
+      using:
+        foreign_key_constraint_on: unit_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - needed_recipe_id
-      - qte
-      - recipe_id
-      - unit_id
-      backend_only: false
+    - role: user
+      permission:
+        check:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
+        columns:
+          - needed_recipe_id
+          - qte
+          - recipe_id
+          - unit_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - qte
-      - created_at
-      - updated_at
-      - id
-      - needed_recipe_id
-      - recipe_id
-      - unit_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - qte
+          - created_at
+          - updated_at
+          - id
+          - needed_recipe_id
+          - recipe_id
+          - unit_id
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    shared_to_user_id:
+                      _eq: X-Hasura-User-Id
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - needed_recipe_id
-      - qte
-      - recipe_id
-      - unit_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - needed_recipe_id
+          - qte
+          - recipe_id
+          - unit_id
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter:
+          recipe:
+            user:
+              _or:
+                - id:
+                    _eq: X-Hasura-User-Id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_write:
+                          _eq: true
 - table:
     schema: public
     name: saison
   array_relationships:
-  - name: saison_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: saison_id
-        table:
-          schema: public
-          name: saison_ingredient
+    - name: saison_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: saison_id
+          table:
+            schema: public
+            name: saison_ingredient
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - description
-      - name
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - description
+          - name
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      - created_at
-      - updated_at
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+          - created_at
+          - updated_at
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: saison_ingredient
   object_relationships:
-  - name: ingredient
-    using:
-      foreign_key_constraint_on: ingredient_id
-  - name: saison
-    using:
-      foreign_key_constraint_on: saison_id
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+    - name: saison
+      using:
+        foreign_key_constraint_on: saison_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - ingredient_id
-      - saison_id
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - ingredient_id
+          - saison_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - id
-      - ingredient_id
-      - saison_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - id
+          - ingredient_id
+          - saison_id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - ingredient_id
-      - saison_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - ingredient_id
+          - saison_id
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: shopping_list
@@ -559,86 +638,86 @@
     custom_column_names:
       user_id: userId
   object_relationships:
-  - name: user
-    using:
-      foreign_key_constraint_on: user_id
+    - name: user
+      using:
+        foreign_key_constraint_on: user_id
   array_relationships:
-  - name: ingredient_entries
-    using:
-      foreign_key_constraint_on:
-        column: shoppingListId
-        table:
-          schema: public
-          name: shopping_list_ingredient_entry
-  - name: ingredients
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: shopping_list_ingredients
-        column_mapping:
-          id: shopping_list_id
-  - name: recipes
-    using:
-      foreign_key_constraint_on:
-        column: shopping_list_id
-        table:
-          schema: public
-          name: shopping_list_entry
+    - name: ingredient_entries
+      using:
+        foreign_key_constraint_on:
+          column: shoppingListId
+          table:
+            schema: public
+            name: shopping_list_ingredient_entry
+    - name: ingredients
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: shopping_list_ingredients
+          column_mapping:
+            id: shopping_list_id
+    - name: recipes
+      using:
+        foreign_key_constraint_on:
+          column: shopping_list_id
+          table:
+            schema: public
+            name: shopping_list_entry
   insert_permissions:
-  - role: user
-    permission:
-      check:
-        user_id:
-          _eq: X-Hasura-User-Id
-      set:
-        user_id: x-hasura-User-Id
-      columns:
-      - name
+    - role: user
+      permission:
+        check:
+          user_id:
+            _eq: X-Hasura-User-Id
+        set:
+          user_id: x-hasura-User-Id
+        columns:
+          - name
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      - created_at
-      - updated_at
-      - id
-      - user_id
-      filter:
-        _or:
-        - user_id:
-            _eq: X-Hasura-User-Id
-        - user:
-            sharingWith:
-              _and:
-              - can_see_shopping_lists:
-                  _eq: true
-              - shared_to_user_id:
-                  _eq: X-Hasura-User-Id
-      allow_aggregations: true
+    - role: user
+      permission:
+        columns:
+          - name
+          - created_at
+          - updated_at
+          - id
+          - user_id
+        filter:
+          _or:
+            - user_id:
+                _eq: X-Hasura-User-Id
+            - user:
+                sharingWith:
+                  _and:
+                    - can_see_shopping_lists:
+                        _eq: true
+                    - shared_to_user_id:
+                        _eq: X-Hasura-User-Id
+        allow_aggregations: true
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      filter:
-        _or:
-        - user_id:
-            _eq: X-Hasura-User-Id
-        - user:
-            sharingWith:
-              _and:
-              - can_see_shopping_lists:
-                  _eq: true
-              - shared_to_user_id:
-                  _eq: X-Hasura-User-Id
-      check: null
+    - role: user
+      permission:
+        columns:
+          - name
+        filter:
+          _or:
+            - user_id:
+                _eq: X-Hasura-User-Id
+            - user:
+                sharingWith:
+                  _and:
+                    - can_see_shopping_lists:
+                        _eq: true
+                    - shared_to_user_id:
+                        _eq: X-Hasura-User-Id
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          user_id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list_entry
@@ -648,524 +727,524 @@
       recipe_id: recipeId
       shopping_list_id: shoppingListId
   object_relationships:
-  - name: recipe
-    using:
-      foreign_key_constraint_on: recipe_id
-  - name: shopping_list
-    using:
-      foreign_key_constraint_on: shopping_list_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: shopping_list
+      using:
+        foreign_key_constraint_on: shopping_list_id
   insert_permissions:
-  - role: user
-    permission:
-      check:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        check:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
-      columns:
-      - qte
-      - recipe_id
-      - shopping_list_id
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
+        columns:
+          - qte
+          - recipe_id
+          - shopping_list_id
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - id
-      - prepared
-      - qte
-      - recipe_id
-      - shopping_list_id
-      - updated_at
-      filter:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - id
+          - prepared
+          - qte
+          - recipe_id
+          - shopping_list_id
+          - updated_at
+        filter:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
-      allow_aggregations: true
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
+        allow_aggregations: true
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - prepared
-      - qte
-      filter:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        columns:
+          - prepared
+          - qte
+        filter:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
-      check: null
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        shopping_list:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          shopping_list:
+            user:
+              id:
+                _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: shopping_list_ingredient_entry
   object_relationships:
-  - name: ingredient
-    using:
-      foreign_key_constraint_on: ingredientId
-  - name: shopping_list
-    using:
-      foreign_key_constraint_on: shoppingListId
-  - name: unit
-    using:
-      foreign_key_constraint_on: unitId
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredientId
+    - name: shopping_list
+      using:
+        foreign_key_constraint_on: shoppingListId
+    - name: unit
+      using:
+        foreign_key_constraint_on: unitId
   insert_permissions:
-  - role: user
-    permission:
-      check:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        check:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
-      columns:
-      - ingredientId
-      - qte
-      - shoppingListId
-      - unitId
-      backend_only: false
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
+        columns:
+          - ingredientId
+          - qte
+          - shoppingListId
+          - unitId
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - qte
-      - created_at
-      - updated_at
-      - id
-      - ingredientId
-      - shoppingListId
-      - unitId
-      filter:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        columns:
+          - qte
+          - created_at
+          - updated_at
+          - id
+          - ingredientId
+          - shoppingListId
+          - unitId
+        filter:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - ingredientId
-      - qte
-      - shoppingListId
-      - unitId
-      filter:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        columns:
+          - ingredientId
+          - qte
+          - shoppingListId
+          - unitId
+        filter:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
-      check: null
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        shopping_list:
-          user:
-            _or:
-            - id:
-                _eq: X-Hasura-User-Id
-            - sharingWith:
-                _and:
-                - shared_to_user_id:
+    - role: user
+      permission:
+        filter:
+          shopping_list:
+            user:
+              _or:
+                - id:
                     _eq: X-Hasura-User-Id
-                - can_see_shopping_lists:
-                    _eq: true
+                - sharingWith:
+                    _and:
+                      - shared_to_user_id:
+                          _eq: X-Hasura-User-Id
+                      - can_see_shopping_lists:
+                          _eq: true
 - table:
     schema: public
     name: shopping_list_ingredients
   object_relationships:
-  - name: ingredient
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: ingredient
-        column_mapping:
-          ingredient_id: id
-  - name: shoppingList
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: shopping_list
-        column_mapping:
-          shopping_list_id: id
-  - name: unit
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: unit
-        column_mapping:
-          unit_id: id
+    - name: ingredient
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: ingredient
+          column_mapping:
+            ingredient_id: id
+    - name: shoppingList
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: shopping_list
+          column_mapping:
+            shopping_list_id: id
+    - name: unit
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: unit
+          column_mapping:
+            unit_id: id
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - shopping_list_id
-      - ingredient_id
-      - sum
-      - unit_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - shopping_list_id
+          - ingredient_id
+          - sum
+          - unit_id
+        filter: {}
 - table:
     schema: public
     name: shopping_list_recipe_ingredients
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - shopping_list_id
-      - ingredient_id
-      - qte
-      - unit_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - shopping_list_id
+          - ingredient_id
+          - qte
+          - unit_id
+        filter: {}
 - table:
     schema: public
     name: tag
   array_relationships:
-  - name: tag_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: tag_id
-        table:
-          schema: public
-          name: tag_ingredient
-  - name: tag_recipes
-    using:
-      foreign_key_constraint_on:
-        column: tag_id
-        table:
-          schema: public
-          name: tag_recipe
+    - name: tag_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: tag_id
+          table:
+            schema: public
+            name: tag_ingredient
+    - name: tag_recipes
+      using:
+        foreign_key_constraint_on:
+          column: tag_id
+          table:
+            schema: public
+            name: tag_recipe
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - description
-      - name
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - description
+          - name
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      - created_at
-      - updated_at
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+          - created_at
+          - updated_at
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - description
-      - name
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - description
+          - name
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: tag_ingredient
   object_relationships:
-  - name: ingredient
-    using:
-      foreign_key_constraint_on: ingredient_id
-  - name: tag
-    using:
-      foreign_key_constraint_on: tag_id
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+    - name: tag
+      using:
+        foreign_key_constraint_on: tag_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - ingredient_id
-      - tag_id
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - ingredient_id
+          - tag_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - updated_at
-      - id
-      - ingredient_id
-      - tag_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - updated_at
+          - id
+          - ingredient_id
+          - tag_id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - ingredient_id
-      - tag_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - ingredient_id
+          - tag_id
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: tag_recipe
   object_relationships:
-  - name: recipe
-    using:
-      foreign_key_constraint_on: recipe_id
-  - name: tag
-    using:
-      foreign_key_constraint_on: tag_id
+    - name: recipe
+      using:
+        foreign_key_constraint_on: recipe_id
+    - name: tag
+      using:
+        foreign_key_constraint_on: tag_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - recipe_id
-      - tag_id
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - recipe_id
+          - tag_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - updated_at
-      - id
-      - recipe_id
-      - tag_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - updated_at
+          - id
+          - recipe_id
+          - tag_id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - recipe_id
-      - tag_id
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - recipe_id
+          - tag_id
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: unit
   array_relationships:
-  - name: recipe_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: unit_id
-        table:
-          schema: public
-          name: recipe_ingredient
-  - name: recipe_needed_recipes
-    using:
-      foreign_key_constraint_on:
-        column: unit_id
-        table:
-          schema: public
-          name: recipe_needed_recipe
-  - name: unit_ingredients
-    using:
-      foreign_key_constraint_on:
-        column: unit_id
-        table:
-          schema: public
-          name: unit_ingredient
+    - name: recipe_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: unit_id
+          table:
+            schema: public
+            name: recipe_ingredient
+    - name: recipe_needed_recipes
+      using:
+        foreign_key_constraint_on:
+          column: unit_id
+          table:
+            schema: public
+            name: recipe_needed_recipe
+    - name: unit_ingredients
+      using:
+        foreign_key_constraint_on:
+          column: unit_id
+          table:
+            schema: public
+            name: unit_ingredient
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - name
-      - short
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - name
+          - short
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      - short
-      - created_at
-      - updated_at
-      - id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - name
+          - short
+          - created_at
+          - updated_at
+          - id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - name
-      - short
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - name
+          - short
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: unit_ingredient
   object_relationships:
-  - name: ingredient
-    using:
-      foreign_key_constraint_on: ingredient_id
-  - name: unit
-    using:
-      foreign_key_constraint_on: unit_id
+    - name: ingredient
+      using:
+        foreign_key_constraint_on: ingredient_id
+    - name: unit
+      using:
+        foreign_key_constraint_on: unit_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      columns:
-      - ingredient_id
-      - unit_id
-      - value
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - ingredient_id
+          - unit_id
+          - value
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - value
-      - created_at
-      - updated_at
-      - id
-      - ingredient_id
-      - unit_id
-      filter: {}
+    - role: user
+      permission:
+        columns:
+          - value
+          - created_at
+          - updated_at
+          - id
+          - ingredient_id
+          - unit_id
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - ingredient_id
-      - unit_id
-      - value
-      filter: {}
-      check: null
+    - role: user
+      permission:
+        columns:
+          - ingredient_id
+          - unit_id
+          - value
+        filter: {}
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter: {}
+    - role: user
+      permission:
+        filter: {}
 - table:
     schema: public
     name: user
   array_relationships:
-  - name: recipes
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table:
-          schema: public
-          name: recipe
-  - name: sharedBy
-    using:
-      foreign_key_constraint_on:
-        column: shared_to_user_id
-        table:
-          schema: public
-          name: user_shares
-  - name: sharingWith
-    using:
-      foreign_key_constraint_on:
-        column: owner_id
-        table:
-          schema: public
-          name: user_shares
-  - name: shopping_lists
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table:
-          schema: public
-          name: shopping_list
+    - name: recipes
+      using:
+        foreign_key_constraint_on:
+          column: user_id
+          table:
+            schema: public
+            name: recipe
+    - name: sharedBy
+      using:
+        foreign_key_constraint_on:
+          column: shared_to_user_id
+          table:
+            schema: public
+            name: user_shares
+    - name: sharingWith
+      using:
+        foreign_key_constraint_on:
+          column: owner_id
+          table:
+            schema: public
+            name: user_shares
+    - name: shopping_lists
+      using:
+        foreign_key_constraint_on:
+          column: user_id
+          table:
+            schema: public
+            name: shopping_list
   insert_permissions:
-  - role: auth
-    permission:
-      check: {}
-      columns:
-      - password
-      - username
-      backend_only: false
+    - role: auth
+      permission:
+        check: {}
+        columns:
+          - password
+          - username
+        backend_only: false
   select_permissions:
-  - role: auth
-    permission:
-      columns:
-      - password
-      - username
-      - created_at
-      - updated_at
-      - id
-      filter: {}
-  - role: user
-    permission:
-      columns:
-      - created_at
-      - id
-      - updated_at
-      - username
-      filter: {}
+    - role: auth
+      permission:
+        columns:
+          - password
+          - username
+          - created_at
+          - updated_at
+          - id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - created_at
+          - id
+          - updated_at
+          - username
+        filter: {}
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - password
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      check: null
+    - role: user
+      permission:
+        columns:
+          - password
+          - username
+        filter:
+          id:
+            _eq: X-Hasura-User-Id
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: user_shares
@@ -1177,54 +1256,54 @@
       owner_id: ownerId
       shared_to_user_id: sharedToUserId
   object_relationships:
-  - name: sharedBy
-    using:
-      foreign_key_constraint_on: owner_id
-  - name: sharedTo
-    using:
-      foreign_key_constraint_on: shared_to_user_id
+    - name: sharedBy
+      using:
+        foreign_key_constraint_on: owner_id
+    - name: sharedTo
+      using:
+        foreign_key_constraint_on: shared_to_user_id
   insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      set:
-        owner_id: x-hasura-User-Id
-      columns:
-      - can_see_shopping_lists
-      - can_write
-      - shared_to_user_id
-      backend_only: false
+    - role: user
+      permission:
+        check: {}
+        set:
+          owner_id: x-hasura-User-Id
+        columns:
+          - can_see_shopping_lists
+          - can_write
+          - shared_to_user_id
+        backend_only: false
   select_permissions:
-  - role: user
-    permission:
-      columns:
-      - can_see_shopping_lists
-      - can_write
-      - created_at
-      - id
-      - owner_id
-      - shared_to_user_id
-      - updated_at
-      filter:
-        _or:
-        - shared_to_user_id:
-            _eq: X-Hasura-User-Id
-        - owner_id:
-            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - can_see_shopping_lists
+          - can_write
+          - created_at
+          - id
+          - owner_id
+          - shared_to_user_id
+          - updated_at
+        filter:
+          _or:
+            - shared_to_user_id:
+                _eq: X-Hasura-User-Id
+            - owner_id:
+                _eq: X-Hasura-User-Id
   update_permissions:
-  - role: user
-    permission:
-      columns:
-      - can_see_shopping_lists
-      - can_write
-      - shared_to_user_id
-      filter:
-        owner_id:
-          _eq: X-Hasura-User-Id
-      check: null
+    - role: user
+      permission:
+        columns:
+          - can_see_shopping_lists
+          - can_write
+          - shared_to_user_id
+        filter:
+          owner_id:
+            _eq: X-Hasura-User-Id
+        check: null
   delete_permissions:
-  - role: user
-    permission:
-      filter:
-        owner_id:
-          _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        filter:
+          owner_id:
+            _eq: X-Hasura-User-Id

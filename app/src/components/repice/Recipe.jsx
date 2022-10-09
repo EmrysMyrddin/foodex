@@ -50,7 +50,7 @@ export default function Recipe() {
         {data.recipe_by_pk.img_url ? <img src={data.recipe_by_pk.img_url} alt={data.recipe_by_pk.name} /> : <></>}
         <div className="info">
           {data.recipe_by_pk.ingredients.map((i) => (
-            <Link key={i.ingredient.id} to={`/ingredients/${i.ingredient.id}`}>
+            <Link key={i.id} to={`/ingredients/${i.ingredient.id}`}>
               <FoodexCard
                 cover={
                   <div className="label">
@@ -79,20 +79,20 @@ export default function Recipe() {
             </Link>
           ))}
           {data.recipe_by_pk.recipe_needed_recipes.map((i) => (
-            <Link key={i.recipeByNeededRecipeId.id} to={`/recipes/${i.recipeByNeededRecipeId.id}`}>
+            <Link key={i.id} to={`/recipes/${i.recipeByNeededRecipeId.id}`}>
               <FoodexCard
                 cover={
                   <div className="label">
                     {i.recipeByNeededRecipeId.ingredients.length < 1 ||
                     i.recipeByNeededRecipeId.ingredients.filter(
-                      (i) => i.ingredient.category.diet_category?.diet.name === "carnivorous"
+                      (i) => i.ingredient?.category?.diet_category?.diet.name === "carnivorous"
                     ).length > 0 ||
                     i.recipeByNeededRecipeId.ingredients.filter(
-                      (i) => i.ingredient.category.diet_category?.diet === undefined
+                      (i) => i.ingredient?.category?.diet_category?.diet === undefined
                     ).length > 0 ? (
                       ""
                     ) : i.recipeByNeededRecipeId.ingredients.filter(
-                        (i) => i.ingredient.category.diet_category?.diet.name === "vegetarian"
+                        (i) => i.ingredient?.category?.diet_category?.diet.name === "vegetarian"
                       ).length > 0 ? (
                       <icons.VegetarianIcon />
                     ) : (
