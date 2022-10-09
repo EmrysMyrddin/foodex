@@ -78,19 +78,15 @@ export const recipe = /* GraphQL */ `
       }
       ingredients(order_by: { ingredient: { name: asc } }) {
         id
+        qte
+        unit {
+          id
+          name
+        }
         ingredient {
           id
           name
           url_img
-          recipe_ingredients {
-            id
-            qte
-            recipeId
-            unit {
-              id
-              name
-            }
-          }
           category {
             id
             diet_category {

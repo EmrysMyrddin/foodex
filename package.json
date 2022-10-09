@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "docker-compose up -d && concurrently --handle-input -n auth,app -c blue,green 'yarn dev:auth' 'yarn dev:app'",
-    "dev:app": "cd app && HASURA_ADMIN_SECRET=dev yarn dev",
+    "dev:app": "cd app && HASURA_ADMIN_SECRET=dev yarn start",
     "dev:auth": "cd auth && HASURA_ADMIN_SECRET=dev yarn dev",
     "build:app": "cd app && yarn build",
     "hasura": "hasura --project hasura",

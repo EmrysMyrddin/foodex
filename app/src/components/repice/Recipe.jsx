@@ -74,10 +74,7 @@ export default function Recipe() {
                     />
                   )
                 }
-                description={`${formatMessage(
-                  { id: i.ingredient.recipe_ingredients[0].unit.name },
-                  { count: i.ingredient.recipe_ingredients[0].qte }
-                )}`}
+                description={`${formatMessage({ id: i.unit.name }, { count: i.qte })}`}
               />
             </Link>
           ))}
