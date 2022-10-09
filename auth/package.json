@@ -5,7 +5,6 @@
   "repository": "https://github.com/EmrysMyrddin/foodex",
   "author": "Valentin Cocaud (v.cocaud@gmail.com)",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "dev": "nodemon .",
     "start": "node ."

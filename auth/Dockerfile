@@ -1,10 +1,10 @@
-from node:13
+FROM node:13
 
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn --production
+RUN yarn workspaces focus @foddex/auth --production
 
 COPY . .
 

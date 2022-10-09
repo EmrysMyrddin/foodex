@@ -2,16 +2,16 @@
   "private": true,
   "scripts": {
     "dev": "docker-compose up -d && concurrently --handle-input -n auth,app -c blue,green 'yarn dev:auth' 'yarn dev:app'",
-    "dev:app": "cd app && HASURA_ADMIN_SECRET=dev yarn dev",
-    "dev:auth": "cd auth && HASURA_ADMIN_SECRET=dev yarn dev",
-    "build:app": "cd app && yarn build",
+    "dev:app": "HASURA_ADMIN_SECRET=dev yarn workspace @foodex/app start",
+    "dev:auth": "HASURA_ADMIN_SECRET=dev yarn workspace @foodex/auth dev",
+    "build:app": "yarn @foodex/app build",
     "hasura": "hasura --project hasura",
-    "hasura:console": "yarn hasura console --admin-secret dev",
+    "hasura:local": "yarn hasura --admin-secret dev",
     "hasura:prod": "yarn hasura --endpoint https://foodex-hasura.caprover.cocaud.dev/ --admin-secret $HASURA_ADMIN_SECRET",
     "deploy:hasura": "yarn hasura:prod deploy",
-    "predeploy:app": "tar -czf foodex-app.tar.gz app/build app/captain-definition app/Dockerfile app/package.json app/yarn.lock app/nginx.conf",
+    "predeploy:app": "tar -czf foodex-app.tar.gz app/build app/captain-definition app/Dockerfile app/nginx.conf",
     "deploy:app": "caprover deploy -a foodex-app -h captain.caprover.cocaud.dev -t foodex-app.tar.gz",
-    "predeploy:auth": "tar -czf foodex-auth.tar.gz auth/src auth/captain-definition auth/Dockerfile auth/package.json auth/yarn.lock",
+    "predeploy:auth": "tar -czf foodex-auth.tar.gz package.json yarn.lock auth/src auth/captain-definition auth/Dockerfile auth/package.json",
     "deploy:auth": "caprover deploy -a foodex-auth -h captain.caprover.cocaud.dev -t foodex-auth.tar.gz"
   },
   "devDependencies": {
@@ -26,5 +26,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "hasura-cli": "^2.12.0"
   },
-  "dependencies": {}
+  "packageManager": "yarn@3.2.3",
+  "workspaces": [
+    "app",
+    "auth"
+  ]
 }
